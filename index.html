@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" ng-app="portfolio">
+<head>
+    <meta charset="UTF-8">
+    <title>Natascha Portfolio</title>
+    <link rel="stylesheet" href="css/book.css"/>
+    <link rel="stylesheet" href="css/facebook.css"/>
+    <link rel="stylesheet" href="css/tumblr.css"/>
+    <link rel="stylesheet" href="css/devices.min.css"/>
+</head>
+<body>
+
+<div id="page">
+
+
+    </div>
+
+    <div id="main">
+
+        <div id="content" class="column" role="main">
+                <div id="phone-hardware">
+                    <div class="marvel-device iphone6plus black">
+                        <div class="top-bar"></div>
+                        <div class="sleep"></div>
+                        <div class="volume"></div>
+                        <div class="camera"></div>
+                        <div class="sensor"></div>
+                        <div class="speaker"></div>
+                        <div class="home" ui-sref="home"></div>
+                        <div class="bottom-bar"></div>
+                    </div>
+                </div>
+
+
+                <div id="phone-screen">
+                    <div class="lockscreen" style="display: none;">
+                        <div class="music-player">
+                            <div class="previous-button button"></div>
+                            <div class="next-button button"></div>
+                        </div>
+                        <div class="text"><span>unlock me</span></div>
+                    </div>
+                    <div class="app-layer">
+                        <div ng-show="showApp">
+                            <div id="current-app" ui-view>
+                        </div>
+
+                        </div>
+                        <div id="app-menu">
+                            <ul id="app-list">
+                                <li><a ui-sref="app.tumblr"><img src="images/apps/tumblr.jpg"></a></li>
+                                <li><a ui-sref="app.facebook"><img src="images/apps/facebook.png"></a></li>
+                                <li><a href="#"><img src="images/apps/twitter.png"></a></li>
+                                <li><a href="#"><img src="images/apps/snapchat.png"></a></li>
+                                <li><a href="#"><img src="images/apps/whisper.png"></a></li>
+                            </ul>
+                            <div class="app-menu-background"></div>
+                        </div>
+                    </div>
+
+
+        </div>
+
+    </div>
+
+    <div id="scarlet-letter">
+        <img src="images/scarlet-letter.png" />
+    </div>
+
+    <div id="pen">
+        <img src="images/pen.png" />
+    </div>
+
+    <div id="apple">
+        <img src="images/apple.png" />
+    </div>
+
+    <div id="tampon">
+        <img src="images/tampon.png" />
+    </div>
+
+    <div id="xacto">
+        <img src="images/xacto.png" />
+    </div>
+
+    <div id="charm">
+        <img src="images/charm.png" />
+    </div>
+
+    <div id="bobbypins">
+        <img src="images/bobbypins.png" />
+    </div>
+
+    <div id="lipgloss">
+        <img src="images/lipgloss.png" />
+    </div>
+</div>
+
+<script src="node_modules/lodash/index.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/angular-resource/angular-resource.js"></script>
+<script src="node_modules/ui-router/angular-ui-router.js"></script>
+
+<script src="js/main.js"></script>
+<script src="js/routing/routing.js"></script>
+<script src="js/resources/resources.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+@import "fonts/facebook-fonts";
+
+#facebook-app {
+  background: #d8dce8;
+
+  font-family: facebook-regular;
+
+  p, h1, h2, h3, h4, h5, a {
+    font-family: facebook-regular;
+  }
+
+  .header-pic img {
+    width: 100%;
+  }
+}
+
+.facebook-post {
+  background: white;
+  border: 1px solid #bbc3d0;
+  border-radius: 2px;
+  margin: 10px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+  padding: 0;
+
+  .post-header, .post-body {
+    padding: 0.5em;
+  }
+
+  .post-header {
+    position: relative;
+
+    .avatar {
+      display: inline;
+    }
+
+    .details {
+      position: absolute;
+      left: 100px;
+      top: -5px;
+      time {
+        font-size: 0.7em;
+        color: #c2c2c2;
+      }
+
+      .name {
+        font-famiy: facebook-bold;
+        margin-bottom: -5px;
+        color: #60739c;
+      }
+    }
+  }
+
+
+  .post-footer {
+    background: #eceff6;
+    border-top: #e0e3ea;
+    padding: 0;
+
+
+    ul {
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+
+      li {
+        display: inline;
+        a {
+          font-famiy: facebook-bold;
+          color: #425a9b;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

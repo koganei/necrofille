@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'facebook-regular';
+  src: url('../../fonts/texgyreheros_regular_macroman//texgyreheros-regular-webfont.eot');
+  src: url('../../fonts/texgyreheros_regular_macroman//texgyreheros-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/texgyreheros_regular_macroman//texgyreheros-regular-webfont.woff') format('woff'), url('../../fonts/texgyreheros_regular_macroman//texgyreheros-regular-webfont.ttf') format('truetype'), url('../../fonts/texgyreheros_regular_macroman//texgyreheros-regular-webfont.svg#texgyreherosregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'facebook-bold';
+  src: url('../../fonts/texgyreheros_regular_macroman//texgyreheros-bold-webfont.eot');
+  src: url('../../fonts/texgyreheros_regular_macroman//texgyreheros-bold-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/texgyreheros_regular_macroman//texgyreheros-bold-webfont.woff') format('woff'), url('../../fonts/texgyreheros_regular_macroman//texgyreheros-bold-webfont.ttf') format('truetype'), url('../../fonts/texgyreheros_regular_macroman//texgyreheros-bold-webfont.svg#texgyreherosbold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+#facebook-app {
+  background: #d8dce8;
+  font-family: facebook-regular;
+}
+#facebook-app p,
+#facebook-app h1,
+#facebook-app h2,
+#facebook-app h3,
+#facebook-app h4,
+#facebook-app h5,
+#facebook-app a {
+  font-family: facebook-regular;
+}
+#facebook-app .header-pic img {
+  width: 100%;
+}
+.facebook-post {
+  background: white;
+  border: 1px solid #bbc3d0;
+  border-radius: 2px;
+  margin: 10px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+  padding: 0;
+}
+.facebook-post .post-header,
+.facebook-post .post-body {
+  padding: 0.5em;
+}
+.facebook-post .post-header {
+  position: relative;
+}
+.facebook-post .post-header .avatar {
+  display: inline;
+}
+.facebook-post .post-header .details {
+  position: absolute;
+  left: 100px;
+  top: -5px;
+}
+.facebook-post .post-header .details time {
+  font-size: 0.7em;
+  color: #c2c2c2;
+}
+.facebook-post .post-header .details .name {
+  font-famiy: facebook-bold;
+  margin-bottom: -5px;
+  color: #60739c;
+}
+.facebook-post .post-footer {
+  background: #eceff6;
+  border-top: #e0e3ea;
+  padding: 0;
+}
+.facebook-post .post-footer ul {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.facebook-post .post-footer ul li {
+  display: inline;
+}
+.facebook-post .post-footer ul li a {
+  font-famiy: facebook-bold;
+  color: #425a9b;
+  font-weight: bold;
+}

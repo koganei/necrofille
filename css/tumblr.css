@@ -1,0 +1,44 @@
+#tumblr-app {
+  background: black;
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+  font-size: 15px;
+  text-align: center;
+}
+#tumblr-app .header-bg {
+  position: relative;
+  top: -78px;
+  height: 184px;
+}
+#tumblr-app .header-bg > img {
+  width: 100%;
+}
+#tumblr-app .header-avatar {
+  text-align: center;
+  position: relative;
+}
+#tumblr-app .header-avatar > img {
+  border-radius: 50%;
+  position: relative;
+  top: -75%;
+}
+#tumblr-app .post {
+  background: white;
+  color: black;
+  text-align: left;
+  padding: 1em;
+  margin-bottom: 2em;
+}
+#tumblr-app .post-controls {
+  list-style-type: none;
+  text-align: right;
+  margin-right: 1em;
+}
+#tumblr-app .post-controls li {
+  display: inline-block;
+}
+#tumblr-app .post-controls li a {
+  color: grey;
+}
