@@ -1,3 +1,12 @@
+.gradient (@startColor: #eee, @endColor: white) {
+  background-color: @startColor;
+  background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+  background: -webkit-linear-gradient(top, @startColor, @endColor);
+  background: -moz-linear-gradient(top, @startColor, @endColor);
+  background: -ms-linear-gradient(top, @startColor, @endColor);
+  background: -o-linear-gradient(top, @startColor, @endColor);
+}
+
 #tumblr-app {
   // height: 100%;
   background: black;
@@ -7,6 +16,40 @@
   font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
   font-size: 15px;
   text-align: center;
+
+  .header-aboutme {
+    position: relative;
+    height: 200px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-transition: height 250ms;
+    -moz-transition: height 250ms;
+    -ms-transition: height 250ms;
+    -o-transition: height 250ms;
+    transition: height 250ms;
+
+    &.open {
+      height: 450px;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      height: 100px;
+      width: 100%;
+      left: 0;
+
+      .gradient(rgba(0,0,0,0), rgba(0,0,0,255));
+    }
+
+    &.open:after {
+      display: none;
+    }
+  }
+
+
 
   .header-bg {
     position: relative;
@@ -27,6 +70,10 @@
     border-radius: 50%;
     position: relative;
     top: -75%;
+  }
+
+  .posts {
+    padding-bottom: 100px;
   }
 
   .post {

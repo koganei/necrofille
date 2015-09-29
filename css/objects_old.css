@@ -1,0 +1,83 @@
+#scarlet-letter {
+  position: absolute;
+  right: 966px;
+  top: 221px;
+  -webkit-transform: rotate(20deg) scale(2.5);
+  -moz-transform: rotate(20deg) scale(2.5);
+  -ms-transform: rotate(20deg) scale(2.5);
+  -o-transform: rotate(20deg) scale(2.5);
+  transform: rotate(20deg) scale(2.5);
+  box-shadow: inset 110px -79px 72px rgba(0, 0, 0, 0.5), -7px 6px 7px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+#pen {
+  position: absolute;
+  right: 0;
+  top: 571px;
+  -webkit-transform: rotate(79deg) scale(2);
+  -moz-transform: rotate(79deg) scale(2);
+  -ms-transform: rotate(79deg) scale(2);
+  -o-transform: rotate(79deg) scale(2);
+  transform: rotate(79deg) scale(2);
+}
+#charm {
+  position: absolute;
+  top: -11px;
+  right: 859px;
+  -webkit-transform: rotate(20deg) scale(0.75);
+  -moz-transform: rotate(20deg) scale(0.75);
+  -ms-transform: rotate(20deg) scale(0.75);
+  -o-transform: rotate(20deg) scale(0.75);
+  transform: rotate(20deg) scale(0.75);
+}
+#apple {
+  position: absolute;
+  top: 0;
+  right: 2198px;
+  -webkit-transform: scale(2) rotate(130deg);
+  -moz-transform: scale(2) rotate(130deg);
+  -ms-transform: scale(2) rotate(130deg);
+  -o-transform: scale(2) rotate(130deg);
+  transform: scale(2) rotate(130deg);
+}
+#bobbypins {
+  position: absolute;
+  top: 903px;
+  right: 2146px;
+  -webkit-transform: scale(0.6) rotate(-300deg);
+  -moz-transform: scale(0.6) rotate(-300deg);
+  -ms-transform: scale(0.6) rotate(-300deg);
+  -o-transform: scale(0.6) rotate(-300deg);
+  transform: scale(0.6) rotate(-300deg);
+}
+#lipgloss {
+  position: absolute;
+  top: 332px;
+  right: 2389px;
+  -webkit-transform: scale(1.1) rotate(-192deg);
+  -moz-transform: scale(1.1) rotate(-192deg);
+  -ms-transform: scale(1.1) rotate(-192deg);
+  -o-transform: scale(1.1) rotate(-192deg);
+  transform: scale(1.1) rotate(-192deg);
+}
+#tampon {
+  position: absolute;
+  top: 734px;
+  right: -37px;
+  -webkit-transform: scale(0.3) rotate(86deg);
+  -moz-transform: scale(0.3) rotate(86deg);
+  -ms-transform: scale(0.3) rotate(86deg);
+  -o-transform: scale(0.3) rotate(86deg);
+  transform: scale(0.3) rotate(86deg);
+}
+#xacto {
+  position: absolute;
+  top: 1042px;
+  right: 320px;
+  -webkit-transform: scale(0.7) rotate(20deg) scale(1.5);
+  -moz-transform: scale(0.7) rotate(20deg) scale(1.5);
+  -ms-transform: scale(0.7) rotate(20deg) scale(1.5);
+  -o-transform: scale(0.7) rotate(20deg) scale(1.5);
+  transform: scale(0.7) rotate(20deg) scale(1.5);
+  z-index: -1;
+}

@@ -1,0 +1,23 @@
+#phone-hardware {
+  position: absolute;
+  top: 19px;
+  right: 538px;
+}
+.marvel-device {
+  -webkit-transform: translateY(0) translateX(250px) scale(0.8);
+  -moz-transform: translateY(0) translateX(250px) scale(0.8);
+  -ms-transform: translateY(0) translateX(250px) scale(0.8);
+  -o-transform: translateY(0) translateX(250px) scale(0.8);
+  transform: translateY(0) translateX(250px) scale(0.8);
+  z-index: 5;
+  box-shadow: inset 110px -79px 72px rgba(0, 0, 0, 0.5), -7px 6px 7px rgba(0, 0, 0, 0.5);
+}
+.marvel-device .home {
+  cursor: pointer;
+}
+.marvel-device .screen {
+  z-index: 5 !important;
+}
+.marvel-device .screen #navigation {
+  font-size: 40px !important;
+}

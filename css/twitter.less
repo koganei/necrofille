@@ -1,0 +1,92 @@
+// @import "fonts/facebook-fonts";
+
+[app-color="twitter"] {
+  background: #0e7398;
+}
+
+#twitter-app {
+
+  font-family: 'Helvetica Neue', 'Roboto', sans-serif;
+
+  p, h1, h2, h3, h4, h5, a {
+    font-family: 'Helvetica Neue', 'Roboto', sans-serif;
+  }
+
+  .header-pic img {
+    width: 100%;
+  }
+
+  a:link,
+  a:active,
+  a:visited,
+  a:hover {
+    color: #3785b5;
+    font-size: 16px;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.twitter-post {
+  position: relative;
+  background: white;
+  border-top: 1px solid #c5cdd3;
+  padding: 0;
+  font-size: 16px;
+
+  .post-header {
+    padding: 0.5em;
+  }
+
+  .post-body {
+    padding-left: 100px;
+  }
+
+    .avatar {
+      float: left;
+      // display: inline;
+      border-radius: 10px;
+      width: 80px;
+      margin: 10px;
+    }
+
+    .details {
+      padding-top: 10px;
+
+      time {
+        display: inline-block;
+        font-size: 0.7em;
+        color: #c2c2c2;
+        float: right;
+        margin-right: 1em;
+      }
+
+      .name {
+        font-famiy: twitter-bold;
+        font-weight: bold;
+      }
+
+      .handle:before {
+        content: '@'
+      }
+  }
+
+
+  .post-footer {
+    margin-left: 100px;
+    ul {
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+
+      li {
+        display: inline;
+        a {
+          font-famiy: twitter-bold;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

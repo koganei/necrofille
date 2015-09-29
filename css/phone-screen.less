@@ -1,0 +1,199 @@
+.phone-menu {
+  height: 85px;
+}
+
+[ui-view] > [ui-view] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -23px;
+  color: black;
+  text-align: left;
+  overflow: scroll;
+  background: white;
+  z-index: 2;
+}
+[ui-view] > [ui-view]::-webkit-scrollbar {
+  width: 0;
+}
+
+.app-list {
+
+  list-style-type: none;
+  margin-left: 0;
+  padding: 0.5em;
+  text-align: center;
+  font-family: "Roboto";
+
+  li {
+    display: inline-block;
+
+    a { position: relative; font-family: "Roboto"; }
+
+    a img {
+      width: 60px;
+      height: 60px;
+      border-radius: 25%;
+      margin: 5px;
+    }
+
+    div {
+      width: 60px;
+      height: 60px;
+      border-radius: 25%;
+      margin: 5px;
+    }
+  }
+}
+
+#app-bottom-list {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 1;
+  margin: 0;
+
+  a:after {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: 67%;
+    font-size: 11px;
+    color: white;
+    content: attr(data-label)
+  }
+
+  .empty {
+    background: #252525;
+  }
+}
+
+#phone-screen {
+  position: absolute;
+  right: 361px;
+  top: 209px;
+  z-index: 7;
+  width: 320px;
+  height: 585px;
+  overflow: hidden;
+}
+#phone-screen .app-layer {
+  background: black;
+  color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+#phone-screen .lockscreen .text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  opacity: 0.8;
+}
+#phone-screen .app-menu-background {
+  background: url(../images/homepage_cat.jpeg);
+  background-position: 50% 50%;
+  background-size: 155%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+#phone-screen:before{
+  z-index: 1111;
+  pointer-events: none;
+  content:'';
+  position:absolute;
+  width: 130%;
+  height: 45%;
+  top: -38%;
+  right: -12%;
+  opacity: 0.2;
+  -webkit-filter: blur(5px); -moz-filter: blur(5px); -o-filter: blur(5px); -ms-filter: blur(5px); filter: blur(5px);
+  background:rgba(255,255,255,0.3);/*opera don't support gradient yet*/
+  background:
+  -webkit-gradient(
+          linear,
+          left top, left bottom,
+          from(rgba(255,255,255,0.1)),
+          to(rgba(255,255,255,0.3))
+  );
+
+  background:
+  -moz-linear-gradient(
+          top,
+          rgba(255,255,255,0.1),
+          rgba(255,255,255,0.3)
+  );
+  background:
+  linear-gradient(
+          top,
+          rgba(255,255,255,0.1),
+          rgba(255,255,255,0.3)
+  );
+;
+  /* Webkit */
+  -webkit-transform:rotate(10deg);
+  -webkit-border-bottom-left-radius: 200px 20px;
+  -webkit-border-bottom-right-radius: 200px 10px;
+  -webkit-border-top-right-radius: 5px 100px;
+  /* Firefox */
+  -moz-transform:rotate(10deg);
+  -moz-border-radius-bottomleft:200px 20px;
+  -moz-border-radius-bottomright:200px 10px;
+  -moz-border-radius-topright:5px 100px;
+  /* CSS3 */
+  transform:rotate(10deg);
+  border-bottom-left-radius:200px 20px;
+  border-bottom-right-radius: 200px 10px;
+  border-top-right-radius:5px 100px;
+}
+
+#phone-screen .lockscreen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: url('../images/phone_bg.jpg') black;
+  background-position: 140% 57%;
+  background-size: 217%;
+  z-index: 20;
+  transition: transform linear 600ms;
+  transform: translateY(0);
+
+
+
+}
+#phone-screen .lockscreen.ng-hide {
+  transform: translateY(-100%);
+}
+#phone-screen .music-player {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 2px solid black;
+  text-align: center;
+  z-index: 30;
+}

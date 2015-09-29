@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Natascha Portfolio</title>
-    <link rel="stylesheet" href="css/book.css"/>
-    <link rel="stylesheet" href="css/facebook.css"/>
-    <link rel="stylesheet" href="css/tumblr.css"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=0.3">
+
+    <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="css/devices.min.css"/>
+    <link rel="stylesheet" href="node_modules/toastr/build/toastr.min.css"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
@@ -33,26 +37,30 @@
 
 
                 <div id="phone-screen">
-                    <div class="lockscreen" style="display: none;">
-                        <div class="music-player">
-                            <div class="previous-button button"></div>
-                            <div class="next-button button"></div>
-                        </div>
-                        <div class="text"><span>unlock me</span></div>
-                    </div>
+                    <connection-bar app-color="{{currentAppName}}"></connection-bar>
+                    <div class="lockscreen" ng-hide="isScreenUnlocked"></div>
                     <div class="app-layer">
                         <div ng-show="showApp">
-                            <div id="current-app" ui-view>
+                            <div id="current-app" ui-view autoscroll="false">
                         </div>
 
                         </div>
-                        <div id="app-menu">
-                            <ul id="app-list">
-                                <li><a ui-sref="app.tumblr"><img src="images/apps/tumblr.jpg"></a></li>
-                                <li><a ui-sref="app.facebook"><img src="images/apps/facebook.png"></a></li>
-                                <li><a href="#"><img src="images/apps/twitter.png"></a></li>
-                                <li><a href="#"><img src="images/apps/snapchat.png"></a></li>
-                                <li><a href="#"><img src="images/apps/whisper.png"></a></li>
+                        <div id="app-menu" notifications>
+                            <ul id="app-list" class="app-list">
+                                <li><a notification-target="tumblr" ui-sref="app.tumblr"><img src="images/apps/tumblr.jpg"></a></li>
+                                <li><a notification-target="facebook" ui-sref="app.facebook"><img src="images/apps/facebook.png"></a></li>
+                                <li><a notification-target="twitter" ui-sref="app.twitter"><img src="images/apps/twitter.png"></a></li>
+                                <!--<li><a notification-target="snapchat" ui-sref="app.snapchat"><img src="images/apps/snapchat.png"></a></li>-->
+                                <li><a notification-target="whisper" ui-sref="app.whisper"><img src="images/apps/whisper.png"></a></li>
+                                <li><div></div></li>
+                                <li><div></div></li>
+                                <li><div></div></li>
+                            </ul>
+                            <ul id="app-bottom-list" class="app-list">
+                                <li><a href="mailto:simard.natascha@gmail.com" data-label="Phone"><img src="images/apps/phone.jpg"></a></li>
+                                <li><a href="#"><div class="empty"></div></a></li>
+                                <li><a href="#"><div class="empty"></div></a></li>
+                                <li><a href="#"><div class="empty"></div></a></li>
                             </ul>
                             <div class="app-menu-background"></div>
                         </div>
@@ -75,10 +83,6 @@
         <img src="images/apple.png" />
     </div>
 
-    <div id="tampon">
-        <img src="images/tampon.png" />
-    </div>
-
     <div id="xacto">
         <img src="images/xacto.png" />
     </div>
@@ -94,16 +98,21 @@
     <div id="lipgloss">
         <img src="images/lipgloss.png" />
     </div>
+
+        <div id="paper" class="letter">
+            <p>All trademarks, service marks, trade names, product names and logos appearing on the site are the property of their respective owners. Any rights not expressly granted herein are reserved.</p>
+        </div>
 </div>
 
-<script src="node_modules/lodash/index.js"></script>
-<script src="node_modules/angular/angular.js"></script>
-<script src="node_modules/angular-resource/angular-resource.js"></script>
-<script src="node_modules/ui-router/angular-ui-router.js"></script>
+<script src="bundle.js"></script>
+<!--<script src="node_modules/lodash/index.js"></script>-->
+<!--<script src="node_modules/angular/angular.js"></script>-->
+<!--<script src="node_modules/angular-resource/angular-resource.js"></script>-->
+<!--<script src="node_modules/ui-router/angular-ui-router.js"></script>-->
 
-<script src="js/main.js"></script>
-<script src="js/routing/routing.js"></script>
-<script src="js/resources/resources.js"></script>
+<!--<script src="js/main.js"></script>-->
+<!--<script src="js/routing/routing.js"></script>-->
+<!--<script src="js/resources/resources.js"></script>-->
 
 </body>
 </html>

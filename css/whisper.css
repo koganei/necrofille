@@ -1,0 +1,108 @@
+[app-color="whisper"] {
+  background: #583b59;
+}
+#whisper-app {
+  font-family: whisper-regular;
+}
+#whisper-app p,
+#whisper-app h1,
+#whisper-app h2,
+#whisper-app h3,
+#whisper-app h4,
+#whisper-app h5,
+#whisper-app a {
+  font-family: whisper-regular;
+}
+#whisper-app .body {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow: scroll;
+  background: #e7e7e7;
+}
+#whisper-app .body::-webkit-scrollbar {
+  width: 0;
+}
+#whisper-app .header-pic img {
+  width: 100%;
+}
+#whisper-app .whisper-footer {
+  position: absolute;
+  bottom: 0;
+}
+#whisper-app .whisper-footer img {
+  width: 100%;
+}
+.whisper-posts {
+  margin: 5px;
+  padding-bottom: 150px;
+}
+.whisper-post {
+  background: white;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 49%;
+  padding: 2px;
+  margin-bottom: 1em;
+  box-shadow: 0 3px 0px rgba(0, 0, 0, 0.25);
+  font-size: 12px;
+}
+.whisper-post,
+.whisper-post img {
+  border-radius: 2px;
+}
+.whisper-post img {
+  width: 100%;
+}
+.whisper-post-footer {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  font-family: 'Roboto';
+  font-size: 14px;
+  text-align: center;
+  color: #626262;
+}
+.whisper-post-footer li {
+  display: inline-block;
+  margin: 2px;
+}
+.whisper-post-footer li:first-child {
+  float: left;
+}
+.whisper-post-footer li:last-child {
+  float: right;
+}
+.whisper-post-footer .time-ago:before {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: url('../images/whisper/icon-time-ago.png');
+  margin-right: 3px;
+}
+.whisper-post-footer .hearts:before {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: url('../images/whisper/icon-hearts.png');
+  margin-right: 3px;
+}
+.whisper-post-footer .reposts:before {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  content: '';
+  width: 18px;
+  height: 16px;
+  background: url('../images/whisper/icon-reposts.png');
+  margin-right: 3px;
+}
+.whisper-post:nth-child(2n) {
+  margin-left: 2%;
+}

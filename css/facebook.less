@@ -1,7 +1,7 @@
 @import "fonts/facebook-fonts";
 
 #facebook-app {
-  background: #d8dce8;
+  background: #d3d6db;
 
   font-family: facebook-regular;
 
@@ -12,6 +12,10 @@
   .header-pic img {
     width: 100%;
   }
+}
+
+[app-color="facebook"] {
+  background: #4f6ca6;
 }
 
 .facebook-post {
@@ -37,7 +41,7 @@
       position: absolute;
       left: 100px;
       top: -5px;
-      time {
+      time, time-ago {
         font-size: 0.7em;
         color: #c2c2c2;
       }
@@ -65,11 +69,46 @@
       li {
         display: inline;
         a {
-          font-famiy: facebook-bold;
+          font-family: facebook-bold;
+          font-size: 12px;
+          color: #425a9b;
+          font-weight: bold;
+          margin-left: 1em;
+          margin-bottom: 2px;
+        }
+      }
+
+      &.left-menu {
+
+        li:first-child:after {
+          font-family: 'Arial';
+          content: '.';
+          position: relative;
+          top: -2px;
+          left: 8px;
+
           color: #425a9b;
           font-weight: bold;
         }
       }
+
+      &.right-menu {
+        margin-right: 10px;
+
+        .likes img {
+          position: relative;
+          top: 2px;
+        }
+
+        .comments img {
+          position: relative;
+          top: 2px;
+        }
+      }
+    }
+
+    > ul {
+      margin-bottom: 5px;
     }
   }
 }

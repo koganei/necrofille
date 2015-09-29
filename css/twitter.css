@@ -1,0 +1,79 @@
+[app-color="twitter"] {
+  background: #0e7398;
+}
+#twitter-app {
+  font-family: 'Helvetica Neue', 'Roboto', sans-serif;
+}
+#twitter-app p,
+#twitter-app h1,
+#twitter-app h2,
+#twitter-app h3,
+#twitter-app h4,
+#twitter-app h5,
+#twitter-app a {
+  font-family: 'Helvetica Neue', 'Roboto', sans-serif;
+}
+#twitter-app .header-pic img {
+  width: 100%;
+}
+#twitter-app a:link,
+#twitter-app a:active,
+#twitter-app a:visited,
+#twitter-app a:hover {
+  color: #3785b5;
+  font-size: 16px;
+}
+#twitter-app a:hover {
+  text-decoration: underline;
+}
+.twitter-post {
+  position: relative;
+  background: white;
+  border-top: 1px solid #c5cdd3;
+  padding: 0;
+  font-size: 16px;
+}
+.twitter-post .post-header {
+  padding: 0.5em;
+}
+.twitter-post .post-body {
+  padding-left: 100px;
+}
+.twitter-post .avatar {
+  float: left;
+  border-radius: 10px;
+  width: 80px;
+  margin: 10px;
+}
+.twitter-post .details {
+  padding-top: 10px;
+}
+.twitter-post .details time {
+  display: inline-block;
+  font-size: 0.7em;
+  color: #c2c2c2;
+  float: right;
+  margin-right: 1em;
+}
+.twitter-post .details .name {
+  font-famiy: twitter-bold;
+  font-weight: bold;
+}
+.twitter-post .details .handle:before {
+  content: '@';
+}
+.twitter-post .post-footer {
+  margin-left: 100px;
+}
+.twitter-post .post-footer ul {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.twitter-post .post-footer ul li {
+  display: inline;
+}
+.twitter-post .post-footer ul li a {
+  font-famiy: twitter-bold;
+  font-weight: bold;
+}

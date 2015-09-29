@@ -1,9 +1,11 @@
-(function() {
-    'use strict';
+import 'angular-resource';
 
-    function Resources($resource) {
-        return $resource('http://dev.nataschasimard.com/poems/node.json?parameters[type]=facebook_post');
-    }
+function Resources($resource) {
+    return {
+        getResources: function (url) {
+            return $resource(url);
+        }
+    };
+}
 
-    angular.module('portfolio.resources', ['ngResource']).service('Resources', Resources);
-}());
+angular.module('portfolio.resources', ['ngResource']).service('Resources', Resources);

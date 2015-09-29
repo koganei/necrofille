@@ -1,0 +1,43 @@
+<div id="tumblr-app">
+    <div class="header-bg">
+        <img src="images/tumblr_header.gif" alt=""/>
+    </div>
+    <div class="header-avatar">
+        <img src="images/tumblr_avatar.png" alt=""/>
+    </div>
+    <div class="header-aboutme" ng-click="isOpen = !isOpen" ng-class="{ open: isOpen }">
+        <span class="description">
+            <h1>necrofille</h1>
+            <p>vegan | pagan | pansexual | transasian |<br>
+feminist | genderfluid | felinekin |</p>
+
+<p>past life regressions to puritan salem</p>
+
+<p>17<br>
+    student at our beloved lady<br>
+    of ptsd<br>
+    and rape conceived pregnancy</p>
+
+<p>ask before u follow me<br>
+    420 friendly</p>
+
+<p>omg dad depresses me out <br>
+    typical white cishet male<br>
+    wtf is he talking about??</p>
+
+<p>purr/purrs/purrself</p>
+
+<p>(^..^)ノ</p>
+
+    </div>
+    <div class="posts">
+        <div class="post" ng-repeat="post in tumblr.posts">
+
+            <h1 class="post-header" ng-bind-html="post.title"></h1>
+            <div class="post-body" ng-bind-html="post.body"></div>
+            <ul class="post-controls">
+                <li><img src="images/tumblr/icons.png" alt=""/></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,60 +1,31 @@
-(function() {
-    'use strict';
+import { angular } from './../base';
+import 'ui-router';
+import './../resources/resources';
 
     function Routing() {
         this.getService = function() { return this; };
 
+
+
         this.config = function ($stateProvider, $urlRouterProvider) {
-            //
-            // For any unmatched url, redirect to /state1
-            // $urlRouterProvider.otherwise("/state1");
-            //
-            // Now set up the states
+
+            $urlRouterProvider.otherwise("/");
+
             $stateProvider
                 .state('home', {
                     url: "/",
                     controller: function($rootScope) {
                         $rootScope.showApp = false;
-                    }
+                        $rootScope.isScreenUnlocked = true;
+                        $rootScope.currentAppName = 'menu';}
                 })
                 .state('app', {
                     url: "/app",
                     templateUrl: "partials/app.html",
                     controller: function($rootScope) {
                         $rootScope.showApp = true;
+                        $rootScope.isScreenUnlocked = true;
                     }
-                })
-                .state('app.facebook', {
-                    url: "/facebook",
-                    templateUrl: "partials/facebook.html",
-                    resolve: {
-                        FacebookResources: function(Resources, $sce) {
-                            var facebookPosts = Resources.query().$promise.then(function(posts) {
-                                posts.forEach(function(post) {
-                                    post.node.body.und[0].safe_value = $sce.trustAsHtml(post.node.body.und[0].safe_value);
-                                });
-                                return posts;
-                            });
-                            return facebookPosts;
-                        }
-                    },
-                    controller: 'FacebookAppController as facebook'
-                })
-                .state('app.tumblr', {
-                    url: "/tumblr",
-                    templateUrl: "partials/tumblr.html"
-                    //resolve: {
-                    //    FacebookResources: function(Resources, $sce) {
-                    //        var facebookPosts = Resources.query().$promise.then(function(posts) {
-                    //            posts.forEach(function(post) {
-                    //                post.node.body.und[0].safe_value = $sce.trustAsHtml(post.node.body.und[0].safe_value);
-                    //            });
-                    //            return posts;
-                    //        });
-                    //        return facebookPosts;
-                    //    }
-                    //},
-                    // controller: 'TumblrAppController as tumblr'
                 });
 
 
@@ -62,12 +33,7 @@
     }
 
     var Router = new Routing();
-    var FacebookAppController = function(FacebookResources, $scope) {
-        console.log('controller', FacebookResources, $scope);
-        this.posts = FacebookResources;
-    };
+
 
     angular.module('portfolio.routing', ['ui.router', 'portfolio.resources']).service('Router', Router.getService)
-        .config(Router.config)
-        .controller('FacebookAppController', FacebookAppController);
-}());
+        .config(Router.config);

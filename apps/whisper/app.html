@@ -1,0 +1,28 @@
+<div id="whisper-app">
+    <div class="body">
+        <div class="header-pic"><img src="images/whisper/timeline-header.jpg"></div>
+
+
+        <div class="whisper-posts" slide-show>
+            <!--<span>sdfsdf</span>-->
+            <!--<pre>{{ slideShow|json }}</pre>-->
+            <!--<span>sdfsdf</span>-->
+
+            <div class="whisper-post" ng-repeat="post in whisper.posts">
+                <img class="avatar" src="{{'http://dev.nataschasimard.com/sites/default/files/' +  post.node.field_whisper_image.und[0].filename}}" slide-show-target ng-click="slideShow.start()">
+
+                <ul class="whisper-post-footer">
+                    <li class="time-ago"><time-ago date="post.node.field_whisper_date_posted.und[0].safe_value"></time-ago></li>
+                    <li class="hearts"><span ng-bind="post.node.field_whisper_hearts.und[0].value"></span></li>
+                    <li class="reposts"><span ng-bind="post.node.field_whisper_reposts.und[0].value"></span></li>
+                </ul>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="whisper-footer">
+        <img src="images/whisper/timeline-footer.png">
+    </div>
+</div>
