@@ -2,7 +2,7 @@ import jQuery from 'jquery';
 import '../../js/resources/resources';
 
     function FacebookResources(Resources) {
-        return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=facebook_post');
+        return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=facebook_post&parameters[]=node');
     }
 
     function FacebookAppController(posts, $rootScope) {
@@ -43,8 +43,6 @@ import '../../js/resources/resources';
                     templateUrl: "apps/facebook/app.html",
                     resolve: {
                         posts: function (FacebookResources, $sce) {
-                            console.log('Face ', FacebookResources);
-
                             return FacebookResources.query().$promise.then(function (posts) {
                                 posts.forEach(function (post) {
                                     post.node.body.und[0].safe_value = $sce.trustAsHtml(post.node.body.und[0].safe_value);

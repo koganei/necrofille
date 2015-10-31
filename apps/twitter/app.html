@@ -4,7 +4,7 @@
 
         <div class="twitter-post" ng-repeat="post in twitter.posts">
 
-            <img class="avatar" src="{{'http://dev.nataschasimard.com/sites/default/files/' +  post.node.field_twitter_avatar.und[0].filename}}">
+            <img class="avatar" ng-src="{{'http://dev.nataschasimard.com/sites/default/files/' +  post.node.field_twitter_avatar.und[0].filename}}">
 
             <div class="details">
                 <span class="name" ng-bind="post.node.field_twitter_name.und[0].safe_value"></span>

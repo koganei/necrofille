@@ -1,5 +1,67 @@
-[app-color="whisper"] {
-  background: #583b59;
+connection-bar {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 25px;
+  z-index: 20;
+  font-family: "Helvetica Neue", 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+connection-bar .horizontal-list {
+  display: inline-block;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+connection-bar .horizontal-list li {
+  display: inline-block;
+}
+connection-bar .connection-dots {
+  float: left;
+  padding-left: 10px;
+}
+connection-bar .connection-dot {
+  height: 9px;
+  width: 9px;
+  padding: 0;
+  margin: 0;
+}
+connection-bar .connection-dot img {
+  width: 100%;
+  height: 100%;
+}
+connection-bar .connection-info {
+  float: left;
+}
+connection-bar .connection-text {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+connection-bar .time {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 21px;
+}
+connection-bar .battery {
+  float: right;
+  margin-right: 10px;
+}
+connection-bar .connection-dot img {
+  content: url("../images/connection-bar/white-dot.png");
+}
+connection-bar .connection-dot.empty img {
+  content: url("../images/connection-bar/white-dot-empty.png");
+}
+connection-bar .connection-icon img {
+  content: url("../images/connection-bar/white-wireless-icon.png");
+}
+connection-bar .battery img {
+  content: url("../images/connection-bar/white-battery.png");
 }
 #whisper-app {
   font-family: whisper-regular;

@@ -28,7 +28,10 @@
 }
 .app-list li a {
   position: relative;
+  display: inline-block;
   font-family: "Roboto";
+  font-size: 12px;
+  font-weight: bold;
 }
 .app-list li a img {
   width: 60px;
@@ -50,12 +53,12 @@
   z-index: 1;
   margin: 0;
 }
-#app-bottom-list a:after {
+#app-bottom-list a:before {
   position: absolute;
   left: 0;
   width: 100%;
   text-align: center;
-  top: 67%;
+  top: 90%;
   font-size: 11px;
   color: white;
   content: attr(data-label);
@@ -71,6 +74,40 @@
   width: 320px;
   height: 585px;
   overflow: hidden;
+  transition: opacity 200ms;
+}
+.crack {
+  z-index: 99999;
+  position: absolute;
+  right: 361px;
+  top: 209px;
+  width: 320px;
+  height: 585px;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  pointer-events: none;
+  transition: transform 1s;
+  transition-delay: 400ms;
+}
+.crack img {
+  position: relative;
+  right: 19px;
+  top: 256px;
+}
+.phone-landscape .crack {
+  transform: rotate(-90deg);
+}
+.rotating #phone-screen {
+  opacity: 0;
+}
+.phone-landscape #phone-screen {
+  right: 228px;
+  top: 330px;
+  width: 586px;
+  height: 335px;
 }
 #phone-screen .app-layer {
   background: black;

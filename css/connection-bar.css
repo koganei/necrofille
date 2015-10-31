@@ -8,8 +8,8 @@ connection-bar {
   z-index: 20;
   font-family: "Helvetica Neue", 'Roboto', Helvetica, Arial, sans-serif;
   font-weight: bold;
-  color: white;
   text-align: center;
+  color: white;
 }
 connection-bar .horizontal-list {
   display: inline-block;
@@ -50,4 +50,16 @@ connection-bar .time {
 connection-bar .battery {
   float: right;
   margin-right: 10px;
+}
+connection-bar .connection-dot img {
+  content: url("../images/connection-bar/white-dot.png");
+}
+connection-bar .connection-dot.empty img {
+  content: url("../images/connection-bar/white-dot-empty.png");
+}
+connection-bar .connection-icon img {
+  content: url("../images/connection-bar/white-wireless-icon.png");
+}
+connection-bar .battery img {
+  content: url("../images/connection-bar/white-battery.png");
 }

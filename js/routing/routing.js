@@ -1,11 +1,10 @@
 import { angular } from './../base';
 import 'ui-router';
 import './../resources/resources';
+import '../../components/phone-orientation/main';
 
     function Routing() {
         this.getService = function() { return this; };
-
-
 
         this.config = function ($stateProvider, $urlRouterProvider) {
 
@@ -17,7 +16,13 @@ import './../resources/resources';
                     controller: function($rootScope) {
                         $rootScope.showApp = false;
                         $rootScope.isScreenUnlocked = true;
-                        $rootScope.currentAppName = 'menu';}
+                        $rootScope.currentAppName = 'menu';
+                    },
+                    resolve: {
+                        orientation: function(phoneOrientation) {
+                            return phoneOrientation && phoneOrientation.toPortrait();
+                        }
+                    }
                 })
                 .state('app', {
                     url: "/app",
@@ -33,7 +38,6 @@ import './../resources/resources';
     }
 
     var Router = new Routing();
-
 
     angular.module('portfolio.routing', ['ui.router', 'portfolio.resources']).service('Router', Router.getService)
         .config(Router.config);

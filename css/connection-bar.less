@@ -6,11 +6,15 @@ connection-bar {
   right: 0;
   height: 25px;
   //background: navy;
+  //-webkit-transition: color 100ms;
+  //-moz-transition: color 100ms;
+  //-ms-transition: color 100ms;
+  //-o-transition: color 100ms;
+  //transition: color 100ms;
 
   z-index: 20;
   font-family: "Helvetica Neue", 'Roboto', Helvetica, Arial, sans-serif;
   font-weight: bold;
-  color: white;
   text-align: center;
 
   .horizontal-list {
@@ -57,4 +61,27 @@ connection-bar {
     float: right;
     margin-right: 10px;
   }
+
+  .connection-bar-color("white");
 }
+
+.connection-bar-color(@color) {
+  color: ~'@{color}';
+
+  .connection-dot img {
+    content: url("../images/connection-bar/@{color}-dot.png");
+  }
+
+  .connection-dot.empty img {
+    content: url("../images/connection-bar/@{color}-dot-empty.png");
+  }
+
+  .connection-icon img {
+    content: url("../images/connection-bar/@{color}-wireless-icon.png");
+  }
+
+  .battery img {
+    content: url("../images/connection-bar/@{color}-battery.png");
+  }
+}
+

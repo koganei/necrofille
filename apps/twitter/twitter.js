@@ -1,7 +1,7 @@
 import '../../js/resources/resources';
 
     function TwitterResources(Resources) {
-        return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=twitter_post');
+        return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=twitter_post&parameters[]=node');
     }
 
     function TwitterAppController(posts, $scope, $rootScope) {
@@ -20,8 +20,6 @@ import '../../js/resources/resources';
                     templateUrl: "apps/twitter/app.html",
                     resolve: {
                         posts: function (TwitterResources, $sce) {
-                            console.log('Snap ', TwitterResources);
-
                             return TwitterResources.query().$promise.then(function (posts) {
                                 posts.forEach(function (post) {
                                     post.node.body.und[0].safe_value = $sce.trustAsHtml(post.node.body.und[0].safe_value);

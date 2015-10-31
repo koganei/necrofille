@@ -9,7 +9,7 @@
             <!--<span>sdfsdf</span>-->
 
             <div class="whisper-post" ng-repeat="post in whisper.posts">
-                <img class="avatar" src="{{'http://dev.nataschasimard.com/sites/default/files/' +  post.node.field_whisper_image.und[0].filename}}" slide-show-target ng-click="slideShow.start()">
+                <img class="avatar" ng-src="{{'http://dev.nataschasimard.com/sites/default/files/' +  post.node.field_whisper_image.und[0].filename}}" slide-show-target ng-click="slideShow.start()">
 
                 <ul class="whisper-post-footer">
                     <li class="time-ago"><time-ago date="post.node.field_whisper_date_posted.und[0].safe_value"></time-ago></li>

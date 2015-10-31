@@ -11,9 +11,42 @@
   transform: translateY(0) translateX(250px) scale(0.8);
   z-index: 5;
   box-shadow: inset 110px -79px 72px rgba(0, 0, 0, 0.5), -7px 6px 7px rgba(0, 0, 0, 0.5);
+  transition: transform 750ms;
+  transition-delay: 300ms;
+}
+.phone-landscape .marvel-device {
+  -webkit-transform: translateY(0) translateX(250px) scale(0.8) rotate(-90deg);
+  -moz-transform: translateY(0) translateX(250px) scale(0.8) rotate(-90deg);
+  -ms-transform: translateY(0) translateX(250px) scale(0.8) rotate(-90deg);
+  -o-transform: translateY(0) translateX(250px) scale(0.8) rotate(-90deg);
+  transform: translateY(0) translateX(250px) scale(0.8) rotate(-90deg);
 }
 .marvel-device .home {
   cursor: pointer;
+}
+.marvel-device .home:after {
+  position: absolute;
+  content: '';
+  width: 55px;
+  height: 55px;
+  top: 2px;
+  left: 8px;
+  transform: rotate(45deg);
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fffadd+29,fffadd+100&amp;0+28,0.32+28,0.04+29,0+100 */
+  background: -moz-linear-gradient(top, rgba(255, 250, 221, 0.32) 28%, rgba(255, 250, 221, 0.04) 29%, rgba(255, 250, 221, 0) 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(28%, rgba(255, 250, 221, 0.32)), color-stop(29%, rgba(255, 250, 221, 0.04)), color-stop(100%, rgba(255, 250, 221, 0)));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(255, 250, 221, 0.32) 28%, rgba(255, 250, 221, 0.04) 29%, rgba(255, 250, 221, 0) 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(255, 250, 221, 0.32) 28%, rgba(255, 250, 221, 0.04) 29%, rgba(255, 250, 221, 0) 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(255, 250, 221, 0.32) 28%, rgba(255, 250, 221, 0.04) 29%, rgba(255, 250, 221, 0) 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, rgba(255, 250, 221, 0.32) 28%, rgba(255, 250, 221, 0.04) 29%, rgba(255, 250, 221, 0) 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#52fffadd', endColorstr='#00fffadd', GradientType=0);
+  /* IE6-9 */
 }
 .marvel-device .screen {
   z-index: 5 !important;

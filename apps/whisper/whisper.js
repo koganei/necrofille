@@ -6,7 +6,7 @@ import jQuery from 'jquery';
 
 
     function WhisperResources(Resources) {
-        return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=whisper_post');
+        return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=whisper_post&parameters[]=node');
     }
 
     function WhisperAppController(posts, $rootScope) {
@@ -45,8 +45,6 @@ import jQuery from 'jquery';
                     templateUrl: "apps/whisper/app.html",
                     resolve: {
                         posts: function (WhisperResources, $sce) {
-                            console.log('Snap ', WhisperResources);
-
                             return WhisperResources.query().$promise.then(function (posts) {
                                 //posts.forEach(function (post) {
                                 //    console.log('POST POST', post);

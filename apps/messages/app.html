@@ -1,0 +1,21 @@
+<div id="messages-app">
+    <div class="header-pic"><img src="images/messages/list-header.png"></div>
+
+    <div class="body">
+
+        <div class="messages-posts">
+            <div class="messages-post" ng-repeat="post in messages.posts" ng-click="messages.loadPost(post)">
+                <b ng-bind="post.node.field_messages_recipient.und[0].value"></b>
+            </div>
+        </div>
+    </div>
+
+    <div class="messages-loadedpost" ng-if="messages.loadedPost">
+        <div class="messages-message-body" role="log">
+            <p ng-repeat="message in messages.loadedPost.messages" ng-class="'message message-type-'+message.type">{{message.message}}</p>
+        </div>
+        <div class="messages-message-footer">
+            <img src="images/messages/footer.png">
+        </div>
+    </div>
+</div>

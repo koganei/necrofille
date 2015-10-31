@@ -1,0 +1,68 @@
+// @import "fonts/whisper-fonts";
+@import 'connection-bar';
+[app-color="newhive"] {
+  .connection-bar-color("black");
+}
+
+#newhive-app {
+  background: white;
+  min-height: 100%;
+  padding-top: 25px;
+  font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+
+  .header {
+    box-shadow: 0 0 8px black;
+    padding-top: 5px;
+    text-align: center;
+    img {
+      width: 25%;
+    }
+  }
+
+  .body {
+    margin-top: 10px;
+    position: relative;
+
+    .newhive-posts {
+      width: 90%;
+      margin: auto;
+      padding-bottom: 2em;
+
+      .newhive-post {
+        padding: 10px;
+        cursor: pointer;
+
+        .thumbnail {
+          width: 100%;
+        }
+
+        .avatar {
+          width: 44px;
+          height: 44px;
+        }
+      }
+
+      .newhive-post:hover {
+        box-shadow: 0 0 2px black;
+      }
+    }
+  }
+
+  .loaded-post {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    iframe {
+      position: relative;
+      top: -5%;
+      left: -5%;
+      width: 110%;
+      height: 110%;
+      border: none;
+      overflow: hidden;
+    }
+  }
+}

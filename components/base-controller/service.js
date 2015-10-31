@@ -1,24 +1,12 @@
 import { angular, toastr } from './../../js/base';
 import _ from 'lodash';
 import '../../js/resources/resources';
-import BaseController from '../base-controller/index.js';
 
 let controllerName = 'notifications';
 
-class NotificationsAttribute {
-    constructor(Resources) {
-        this.items = {};
-        Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[]=node').query().$promise.then((allItems) => {
-            _(allItems).groupBy('type')
-                .each((value, key) => { this.items[key] = value.length; })
-                .value();
-        });
-    }
-}
-
 class NotificationTargetAttribute extends BaseController {
-    constructor($scope, $element) {
-        super($scope);
+    constructor($injector, $element) {
+        super($injector);
         this.el = $element;
 
     }
@@ -28,7 +16,7 @@ class NotificationTargetAttribute extends BaseController {
     }
 
     setWatcher(notificationTarget) {
-        this.__$scope.$watch('target.notificationsCtrl.items.' + notificationTarget, (newValue) => {
+        this.$watch('notificationsCtrl.items.' + notificationTarget, (newValue) => {
             this.setNotificationValue(newValue);
         });
     }

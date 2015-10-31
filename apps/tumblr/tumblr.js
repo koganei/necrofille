@@ -1,7 +1,7 @@
 import '../../js/resources/resources';
 
     function TumblrResources(Resources) {
-        return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=tumblr_post');
+        return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=tumblr_post&parameters[]=node');
     }
 
     function TumblrAppController(posts, $rootScope) {

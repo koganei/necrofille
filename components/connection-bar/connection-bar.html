@@ -1,22 +1,22 @@
-<div>
+<div ng-class="connectionBar.textColor + '-color'">
     <ul class="connection-dots horizontal-list">
-        <li class="connection-dot"><img src="images/connection-bar/dot.png" alt=""/></li>
-        <li class="connection-dot"><img src="images/connection-bar/dot.png" alt=""/></li>
-        <li class="connection-dot"><img src="images/connection-bar/dot.png" alt=""/></li>
-        <li class="connection-dot"><img src="images/connection-bar/dot-empty.png" alt=""/></li>
-        <li class="connection-dot"><img src="images/connection-bar/dot-empty.png" alt=""/></li>
+        <li class="connection-dot"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot.png" alt=""/></li>
+        <li class="connection-dot"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot.png" alt=""/></li>
+        <li class="connection-dot"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot.png" alt=""/></li>
+        <li class="connection-dot" ng-class="{ empty: connectionBar.isLow }"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot{{connectionBar.isLow ? '-empty' : ''}}.png" alt=""/></li>
+        <li class="connection-dot empty"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot-empty.png" alt=""/></li>
     </ul>
 
     <ul class="connection-info horizontal-list">
         <li class="connection-text">MTS</li>
-        <li class="connection-icon"><img src="images/connection-bar/wireless-icon.png" alt=""/></li>
+        <li class="connection-icon"><img src="images/connection-bar/{{connectionBar.textColor}}-wireless-icon.png" alt=""/></li>
     </ul>
 
     <div class="time">
         <ds-widget-clock show-digital="true" digital-format="'h:mma'"></ds-widget-clock>
     </div>
 
-    <div class="battery"><img src="images/connection-bar/battery.png" alt=""/></div>
+    <div class="battery"><img src="images/connection-bar/{{connectionBar.textColor}}-battery.png" alt=""/></div>
 
 
 </div>

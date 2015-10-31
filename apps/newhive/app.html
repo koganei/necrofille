@@ -1,0 +1,21 @@
+<div id="newhive-app">
+    <div class="header">
+        <img src="images/newhive/header.png">
+    </div>
+
+    <div class="body" ng-if="!newhive.loadedPost">
+
+        <div class="newhive-posts" slide-show>
+            <div class="newhive-post" ng-repeat="post in newhive.posts" ng-click="newhive.loadPost(post)">
+                <img class="thumbnail" ng-src="{{post.thumbnail}}" />
+                <div class="newhive-post-footer">
+                    <h2 ng-bind="post.node.title"></h2>
+                    <div><img src="images/avatar.jpg" class="avatar"> by <b ng-bind="post.node.field_newhive_author.und[0].value"></b></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loaded-post" ng-if="newhive.loadedPost">
+        <iframe ng-src="{{newhive.loadedPost.postUrl}}"></iframe>
+    </div>
+</div>
