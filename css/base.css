@@ -24,9 +24,23 @@
 }
 /* close commented backslash hack */
 body {
+  margin: auto 0;
   background: url('../images/wood.jpg');
   font-size: 18px;
-  overflow: hidden;
+  margin-left: 100px;
+}
+#container {
+  overflow: visible;
+  display: block;
+  position: relative;
+  transform: scale(0.6);
+  transform-origin: 0 0;
+  transition: all 1s;
+}
+@media all and (orientation: portrait) {
+  #container {
+    transform: scale(0.8);
+  }
 }
 #header {
   float: right;

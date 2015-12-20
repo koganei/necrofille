@@ -1,3 +1,14 @@
+#phone-screen {
+  position: absolute;
+  left: 78px;
+  top: 95px;
+  z-index: 7;
+  width: 320px;
+  height: 584px;
+  overflow: hidden;
+  transition: opacity 200ms;
+}
+
 .phone-menu {
   height: 85px;
 }
@@ -36,6 +47,11 @@
       font-family: "Roboto";
       font-size: 12px;
       font-weight: bold;
+    }
+
+    transition: opacity 150ms ease-in;
+    a:active {
+      opacity: 0.2;
     }
 
     a img {
@@ -78,22 +94,12 @@
   }
 }
 
-#phone-screen {
-  position: absolute;
-  right: 361px;
-  top: 209px;
-  z-index: 7;
-  width: 320px;
-  height: 585px;
-  overflow: hidden;
-  transition: opacity 200ms;
-}
 
 .crack {
   z-index: 99999;
   position: absolute;
-  right: 361px;
-  top: 209px;
+  left: 73px;
+  top: 89px;
   width: 320px;
   height: 585px;
 
@@ -102,10 +108,11 @@
   -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
   transform: translateZ(0);
+  transform-origin: 100% 60%;
 
   pointer-events: none;
-  transition: transform 1s;
-  transition-delay: 400ms;
+  transition: transform 750ms;
+  transition-delay: 300ms;
 
   img {
     position: relative;
@@ -115,7 +122,7 @@
 }
 
 .phone-landscape .crack {
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) translateX(270px);
 }
 
 .rotating #phone-screen {
@@ -123,8 +130,8 @@
 }
 
 .phone-landscape #phone-screen {
-  right: 228px;
-  top: 330px;
+  left: 55px;
+  top: 164px;
   width: 586px;
   height: 335px;
 }
@@ -216,24 +223,69 @@
   border-top-right-radius:5px 100px;
 }
 
+
+
 #phone-screen .lockscreen {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background: url('../images/phone_bg.jpg') black;
-  background-position: 140% 57%;
-  background-size: 217%;
+  overflow: hidden;
   z-index: 20;
-  transition: transform linear 600ms;
-  transform: translateY(0);
+  transition: opacity ease-in 100ms;
+  transition-delay: 3s;
+
+  .lockscreen-home {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    background: black;
+
+    box-sizing: border-box;
+
+    background: url(../images/homepage_cat.jpeg);
+    background-position: 50% 50%;
+    background-size: 155%;
+
+    transition: transform linear 600ms;
+    transform: translateX(0);
+
+    img { position: absolute; bottom: 0; width: 100%; }
+  }
 
 
 
+  .lockscreen-password {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    background: black;
+    transform: translateX(-100%);
+    transition: transform linear 600ms;
+
+    img {
+      width: 100%;
+    }
+  }
 }
+
 #phone-screen .lockscreen.ng-hide {
-  transform: translateY(-100%);
+  opacity: 0;
+}
+
+
+#phone-screen .lockscreen.ng-hide .lockscreen-home {
+  transform: translateX(100%);
+}
+#phone-screen .lockscreen.ng-hide .lockscreen-password {
+  transform: translateX(0);
 }
 #phone-screen .music-player {
   position: absolute;

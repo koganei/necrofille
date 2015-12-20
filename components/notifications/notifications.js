@@ -8,7 +8,7 @@ let controllerName = 'notifications';
 class NotificationsAttribute {
     constructor(Resources) {
         this.items = {};
-        Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[]=node').query().$promise.then((allItems) => {
+        Resources.getResources('http://dev.nataschasimard.com/poems/node.json?pagesize=500').query().$promise.then((allItems) => {
             _(allItems).groupBy('type')
                 .each((value, key) => { this.items[key] = value.length; })
                 .value();

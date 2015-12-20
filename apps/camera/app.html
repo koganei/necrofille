@@ -1,0 +1,26 @@
+<div id="camera-app">
+    <header  ng-hide="camera.loadedPost">
+        <div class="page-name">All Photos</div>
+        <span class="date-time" ng-if="camera.loadedPost">
+            <span class="date" ng-bind="post.node.field_camera_date.und[0].value"></span>
+            <span class="time" ng-bind="post.node.field_camera_time.und[0].value"></span>
+        </span>
+    </header>
+
+    <div class="loaded-post" ng-hide="camera.loadedPost" ng-click="camera.loadPost(camera.posts[0])" style="background: transparent;z-index:0;"></div>
+    <div class="loaded-post" ng-hide="!camera.loadedPost" style="background: black; opacity: 0; z-index: 1;"></div>
+
+    <div class="loaded-post">
+        <!--<img class="post" ng-src="{{'http://dev.nataschasimard.com/sites/default/files/'+camera.loadedPost.post}}" alt=""/>-->
+        <video class="post" src="https://dl.dropboxusercontent.com/u/10434126/haiku.mp4" type="video/mp4" id="camera-video"></video>
+        <!--<video class="post" src="videos/haiku.mp4" id="camera-video"></video>-->
+    </div>
+
+    <div class="camera-posts" ng-hide="camera.loadedPost">
+
+        <div class="camera-post" ng-repeat="post in camera.posts" ng-click="camera.loadPost(post)">
+            <img class="post" ng-src="{{'http://dev.nataschasimard.com/sites/default/files/'+post.post}}" alt=""/>
+        </div>
+        <img class="controls" src="images/camera/controls.jpg">
+    </div>
+</div>

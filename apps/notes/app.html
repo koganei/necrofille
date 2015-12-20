@@ -1,0 +1,18 @@
+<div id="notes-app">
+    <div class="post-list page"  ng-if="!notes.loadedPost">
+        <div class="header-pic"><img src="images/notes/header.jpg"></div>
+
+        <div class="notes-posts">
+            <div class="notes-post" ng-repeat="post in notes.posts" ng-click="notes.loadPost(post)">
+                <b class="title" ng-bind="post.title"></b>
+                <date class="date" ng-bind="post.node.field_field_notes_date.und[0].value"></date>
+            </div>
+        </div>
+    </div>
+
+    <div class="loaded-post page" ng-if="notes.loadedPost">
+        <div class="header-pic" ng-click="notes.loadedPost = undefined"><img src="images/notes/post-header.jpg"></div>
+        <date class="date" ng-bind="notes.loadedPost.node.field_field_notes_date.und[0].value"></date>
+        <pre class="body" ng-bind="notes.loadedPost.node.body.und[0].value"></pre>
+    </div>
+</div>

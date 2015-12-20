@@ -1,0 +1,60 @@
+// @import "fonts/whisper-fonts";
+// @import "http://fonts.googleapis.com/css?family=Open+Sans:400,600,700";
+@import 'connection-bar';
+[app-color="instagram"] {
+  .connection-bar-color("black");
+}
+
+#instagram-app {
+  position: relative;
+  background: white;
+  height: ~"calc(100% - 120px)";
+  font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+
+  .header-pic {
+    img { width: 100%; }
+  }
+
+  .body {
+    background: white;
+    height: 100%;
+
+    .instagram-post { margin-bottom: 1em; }
+
+    .post {
+      width: 100%;
+    }
+
+    .controls {
+      display: block;
+      margin: auto;
+      width: 90%;
+    }
+
+    .post-info {
+      padding: 0.5em 1em;
+
+      img { vertical-align: middle; }
+
+      .author {
+        color: #125688;
+      }
+
+      .date {
+        color: #a1a1a1;
+        float: right;
+        position: relative;
+        top: 14px;
+      }
+    }
+
+    .post-comment {
+      padding: 0.5em;
+
+      .author { color: #125688; }
+      .comment { color: #0f0f0f; }
+    }
+
+
+  }
+}

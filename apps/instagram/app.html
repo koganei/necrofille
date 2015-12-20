@@ -1,0 +1,21 @@
+<div id="instagram-app">
+    <div class="header-pic"><img src="images/instagram/header.jpg"></div>
+
+    <div class="body">
+        <div class="instagram-posts">
+            <div class="instagram-post" ng-repeat="post in instagram.posts" ng-click="instagram.loadPost(post)">
+                <div class="post-info">
+                    <img src="images/instagram/avatar.jpg" alt=""/>
+                    <b class="author" ng-bind="post.node.field_instagram_author.und[0].value"></b>
+                    <date class="date" ng-bind="post.node.field_instagram_date.und[0].value"></date>
+                </div>
+                <img class="post" ng-src="{{'http://dev.nataschasimard.com/sites/default/files/'+post.node.field_instagram_post.und[0].filename}}" alt=""/>
+                <img src="images/instagram/post-controls.jpg" alt="" class="controls"/>
+                <div class="post-comment">
+                    <b class="author" ng-bind="post.node.field_instagram_author.und[0].value"></b>
+                    <span class="comment" ng-bind-html="post.body"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

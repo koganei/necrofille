@@ -5,11 +5,15 @@ connection-bar {
   left: 0;
   right: 0;
   height: 25px;
-  z-index: 20;
+  z-index: 25;
   font-family: "Helvetica Neue", 'Roboto', Helvetica, Arial, sans-serif;
   font-weight: bold;
   text-align: center;
+  transition: opacity 250ms;
   color: white;
+}
+connection-bar.ng-hide {
+  opacity: 0;
 }
 connection-bar .horizontal-list {
   display: inline-block;
@@ -114,12 +118,12 @@ connection-bar .battery img {
   padding: 0.5em;
 }
 .twitter-post .post-body {
-  padding-left: 100px;
+  padding-left: 50px;
 }
 .twitter-post .avatar {
   float: left;
   border-radius: 10px;
-  width: 80px;
+  width: 40px;
   margin: 10px;
 }
 .twitter-post .details {

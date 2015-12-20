@@ -28,13 +28,21 @@ feminist | genderfluid | felinekin |</p>
 <p>purr/purrs/purrself</p>
 
 <p>(^..^)ノ</p>
-
+         </span>
     </div>
     <div class="posts">
         <div class="post" ng-repeat="post in tumblr.posts">
 
-            <h1 class="post-header" ng-bind-html="post.title"></h1>
-            <div class="post-body" ng-bind-html="post.body"></div>
+            <h1 class="post-header" ng-if="post.node.field_tumblr_header.und[0].value && post.node.field_tumblr_header.und[0].value !== ''" ng-bind-html="post.node.field_tumblr_header.und[0].value"></h1>
+            <div class="post-body">
+                <p ng-bind-html="post.body"></p>
+
+                <img class="pic" ng-repeat="pic in post.node.field_tumblr_pic.und" ng-src="{{'http://dev.nataschasimard.com/sites/default/files/'+pic.filename}}" alt=""/>
+
+                <ul class="hashtags">
+                    <li class="hashtag" ng-repeat="tag in post.node.field_tumblr_tags.und"><a ng-href="{{'https://www.tumblr.com/tagged/'+tumblr.convertTag(tag.value)}}" ng-bind="tag.value"></a></li>
+                </ul>
+            </div>
             <ul class="post-controls">
                 <li><img src="images/tumblr/icons.png" alt=""/></li>
             </ul>

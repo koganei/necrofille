@@ -1,4 +1,5 @@
 import { angular } from './base';
+import $ from 'jquery';
 
 import 'angular-animate';
 import 'angular-clock';
@@ -10,11 +11,16 @@ import '../apps/tumblr/tumblr';
 import '../apps/twitter/twitter';
 import '../apps/whisper/whisper';
 import '../apps/newhive/newhive';
+import '../apps/instagram/instagram';
+import '../apps/notes/notes';
 import '../apps/messages/messages';
+import '../apps/camera/camera';
 
 import '../components/notifications/notifications';
 import '../components/timeago/main';
 import '../components/connection-bar/main';
+import '../components/unlock-animation/main';
+import '../components/bookflip-animation/main';
 
 angular.module('portfolio', [
     'ngAnimate',
@@ -27,9 +33,14 @@ angular.module('portfolio', [
     'app.twitter',
     'app.whisper',
     'app.newhive',
+    'app.instagram',
+    'app.notes',
     'app.messages',
+    'app.camera',
 
     'notifications',
     'timeago',
-    'connectionBar'
+    'connectionBar',
+    'unlockanimation',
+    'bookflipanimation'
 ]);

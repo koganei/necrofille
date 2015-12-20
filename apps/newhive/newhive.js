@@ -3,7 +3,6 @@ import '../../components/slide-show/main';
 import '../../components/phone-orientation/main';
 import _ from 'lodash';
 import moment from 'moment';
-import jQuery from 'jquery';
 
     class NewhiveAppController {
         constructor(posts, $rootScope) {

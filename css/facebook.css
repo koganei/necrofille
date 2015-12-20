@@ -35,11 +35,15 @@ connection-bar {
   left: 0;
   right: 0;
   height: 25px;
-  z-index: 20;
+  z-index: 25;
   font-family: "Helvetica Neue", 'Roboto', Helvetica, Arial, sans-serif;
   font-weight: bold;
   text-align: center;
+  transition: opacity 250ms;
   color: white;
+}
+connection-bar.ng-hide {
+  opacity: 0;
 }
 connection-bar .horizontal-list {
   display: inline-block;

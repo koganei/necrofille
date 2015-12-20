@@ -8,6 +8,7 @@ import '../../js/resources/resources';
         console.log(posts);
         this.posts = posts;
         $rootScope.currentAppName = 'tumblr';
+        this.convertTag = function(value) { return value.replace('#', '').replace(/ /g, '+'); }
     }
 
     angular.module('app.tumblr', ['ngResource', 'portfolio.resources'])

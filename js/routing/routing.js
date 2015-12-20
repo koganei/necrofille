@@ -14,8 +14,8 @@ import '../../components/phone-orientation/main';
                 .state('home', {
                     url: "/",
                     controller: function($rootScope) {
+                        $rootScope.hideConnectionBar = false;
                         $rootScope.showApp = false;
-                        $rootScope.isScreenUnlocked = true;
                         $rootScope.currentAppName = 'menu';
                     },
                     resolve: {
@@ -28,8 +28,8 @@ import '../../components/phone-orientation/main';
                     url: "/app",
                     templateUrl: "partials/app.html",
                     controller: function($rootScope) {
+                        $rootScope.hideConnectionBar = false;
                         $rootScope.showApp = true;
-                        $rootScope.isScreenUnlocked = true;
                     }
                 });
 

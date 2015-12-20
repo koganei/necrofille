@@ -1,39 +1,123 @@
 #scarlet-letter {
   position: absolute;
-  right: 966px;
-  top: 221px;
+  left: 674px;
+  top: 285px;
+  width: 436px;
+  height: 592px;
   -webkit-transform: rotate(18deg) scale(1.6);
   -moz-transform: rotate(18deg) scale(1.6);
   -ms-transform: rotate(18deg) scale(1.6);
   -o-transform: rotate(18deg) scale(1.6);
   transform: rotate(18deg) scale(1.6);
+}
+#scarlet-letter.canBeOpened {
+  cursor: pointer;
+}
+#scarlet-letter .cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateY(0);
+  transform-origin: 2% 50%;
+  transition: transform 1s linear;
+  transition-delay: 0ms;
   box-shadow: inset 73px -52px 50px rgba(0, 0, 0, 0.5), -3px 2px 3px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
+  z-index: 5;
+  backface-visibility: hidden;
+}
+#scarlet-letter .cover-flipped {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateY(90deg);
+  transform-origin: 2% 50%;
+  transition: transform 1s linear;
+  transition-delay: 500ms;
+  box-shadow: inset 73px -52px 50px rgba(0, 0, 0, 0.5), -3px 2px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  z-index: 5;
+}
+#scarlet-letter .inside {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  bottom: 10px;
+  left: 10px;
+  background: #f5f5f5;
+  z-index: 4;
+  box-shadow: 1px 0 1px rgba(0, 0, 0, 0.15), 2px 0 0 #eeeeee, 3px 0 1px rgba(0, 0, 0, 0.15), 4px 0 0 #eeeeee, 5px 0 1px rgba(0, 0, 0, 0.15), 6px 0 0 #eeeeee;
+}
+#scarlet-letter .inside .erasure-poem {
+  margin-left: 30px;
+  height: 95%;
+}
+#scarlet-letter .backcover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: inset 73px -52px 50px rgba(0, 0, 0, 0.5), -3px 2px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  z-index: 2;
+}
+#scarlet-letter.opened {
+  z-index: 999999;
+}
+#scarlet-letter.opened .cover {
+  transform: rotateY(180deg);
+  transition-delay: 0ms;
+}
+#scarlet-letter.opened .cover-flipped {
+  transform: rotateY(180deg);
+  transition-delay: 500ms;
+}
+#scarlet-letter.opened .erasure-poem {
+  display: block !important;
+}
+#scarlet-letter.closing {
+  z-index: 999999;
+}
+#scarlet-letter.closing .cover {
+  transition-delay: 500ms;
+}
+#scarlet-letter.closing .cover-flipped {
+  transition-delay: 0ms;
 }
 #pen {
   position: absolute;
-  right: 0;
-  top: 377px;
-  -webkit-transform: rotate(79deg) scale(1.4);
-  -moz-transform: rotate(79deg) scale(1.4);
-  -ms-transform: rotate(79deg) scale(1.4);
-  -o-transform: rotate(79deg) scale(1.4);
-  transform: rotate(79deg) scale(1.4);
+  left: 1200px;
+  top: 642px;
+  -webkit-transform: rotate(86deg) scale(1.4);
+  -moz-transform: rotate(86deg) scale(1.4);
+  -ms-transform: rotate(86deg) scale(1.4);
+  -o-transform: rotate(86deg) scale(1.4);
+  transform: rotate(86deg) scale(1.4);
 }
 #charm {
   position: absolute;
-  top: -32px;
-  right: 668px;
+  top: -83px;
+  left: -35px;
   -webkit-transform: rotate(12deg) scale(0.5);
   -moz-transform: rotate(12deg) scale(0.5);
   -ms-transform: rotate(12deg) scale(0.5);
   -o-transform: rotate(12deg) scale(0.5);
-  transform: rotate(12deg) scale(0.5);
+  transform: rotate(15deg) scale(0.5);
+  transform-origin: 30% 30%;
+  z-index: 0;
+  transition: all 0.5s;
+  transition-delay: 0.5s;
+}
+.phone-landscape #charm {
+  -webkit-transform: rotate(55deg) scale(0.5);
+  -moz-transform: rotate(55deg) scale(0.5);
+  -ms-transform: rotate(55deg) scale(0.5);
+  -o-transform: rotate(55deg) scale(0.5);
+  transform: rotate(55deg) scale(0.5);
 }
 #apple {
   position: absolute;
   top: 0;
-  right: 1451px;
+  left: 1451px;
   -webkit-transform: scale(1.3) rotate(130deg);
   -moz-transform: scale(1.3) rotate(130deg);
   -ms-transform: scale(1.3) rotate(130deg);
@@ -42,49 +126,49 @@
 }
 #bobbypins {
   position: absolute;
-  top: 596px;
-  right: 1416px;
-  -webkit-transform: scale(0.4) rotate(-300deg);
-  -moz-transform: scale(0.4) rotate(-300deg);
-  -ms-transform: scale(0.4) rotate(-300deg);
-  -o-transform: scale(0.4) rotate(-300deg);
-  transform: scale(0.4) rotate(-300deg);
+  top: 873px;
+  left: 969px;
+  -webkit-transform: scale(0.4) rotate(162deg);
+  -moz-transform: scale(0.4) rotate(162deg);
+  -ms-transform: scale(0.4) rotate(162deg);
+  -o-transform: scale(0.4) rotate(162deg);
+  transform: scale(0.4) rotate(162deg);
 }
 #lipgloss {
   position: absolute;
-  top: 219px;
-  right: 1577px;
-  -webkit-transform: scale(0.7) rotate(-192deg);
-  -moz-transform: scale(0.7) rotate(-192deg);
-  -ms-transform: scale(0.7) rotate(-192deg);
-  -o-transform: scale(0.7) rotate(-192deg);
-  transform: scale(0.7) rotate(-192deg);
+  top: -215px;
+  left: 1121px;
+  -webkit-transform: scale(0.9) rotate(96deg);
+  -moz-transform: scale(0.9) rotate(96deg);
+  -ms-transform: scale(0.9) rotate(96deg);
+  -o-transform: scale(0.9) rotate(96deg);
+  transform: scale(0.9) rotate(96deg);
 }
 #tampon {
   position: absolute;
-  top: 484px;
-  right: -24px;
-  -webkit-transform: scale(0.2) rotate(86deg);
-  -moz-transform: scale(0.2) rotate(86deg);
-  -ms-transform: scale(0.2) rotate(86deg);
-  -o-transform: scale(0.2) rotate(86deg);
-  transform: scale(0.2) rotate(86deg);
+  top: 655px;
+  left: 41px;
+  -webkit-transform: scale(0.3) rotate(86deg);
+  -moz-transform: scale(0.3) rotate(86deg);
+  -ms-transform: scale(0.3) rotate(86deg);
+  -o-transform: scale(0.3) rotate(86deg);
+  transform: scale(0.3) rotate(8deg);
 }
 #xacto {
   position: absolute;
-  top: 920px;
-  right: 211px;
+  top: 1020px;
+  left: 275px;
   -webkit-transform: rotate(20deg) scale(0.9);
   -moz-transform: rotate(20deg) scale(0.9);
   -ms-transform: rotate(20deg) scale(0.9);
   -o-transform: rotate(20deg) scale(0.9);
   transform: rotate(20deg) scale(0.9);
-  z-index: -1;
+  z-index: 0;
 }
 #paper {
   position: absolute;
-  top: 744px;
-  right: 205px;
+  top: 756px;
+  left: 84px;
   font-size: 13px;
   font-family: "Helvetica Neue", 'Roboto', Helvetica, Arial, sans-serif;
 }
@@ -93,6 +177,7 @@
   bottom: 0;
   width: 82%;
   text-align: center;
+  z-index: 1;
 }
 .letter {
   background: #fff;
@@ -102,7 +187,10 @@
   min-height: 152px;
   padding: 24px;
   width: 245px;
-  transform: rotate(-19deg);
+  transform: rotate(19deg);
+}
+.letter .content {
+  z-index: 1;
 }
 .letter:before,
 .letter:after {
@@ -110,7 +198,7 @@
   height: 98%;
   position: absolute;
   width: 100%;
-  z-index: -1;
+  z-index: 0;
 }
 .letter:before {
   background: #fafafa;

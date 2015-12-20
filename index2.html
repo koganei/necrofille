@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" ng-app="portfolio">
+<head>
+    <meta charset="UTF-8">
+    <title>Natascha Portfolio</title>
+
+    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/devices.min.css"/>
+    <link rel="stylesheet" href="node_modules/toastr/build/toastr.min.css"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+
+<div id="container">
+    <div id="main">
+        <div id="content" class="column" role="main"
+             ng-class="orientation.current + ' ' + (orientation.rotating ? 'rotating' : '')">
+            <div id="phone-hardware">
+                <div class="marvel-device iphone6plus black">
+                    <div id="charm">
+                        <img src="images/charm.png"/>
+                    </div>
+                    <div class="top-bar"></div>
+                    <div class="sleep"></div>
+                    <div class="volume"></div>
+                    <div class="camera"></div>
+                    <div class="sensor"></div>
+                    <div class="speaker"></div>
+                    <div class="home" ui-sref="home"></div>
+                    <div class="bottom-bar"></div>
+                </div>
+            </div>
+
+            <div class="crack">
+                <img src="images/crack.png">
+            </div>
+
+            <div id="phone-screen">
+                <connection-bar app-color="{{currentAppName}}" ng-hide="hideConnectionBar"></connection-bar>
+                <div class="lockscreen" ng-hide="isScreenUnlocked" unlock-animation>
+                    <div class="lockscreen-password">
+                        <img ng-src="{{unlockAnimation.screenUnlockSource}}" alt=""/>
+                        <img ng-hide src="images/lockscreen-password.gif" alt=""/>
+                    </div>
+                    <div class="lockscreen-home" ng-if="!isScreenUnlocked">
+                        <img src="images/slide-to-unlock.gif" alt="Slide to unlock"/>
+                    </div>
+                </div>
+                <div class="app-layer">
+                    <div ng-show="showApp">
+                        <div id="current-app" ui-view autoscroll="false"></div>
+                    </div>
+                    <div id="app-menu" notifications>
+                        <ul id="app-list" class="app-list">
+                            <li><a notification-target="tumblr_post" ui-sref="app.tumblr"><img
+                                    src="images/apps/tumblr.jpg"></a>
+                            </li>
+                            <li><a notification-target="facebook_post" ui-sref="app.facebook"><img
+                                    src="images/apps/facebook.png"></a></li>
+                            <li><a notification-target="twitter_post" ui-sref="app.twitter"><img
+                                    src="images/apps/twitter.png"></a></li>
+                            <li><a notification-target="whisper_post" ui-sref="app.whisper"><img
+                                    src="images/apps/whisper.png"></a></li>
+
+                            <li><a notification-target="newhive_post" ui-sref="app.newhive"><img
+                                    src="images/apps/newhive.jpg"></a></li>
+                            <li><a notification-target="instagram_post" ui-sref="app.instagram"><img
+                                    src="images/apps/instagram.png"></a></li>
+                            <li><a ui-sref="app.camera"><img src="images/apps/camera.jpg"></a></li>
+                            <!--<li><a notification-target="snapchat" ui-sref="app.snapchat"><img src="images/apps/snapchat.png" style="opacity: 0.3"></a></li>-->
+                            <li>
+                                <div></div>
+                            </li>
+                            <li>
+                                <div></div>
+                            </li>
+                        </ul>
+                        <ul id="app-bottom-list" class="app-list">
+                            <li><a href="mailto:simard.natascha@gmail.com" data-label="Phone"><img
+                                    src="images/apps/phone.jpg"></a></li>
+                            <li><a notification-target="messages_post" ui-sref="app.messages" data-label="Messages"><img
+                                    src="images/apps/messages.png"></a></li>
+                            <li><a ui-sref="app.notes"><img src="images/apps/notes.png"></a></li>
+                            <li><a href="#">
+                                <div class="empty"></div>
+                            </a></li>
+                        </ul>
+                        <div class="app-menu-background"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="scarlet-letter">
+        <img src="images/scarlet-letter.png"/>
+    </div>
+
+    <div id="pen">
+        <img src="images/pen.png"/>
+    </div>
+
+    <div id="apple">
+        <img src="images/apple.png"/>
+    </div>
+
+    <div id="xacto">
+        <img src="images/xacto.png"/>
+    </div>
+
+    <div id="bobbypins">
+        <img src="images/bobbypins.png"/>
+    </div>
+
+    <div id="lipgloss">
+        <img src="images/lipgloss.png"/>
+    </div>
+
+    <div id="paper" class="letter">
+        <p>All trademarks, service marks, trade names, product names and logos appearing on the site are the property of
+            their respective owners. Any rights not expressly granted herein are reserved.</p>
+    </div>
+
+    <div id="tampon">
+        <img src="images/tampon.png"/>
+    </div>
+</div>
+</div>
+<script src="bundle.js"></script>
+<!--<script src="node_modules/lodash/index.js"></script>-->
+<!--<script src="node_modules/angular/angular.js"></script>-->
+<!--<script src="node_modules/angular-resource/angular-resource.js"></script>-->
+<!--<script src="node_modules/ui-router/angular-ui-router.js"></script>-->
+
+<!--<script src="js/main.js"></script>-->
+<!--<script src="js/routing/routing.js"></script>-->
+<!--<script src="js/resources/resources.js"></script>-->
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+// @import "fonts/whisper-fonts";
+// @import "http://fonts.googleapis.com/css?family=Open+Sans:400,600,700";
+@import 'connection-bar';
+[app-color="camera"] {
+  .connection-bar-color("black");
+  background: #f9f9f9;;
+}
+
+#camera-app {
+  position: relative;
+  background: white;
+  height: 100%;
+  font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+  padding-top: 25px;
+  overflow: hidden;
+
+  header {
+    position: absolute;
+    top: 25px;
+    left:0;
+    right:0;
+    height: 50px;
+    z-index: 3;
+
+    background: #f9f9f9;
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+
+    transition: opacity 250ms;
+
+    .page-name {
+      padding-top: 15px;
+      padding-left: 10px;
+    }
+
+    &.ng-hide {
+      opacity: 0;
+    }
+  }
+
+  header .page-name {
+    color: #007bff;
+    font-weight: bold;
+  }
+
+  .camera-posts {
+    position: absolute;
+    left:0;
+    right:0;
+    background: #f9f9f9;
+    bottom: 23px;
+    z-index: 2;
+
+    .camera-post {
+      position: relative;
+      cursor: pointer;
+      padding-bottom: 0.1em;
+      margin-left: 5px;
+      display: inline-block;
+      width: 24px;
+      overflow: hidden;
+    }
+
+    .post {
+      height: 50px;
+    }
+
+    .controls {
+      width: 100%;
+    }
+
+    transition: opacity 250ms;
+    &.ng-hide {
+      opacity: 0;
+    }
+  }
+
+  .loaded-post {
+    position: absolute;
+    left:0;
+    right:0;
+    top: -25px;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background: black;
+
+    z-index: 1;
+
+    .post {
+      height: 100%;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    transition: opacity 250ms;
+    opacity: 1 !important;
+    &.ng-hide {
+      opacity: 0 !important;
+    }
+
+  }
+}

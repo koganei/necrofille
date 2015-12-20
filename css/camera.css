@@ -1,0 +1,163 @@
+connection-bar {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 25px;
+  z-index: 25;
+  font-family: "Helvetica Neue", 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  transition: opacity 250ms;
+  color: white;
+}
+connection-bar.ng-hide {
+  opacity: 0;
+}
+connection-bar .horizontal-list {
+  display: inline-block;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+connection-bar .horizontal-list li {
+  display: inline-block;
+}
+connection-bar .connection-dots {
+  float: left;
+  padding-left: 10px;
+}
+connection-bar .connection-dot {
+  height: 9px;
+  width: 9px;
+  padding: 0;
+  margin: 0;
+}
+connection-bar .connection-dot img {
+  width: 100%;
+  height: 100%;
+}
+connection-bar .connection-info {
+  float: left;
+}
+connection-bar .connection-text {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+connection-bar .time {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 21px;
+}
+connection-bar .battery {
+  float: right;
+  margin-right: 10px;
+}
+connection-bar .connection-dot img {
+  content: url("../images/connection-bar/white-dot.png");
+}
+connection-bar .connection-dot.empty img {
+  content: url("../images/connection-bar/white-dot-empty.png");
+}
+connection-bar .connection-icon img {
+  content: url("../images/connection-bar/white-wireless-icon.png");
+}
+connection-bar .battery img {
+  content: url("../images/connection-bar/white-battery.png");
+}
+[app-color="camera"] {
+  color: black;
+  background: #f9f9f9;
+}
+[app-color="camera"] .connection-dot img {
+  content: url("../images/connection-bar/black-dot.png");
+}
+[app-color="camera"] .connection-dot.empty img {
+  content: url("../images/connection-bar/black-dot-empty.png");
+}
+[app-color="camera"] .connection-icon img {
+  content: url("../images/connection-bar/black-wireless-icon.png");
+}
+[app-color="camera"] .battery img {
+  content: url("../images/connection-bar/black-battery.png");
+}
+#camera-app {
+  position: relative;
+  background: white;
+  height: 100%;
+  font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+  padding-top: 25px;
+  overflow: hidden;
+}
+#camera-app header {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  z-index: 3;
+  background: #f9f9f9;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  transition: opacity 250ms;
+}
+#camera-app header .page-name {
+  padding-top: 15px;
+  padding-left: 10px;
+}
+#camera-app header.ng-hide {
+  opacity: 0;
+}
+#camera-app header .page-name {
+  color: #007bff;
+  font-weight: bold;
+}
+#camera-app .camera-posts {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: #f9f9f9;
+  bottom: 23px;
+  z-index: 2;
+  transition: opacity 250ms;
+}
+#camera-app .camera-posts .camera-post {
+  position: relative;
+  cursor: pointer;
+  padding-bottom: 0.1em;
+  margin-left: 5px;
+  display: inline-block;
+  width: 24px;
+  overflow: hidden;
+}
+#camera-app .camera-posts .post {
+  height: 50px;
+}
+#camera-app .camera-posts .controls {
+  width: 100%;
+}
+#camera-app .camera-posts.ng-hide {
+  opacity: 0;
+}
+#camera-app .loaded-post {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -25px;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background: black;
+  z-index: 1;
+  transition: opacity 250ms;
+  opacity: 1 !important;
+}
+#camera-app .loaded-post .post {
+  height: 100%;
+  margin: 0 auto;
+  width: 100%;
+}
+#camera-app .loaded-post.ng-hide {
+  opacity: 0 !important;
+}
