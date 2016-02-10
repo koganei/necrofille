@@ -1,0 +1,32 @@
+<div id="youtube-app">
+    <div class="header" ng-if="!youtube.loadedPost">
+        <img src="images/youtube/header.png">
+        <img class="avatar" src="images/avatar.jpg">
+        <span class="top-name">Necrofille</span>
+        <span class="bottom-name">Necrofille</span>
+    </div>
+
+    <div class="body" ng-if="!youtube.loadedPost">
+
+        <div class="youtube-posts">
+            <div class="youtube-post" ng-repeat="post in youtube.posts">
+                <img class="youtube-thumbnail" ng-src="{{'http://dev.nataschasimard.com/sites/default/files/'+post.thumbnail}}" ng-click="youtube.loadPost(post)">
+                <div class="youtube-post-details">
+                    <h2 ng-bind="post.node.title" ng-click="youtube.loadPost(post)"></h2>
+                    <div>
+                        <ul class="stats">
+                            <li>0 views</li>
+                            <li>2 years ago</li>
+                            <li><img src="images/youtube/globe.png"></li>
+                        </ul>
+                    </div>
+                    <div class="more"><img src="images/youtube/more.png"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loaded-post" ng-if="youtube.loadedPost">
+        <img class="arrowLeft" src="images/youtube/arrow-left.png" ng-click="youtube.unloadPost()">
+        <video id="youtube-current-video" height="100%" autoplay="true" class="video" ng-src="{{youtube.loadedPost.video}}" type="video/mp4">
+    </div>
+</div>

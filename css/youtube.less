@@ -1,0 +1,113 @@
+// @import "fonts/whisper-fonts";
+// @import "http://fonts.googleapis.com/css?family=Open+Sans:400,600,700";
+@import 'connection-bar';
+[app-color="youtube"] {
+  .connection-bar-color("black");
+  background: #868686;
+}
+
+#youtube-app {
+  font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+  padding-top: 25px;
+
+  .header {
+    position: relative;
+    img { margin-top: -1px; width: 100%; }
+
+    .top-name {
+      position: absolute;
+      top: 34px;
+      left: 46px;
+      font-size: 22px;
+      color: white;
+    }
+
+    .bottom-name {
+      position: absolute;
+      top: 177px;
+      left: 85px;
+      font-size: 25px;
+      color: #1f1f1f;
+    }
+
+    .avatar {
+      position: absolute;
+      top: 107px;
+      left: 20px;
+      border-radius: 50%;
+      width: 60px;
+    }
+  }
+
+  .youtube-post {
+    padding: 10px;
+    position: relative;
+    
+    .youtube-thumbnail {
+      width: 128px;
+      cursor: pointer;
+      margin-left: 6px;
+    }
+
+    .youtube-post-details {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      right: 20px;
+
+      h2 {
+        &:hover { text-decoration: underline; }
+        font-size: 14px; width: 90%; cursor: pointer;
+      }
+
+      .stats {
+        li {
+          display: inline-block;
+          list-style-type: none;
+
+          &:not(:last-of-type):after {
+            content: '·';
+            padding-left: 2px;
+          }
+
+        }
+        padding: 0;
+        color: #838383;
+        font-size: 12px;
+        img { vertical-align: bottom; width: 14px; height: 14px; }
+      }
+      .more { position: absolute; top: 12px; right: 0; img { width: 6px;} }
+    }
+  }
+
+  .loaded-post {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      background: black;
+
+      .arrowLeft {
+        position: absolute;
+        left: 17px;
+        top: 35px;
+        cursor: pointer;
+        z-index: 5;
+      }
+
+      .video {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+      }
+
+    }
+
+
+  
+}

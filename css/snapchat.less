@@ -1,0 +1,174 @@
+// @import "fonts/whisper-fonts";
+// @import "http://fonts.googleapis.com/css?family=Open+Sans:400,600,700";
+@import 'connection-bar';
+[app-color="snapchat"] {
+  .connection-bar-color("black");
+  // background: #03a588;
+}
+
+#snapchat-app {
+  font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+  padding-top: 25px;
+
+  .header {
+    position: relative;
+    img { margin-top: -1px; width: 100%; }
+  }
+
+  .snapchat-post {
+    cursor: pointer;
+
+    .post-preview {
+      width: 45px;
+      height: 45px;
+      padding: 15px;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .post-author {
+      font-size: 14px;
+      display: inline-block;
+      padding: 0 5px;
+    }
+
+    .post-date {
+      color: #ccc;
+      font-size: 12px;
+      padding-left: 45px;
+      display: inline-block;
+    }
+
+
+  }
+
+  .loaded-post {
+    .snapchat-loaded-post-post {
+      width: 100%;
+      height: calc(100% + 10px);
+
+      position: absolute;
+      top: -10px;
+      cursor: pointer;
+    }
+
+  }
+
+.radial-progress {
+
+position: absolute;
+top: 20px;
+right: 10px;
+
+  @circle-size: 20px;
+  @circle-background: white;
+  @circle-color: black;
+  @inset-size: 10px;
+  @inset-color: #aaa;
+  @transition-length: 1s;
+  @shadow: 0px 0px 0px rgba(0,0,0,0.2);
+  @percentage-color: transparent;
+  @percentage-font-size: 22px;
+  @percentage-text-width: 57px;
+
+  margin: 2px;
+  width:  @circle-size;
+  height: @circle-size;
+
+  background-color: @circle-background;
+  border-radius: 50%;
+  
+  .circle {
+    .mask, .fill, .shadow {
+      width:    @circle-size;
+      height:   @circle-size;
+      position: absolute;
+      border-radius: 50%;
+      
+    }
+    .shadow {
+      box-shadow: @shadow inset;
+      
+  border: 1px solid black;
+    }
+    .mask, .fill {
+      -webkit-backface-visibility: hidden;
+      transition: -webkit-transform @transition-length;
+      transition: -ms-transform @transition-length;
+      transition: transform @transition-length;
+      border-radius: 50%;
+    }
+    .mask {
+      clip: rect(0px, @circle-size, @circle-size, @circle-size/2);
+      .fill {
+        clip: rect(0px, @circle-size/2, @circle-size, 0px);
+        background-color: @circle-color;
+      }
+    }
+  }
+  .inset {
+    width:       @inset-size;
+    height:      @inset-size;
+    
+      border: 1px solid black;
+    position:    absolute;
+    margin-left: (@circle-size - @inset-size)/2;
+    margin-top:  (@circle-size - @inset-size)/2;
+
+    background-color: @inset-color;
+    border-radius: 50%;
+    box-shadow: @shadow;
+    .percentage {
+      height:   @percentage-font-size;
+      width:    @percentage-text-width;
+      overflow: hidden;
+
+      position: absolute;
+      top:      (@inset-size - @percentage-font-size) / 2;
+      left:     (@inset-size - @percentage-text-width) / 2;
+
+      line-height: 1;
+      .numbers {
+        margin-top: -@percentage-font-size;
+        transition: width @transition-length;
+        span {
+          width:          @percentage-text-width;
+          display:        inline-block;
+          vertical-align: top;
+          text-align:     center;
+          font-weight:    800;
+          font-size:      @percentage-font-size;
+          font-family:    "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          color:          @percentage-color;
+        }
+      }
+    }
+  }
+
+  @i: 0;
+  @increment: 180deg / 100;
+  .loop (@i) when (@i <= 100) {
+    &[data-progress="@{i}"] {
+      .circle {
+        .mask.full, .fill {
+          -webkit-transform: rotate(@increment * @i);
+          -ms-transform: rotate(@increment * @i);
+          transform: rotate(@increment * @i);
+        } 
+        .fill.fix {
+          -webkit-transform: rotate(@increment * @i * 2);
+          -ms-transform: rotate(@increment * @i * 2);
+          transform: rotate(@increment * @i * 2);
+        }
+      }
+      .inset .percentage .numbers {
+        width: @i * @percentage-text-width + @percentage-text-width;
+      }
+    }
+    .loop(@i + 1);
+  }
+  .loop(@i);
+}
+  
+}

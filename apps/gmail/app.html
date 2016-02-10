@@ -1,0 +1,44 @@
+<div id="gmail-app">
+    <div class="header" ng-if="!gmail.loadedPost">
+        <img src="images/gmail/header.png">
+        <span class="title">Inbox <span class="count">{{gmail.posts.length}}</span><span>
+    </div>
+
+    <div class="body" ng-if="!gmail.loadedPost">
+
+        <div class="gmail-posts">
+            <div class="gmail-post" ng-repeat="post in gmail.posts" ng-click="gmail.loadPost(post)">
+                <img class="checkbox" src="images/gmail/checkbox.png">
+                <div class="gmail-post-details">
+                    <div class="sender">{{post.sender}} <small class="replies">{{post.body.length}}</small></div>
+                    <div class="subject">{{post.subject}}</div>
+                    <div class="preview">{{post.preview}}</div>
+                    <div class="date">{{post.date | date}}</div>
+                </div>
+                <img class="star" src="images/gmail/star.png">  
+            </div>
+        </div>
+    </div>
+    <div class="loaded-post" ng-if="gmail.loadedPost">
+        <div class="header">
+            <img src="images/gmail/post_header.png" ng-click="gmail.unloadPost()">
+        </div>
+        <div class="emails">
+            <div class="email"
+                 ng-repeat="email in gmail.loadedPost.body"
+                 ng-class="{ expanded: gmail.expanded === email }"
+                 ng-click="gmail.expanded = email">
+                <img class="email_avatar" ng-src="{{email.avatar}}" />
+                <div class="email_author">{{email.author}}</div>
+                <div class="email_text_preview" ng-if="gmail.expanded !== email" ng-bind-html="email.text"></div>
+                <div class="email_details" ng-if="gmail.expanded === email">
+                    <div class="email_to">to {{email.to}}</div>
+                    <div class="email_date">{{email.date | date}} <span class="details">Details</span></div>
+                </div>
+
+
+                <div class="email_text" ng-if="gmail.expanded === email" ng-bind-html="email.text"></div>
+            </div>
+        </div>
+    </div>
+</div>

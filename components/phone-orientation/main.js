@@ -1,5 +1,5 @@
 import { angular } from './../../js/base';
-import jQuery from 'jquery';
+import $ from 'jquery';
 import BaseController from '../base-controller/index.js';
 
 let $timeout, $q;
@@ -11,9 +11,10 @@ class phoneOrientation extends BaseController {
         this.current = "phone-portrait";
         $timeout = _$timeout_;
         $q = _$q_;
+        this.prepareResizeAnimation();
     }
 
-    rotate(orientation) {
+    rotate(orientation, zoomSize) {
         let defer = $q.defer();
         this.rotating = true;
 
@@ -21,6 +22,7 @@ class phoneOrientation extends BaseController {
             this.current = "phone-" + orientation;
             $timeout(() => {
                 this.rotating = false;
+                this.executeResizeAnimation(zoomSize);
                 defer.resolve(true);
             }, 1700);
         }, 400);
@@ -30,16 +32,28 @@ class phoneOrientation extends BaseController {
 
     toLandscape() {
         if(this.current != 'phone-landscape') {
-            return this.rotate('landscape');
+            return this.rotate('landscape', 1.75);
         }
         return $q.when();
     }
 
     toPortrait() {
         if(this.current != 'phone-portrait') {
-            return this.rotate('portrait');
+            return this.rotate('portrait', 1.25);
         }
         return $q.when();
+    }
+    
+    prepareResizeAnimation() {
+        let $device = $('#phone-hardware').find('.marvel-device');
+        this.windowHeight = window.innerHeight;
+        this.deviceHeight = $device.innerHeight();
+    }
+    
+    executeResizeAnimation(zoomSize) {
+        let ratio = this.windowHeight / this.deviceHeight * zoomSize,
+            text = `scale(${ratio})`;
+        $('#container').css({transform: text});
     }
 }
 

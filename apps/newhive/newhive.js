@@ -36,7 +36,8 @@ import moment from 'moment';
                                     }
 
                                     if(!_.isEmpty(post.node.field_newhive_thumbnail.und)) {
-                                        post.thumbnail = $sce.trustAsResourceUrl(post.node.field_newhive_thumbnail.und[0].safe_value);
+                                        post.thumbnail = $sce.trustAsResourceUrl('http://dev.nataschasimard.com/sites/default/files/' +  post.node.field_newhive_thumbnailfile.und[0].filename);
+                                        //post.thumbnail = $sce.trustAsResourceUrl(post.node.field_newhive_thumbnailfile.und[0].safe_value);
                                     }
                                 });
 

@@ -1,29 +1,45 @@
 <div id="snapchat-app">
-    <div class="header-pic"><img src="../../images/snapchat-timeline-header.jpg"></div>
-    <div class="body">
+    <div class="header" ng-if="!snapchat.loadedPost">
+        <img src="images/snapchat/header.png">
+    </div>
 
-        <div class="snapchat-post" ng-repeat="post in snapchat.posts">
-            <div class="post-header">
-                <img class="avatar" src="../../images/avatar.jpg">
+    <div class="body" ng-if="!snapchat.loadedPost">
 
-                <div class="details">
-                    <h3 class="name" ng-bind="post.node.field_name.und[0].safe_value"></h3>
-                    <time>5 minutes ago near Menlo Park . globe</time>
-                </div>
-            </div>
-            <div class="post-body" ng-bind-html="post.node.body.und[0].safe_value"></div>
-            <div class="post-footer clearfix">
-                <ul class="pull-left">
-                    <li><a href="#">Like</a></li>
-                    <li><a href="#">Comment</a></li>
-                    <li><a href="#">Share</a></li>
-                </ul>
-
-                <ul class="pull-right">
-                    <li><a href="#">ThumbUp <span ng-bind="post.node.field_likes.und[0].value"></span></a></li>
-                    <li><a href="#">(Comments) <span ng-bind="post.node.field_comments.und[0].value"></span></a></li>
-                </ul>
+        <div class="snapchat-posts">
+            <div class="snapchat-post" ng-repeat="post in snapchat.posts" ng-click="snapchat.loadPost(post)">
+                <img class="post-preview"
+                     ng-src="{{'http://dev.nataschasimard.com/sites/default/files/' + post.node.field_posts.und[post.node.field_posts.und.length-1].filename}}">
+                <h1 class="post-author">{{post.title}}</h1>
+                <span class="post-date">{{post.node.field_latest.und[0].safe_value}}</span>
             </div>
         </div>
+    </div>
+    <div class="loaded-post" ng-if="snapchat.loadedPost">
+        <div ng-repeat="post in snapchat.loadedPost.node.field_posts.und"
+            ng-if="snapchat.loadedPostIndex === $index"
+            ng-click="snapchat.nextLoadedPostIndex()">
+            <img class="snapchat-loaded-post-post"
+                ng-src="{{'http://dev.nataschasimard.com/sites/default/files/' + post.filename}}">
+
+            <div class="radial-progress" ng-attr-data-progress="{{snapchat.loadedPostTimer}}">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                        <div class="fill fix"></div>
+                    </div>
+                    <div class="shadow"></div>
+                </div>
+                <div class="inset">
+                    <div class="percentage">
+                        <div class="numbers"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>

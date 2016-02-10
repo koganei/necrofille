@@ -15,6 +15,9 @@ import '../apps/instagram/instagram';
 import '../apps/notes/notes';
 import '../apps/messages/messages';
 import '../apps/camera/camera';
+import '../apps/youtube/youtube';
+import '../apps/gmail/gmail';
+import '../apps/snapchat/snapchat';
 
 import '../components/notifications/notifications';
 import '../components/timeago/main';
@@ -37,6 +40,9 @@ angular.module('portfolio', [
     'app.notes',
     'app.messages',
     'app.camera',
+    'app.youtube',
+    'app.gmail',
+    'app.snapchat',
 
     'notifications',
     'timeago',
