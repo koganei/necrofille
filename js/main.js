@@ -18,6 +18,7 @@ import '../apps/camera/camera';
 import '../apps/youtube/youtube';
 import '../apps/gmail/gmail';
 import '../apps/snapchat/snapchat';
+import '../apps/netflix/netflix';
 
 import '../components/notifications/notifications';
 import '../components/timeago/main';
@@ -43,6 +44,7 @@ angular.module('portfolio', [
     'app.youtube',
     'app.gmail',
     'app.snapchat',
+    'app.netflix',
 
     'notifications',
     'timeago',

@@ -17,7 +17,6 @@ import moment from 'moment';
         }
 
         unloadPost() {
-            
             document.getElementById('youtube-current-video').pause();
             this.orientation.toPortrait().then(() => {
                 this.loadedPost = undefined;

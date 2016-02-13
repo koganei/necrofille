@@ -15,8 +15,8 @@
                     <h2 ng-bind="post.node.title" ng-click="youtube.loadPost(post)"></h2>
                     <div>
                         <ul class="stats">
-                            <li>0 views</li>
-                            <li>2 years ago</li>
+                            <li>3M views</li>
+                            <li>7 days ago</li>
                             <li><img src="images/youtube/globe.png"></li>
                         </ul>
                     </div>
@@ -27,6 +27,6 @@
     </div>
     <div class="loaded-post" ng-if="youtube.loadedPost">
         <img class="arrowLeft" src="images/youtube/arrow-left.png" ng-click="youtube.unloadPost()">
-        <video id="youtube-current-video" height="100%" autoplay="true" class="video" ng-src="{{youtube.loadedPost.video}}" type="video/mp4">
+        <video id="youtube-current-video" width="100%" autoplay="true" class="video" ng-src="{{youtube.loadedPost.video}}" type="video/mp4">
     </div>
 </div>

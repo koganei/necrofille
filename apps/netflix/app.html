@@ -1,0 +1,23 @@
+<div id="netflix-app">
+    <div class="header" ng-if="!netflix.loadedPost">
+        <img src="images/netflix/header.png">
+    </div>
+
+    <div class="body" ng-if="!netflix.loadedPost">
+        <div class="netflix-post" ng-repeat="post in netflix.posts">
+            <img class="poster" ng-src="{{post.poster}}" ng-click="netflix.loadPost(post)">
+            <img class="play" src="images/netflix/play.png" ng-click="netflix.loadPost(post)">
+            <div class="details">
+                <div class="title" ng-bind="post.title" ng-click="netflix.loadPost(post)"></div>
+                <img class="rating" ng-src="{{post.rating}}">
+            </div>
+            <img class="remove-from-list" src="images/netflix/remove_from_list.png">
+            <div class="description" ng-bind-html="post.description"></div>
+        </div>
+        
+    </div>
+    <div class="loaded-post" ng-if="netflix.loadedPost">
+        <img class="arrowLeft" src="images/netflix/post_header.png" ng-click="netflix.unloadPost()">
+        <video id="netflix-current-video" height="100%" autoplay="true" class="video" ng-src="{{netflix.loadedPost.video_link}}" type="video/mp4">
+    </div>
+</div>
