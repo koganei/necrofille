@@ -19,12 +19,15 @@ import '../apps/youtube/youtube';
 import '../apps/gmail/gmail';
 import '../apps/snapchat/snapchat';
 import '../apps/netflix/netflix';
+import '../apps/manga/manga';
+import '../apps/borderland/borderland';
 
 import '../components/notifications/notifications';
 import '../components/timeago/main';
 import '../components/connection-bar/main';
 import '../components/unlock-animation/main';
 import '../components/bookflip-animation/main';
+import '../components/binder-animation/main';
 
 angular.module('portfolio', [
     'ngAnimate',
@@ -45,10 +48,13 @@ angular.module('portfolio', [
     'app.gmail',
     'app.snapchat',
     'app.netflix',
+    'app.manga',
+    'app.borderland',
 
     'notifications',
     'timeago',
     'connectionBar',
     'unlockanimation',
-    'bookflipanimation'
+    'bookflipanimation',
+    'binderanimation'
 ]);

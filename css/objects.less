@@ -155,8 +155,8 @@
 
 #bobbypins {
   position: absolute;
-  top: 873px;
-  left: 969px;
+  top: 684px;
+  left: 957px;
   -webkit-transform: scale(0.4) rotate(162deg);
   -moz-transform: scale(0.4) rotate(162deg);
   -ms-transform: scale(0.4) rotate(162deg);
@@ -212,6 +212,99 @@
     text-align: center;
     z-index: 1;
   }
+}
+
+#binder {
+    position: absolute;
+    top: 1416px;
+    left: 750px;
+    -webkit-transform: scale(1.75) rotate(-5deg);
+    -moz-transform: scale(1.75) rotate(-5deg);
+    -ms-transform: scale(1.75) rotate(-5deg);
+    -o-transform: scale(1.75) rotate(-5deg);
+    transform: scale(1.75) rotate(-5deg);
+    z-index: 0;
+
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      content: '';
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .binder-pages {
+      position: absolute;
+      top: 29px;
+      left: 867px;
+
+      z-index: 4;
+
+      .binder-page {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: -10px center;
+        transform: rotateY(0deg);
+        transition: transform 500ms;
+        backface-visibility: hidden;  /* W3C */
+        -webkit-backface-visibility: hidden; /* Safari & Chrome */
+        -moz-backface-visibility: hidden; /* Firefox */
+        -ms-backface-visibility: hidden; /* Internet Explorer */
+        -o-backface-visibility: hidden; /* Opera */
+        z-index: 4;
+      }
+
+      .back-page {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: -10px center;
+        width: 601px;
+        height: 792px;
+        background: white;
+        z-index: 3;
+        transform: rotateY(0deg);
+        transition: transform 500ms;
+      }
+
+      .binder-page ~ .binder-page { z-index: 2; }
+      .back-page ~ .back-page { z-index: 1; }
+
+      .flipped {
+        transform: rotateY(180deg);
+      }
+
+      .flipped + .back-page {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .cover {
+      z-index: 2;
+    }
+
+    .ring {
+      position: absolute;
+      display: block;
+      z-index: 6;
+    }
+
+    .ring-1 {
+      left: 800px;
+      top: 94px;
+    }
+    .ring-2 {
+      left: 795px;
+      top: 415px;
+    }
+    .ring-3 {
+      left: 795px;
+      top: 719px;
+    }
 }
 
 .letter {

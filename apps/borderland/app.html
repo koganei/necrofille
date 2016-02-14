@@ -1,0 +1,33 @@
+<div id="borderland-app">
+    <div class="body">
+
+        <div class="game-download" ng-if="!borderland.hasGameStarted">
+            <div>
+                <img class="logo" src="images/borderland/logo.png">
+                <div class="title">Adventures in Borderland</div>
+            </div>
+
+            <div class="downloads">
+            
+                <div class="download">
+                    <p>Download the game</p>
+                    <div class="windows"><a href="https://dl.dropboxusercontent.com/u/10434126/Borderland_PC.zip"><img src="images/borderland/windows.png"><div>Windows</div></a></div>
+                    <div class="osx"><a href="https://dl.dropboxusercontent.com/u/10434126/Borderland_OSX.zip"><img src="images/borderland/osx.png"><div>Mac OSX</div></a></div>
+                </div>
+
+                <div class="play">
+                    <p>or play directly on your phone</p>
+                    <a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+                        <img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
+                    </a>
+                    <small>only works on Firefox and Safari</small>
+                </div>
+            </div>
+        </div>
+
+        <div id="unityPlayer" ng-if="borderland.hasGameStarted"></div>
+</html>
+
+
+    </div>
+</div>

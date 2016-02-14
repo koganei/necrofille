@@ -1,0 +1,98 @@
+// @import "fonts/whisper-fonts";
+// @import "http://fonts.googleapis.com/css?family=Open+Sans:400,600,700";
+@import 'connection-bar';
+[app-color="borderland"] {
+  .connection-bar-color("white");
+  background: black;
+
+}
+
+[app-color="borderland"] ~ .app-layer {
+  [ui-view] {
+    overflow: visible !important;
+  }
+}
+
+#borderland-app {
+  font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+  padding-top: 25px;
+  background: black;
+  color: white;
+
+  width: 586px;
+  height: 310px;
+  overflow: hidden;
+
+  a, a:active, a:hover, a:visited {
+    font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+    color: white;
+    text-decoration: none;
+  }
+
+  .game-download {
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 15px;
+      float: left;
+      margin: 15px;
+    }
+
+    .title {
+      font-size: 25px;
+      font-weight: bold;
+      padding-top: 30px;
+    }
+
+    .downloads {
+      clear: both;
+    }
+
+    .download {
+      float: left;
+      
+      p { width: 280px; text-align: center; }
+
+      .windows, .osx {
+        display: inline-block;
+        width: 80px;
+        text-align: center;
+        padding: 0 30px;
+      }
+
+      .windows img, .osx img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    .play {
+      display: inline-block;
+      float: right;
+      width: 250px;
+
+      small {
+        display: block;
+        font-weight: 100;
+        font-size: 12px;
+      }
+    }
+
+    .play-button {
+      clear: both;
+      width: 100%;
+      padding: 40px 0;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    
+  }
+}
+
+#unityPlayer {
+    cursor: default;
+    height: 448px;
+    width: 784px;
+}

@@ -1,0 +1,37 @@
+<div id="manga-app">
+    <div class="body" ng-if="!manga.loadedPost">
+        <div class="manga-posts">
+            <div class="manga-post" ng-repeat="post in manga.posts">
+                <div class="top-details">
+                    <div class="poster"><img ng-src="{{post.poster}}" ng-click="manga.loadPost(post)"></div>
+                    <div class="title" ng-bind="post.title" ng-click="manga.loadPost(post)"></div>
+                    <div class="author" ng-bind="post.author"></div>
+                    <div class="type" ng-bind="post.type"></div>
+                    <div class="read"><img src="images/manga/read_button.png" ng-click="manga.loadPost(post)"></div>
+                </div>
+                <div class="bottom-details">
+                    <dl>
+                      <dt>Source</dt>
+                      <dd><a ng-href="{{post.source_link}}" ng-bind="post.source"></a></dd>
+                      <dt>Genres</dt>
+                      <dd ng-bind="post.genres"></dd>
+                      <dt>Description</dt>
+                      <dd ng-bind="post.description"></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="images/manga/footer.png"></div>
+    </div>
+    
+    <div class="close-bar" ng-if="manga.loadedPost" ng-class="{ hidden: !manga.showCloseBar }">
+        <span class="close-link" ng-click="manga.unloadPost()">Close</span>
+    </div>
+
+    <div class="loaded-post" ng-if="manga.loadedPost" ng-click="manga.showCloseBar = !manga.showCloseBar">
+
+        <div class="page" ng-repeat="page in manga.loadedPost.pages">
+            <img ng-src="{{page}}">
+        </div>
+    </div>
+</div>

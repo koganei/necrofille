@@ -1,0 +1,144 @@
+// @import "fonts/whisper-fonts";
+// @import "http://fonts.googleapis.com/css?family=Open+Sans:400,600,700";
+@import 'connection-bar';
+[app-color="manga"] {
+  .connection-bar-color("white");
+  background: #161b21;
+}
+
+#manga-app {
+  font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+  padding-top: 25px;
+  background: #161b21;
+  color: white;
+
+  a, a:active, a:hover, a:visited {
+    font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+    color: white;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .body {
+    height: 100%;
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+
+      img { width: 100%; }
+    }
+  }
+
+  .manga-posts {
+    height: 550px;
+    overflow: hidden;
+  }
+
+  .manga-post {
+    padding: 15px;
+
+    .poster { 
+      width: 30%;
+      float: left;
+      padding-right: 20px;
+      cursor: pointer;
+
+      img { width: 100%; }
+    }
+
+    .top-details {
+
+      .title {
+        cursor: pointer;
+        &:hover { text-decoration: underline; }
+      }
+
+      .author, .type {
+        font-weight: 100;
+      }
+
+      .type {
+        padding-top: 60px;
+
+
+      }
+
+      .read {
+        position: relative;
+        top: -23px;
+        cursor: pointer;
+
+        img { height: 25px; }
+        float: right;
+      }
+    }
+
+    .bottom-details {
+      clear: both;
+
+      dt { margin-top: 15px; }
+
+      dd { margin-top: 5px; margin-left: 0; font-weight: 100; }
+    }
+  }
+
+  .close-bar {
+      position: absolute;
+      top: 25px;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.5);
+      height: 30px;
+      border-bottom: 1px solid #1b8bb2;
+      z-index: 6;
+
+      .close-link {
+        cursor: pointer;
+        display: inline-block;
+        margin-left: 15px;
+        padding-top: 5px;
+        color: #1b8bb2;
+        font-weight: bold;
+      }
+
+      opacity: 1;
+      transition: opacity 500ms ease-in-out;
+    }
+
+    .close-bar.hidden {
+      opacity: 0;
+    }
+
+  .loaded-post {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+
+      background: #161b21;
+      overflow: scroll;
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+
+      .page img {
+        width: 100%;
+
+      }
+
+      .page {
+        background: #161b21;
+        padding-bottom: 20px;
+      }
+  }
+
+
+  
+}
