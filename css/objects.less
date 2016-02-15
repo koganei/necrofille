@@ -104,12 +104,29 @@
       transform: rotateY(180deg);
     }
 
+    .back-face ~ .flipped ~ .back-face {
+      z-index: 7;
+    }
+
+
+    .back-face ~ .flipped ~ .back-face ~ .flipped ~ .back-face {
+      z-index: 8;
+    }
+
     .erasure-poem ~ .erasure-poem {
       z-index: 6;
     }
 
     .back-face ~ .back-face {
       z-index: 5;
+    }
+
+    .erasure-poem ~ .erasure-poem ~ .erasure-poem {
+      z-index: 4;
+    }
+
+    .back-face ~ .back-face ~ .back-face {
+      z-index: 3;
     }
 
 

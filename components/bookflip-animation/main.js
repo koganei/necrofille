@@ -37,24 +37,31 @@ class bookflipAnimation {
                 this.element.removeClass('opening');
             }, 1000);
 
-        
-            this.timeout(() => {
-
-                var doc = document.getElementById("scarlet-page-1").getSVGDocument();
-                var s = doc.getElementById("status");
-
-
-                const pageStatusCheck = setInterval(() => {
-                    if(s.getAttribute('animation-done') === 'true') {
-                        clearInterval(pageStatusCheck);
-                        console.log(this);
-                        this.currentPage = 2;
-                    }
-                }, 1500);    
-            }, 5000);
-            
+            this.turnToPage(1);
         }
     }
+
+    turnToPage(pageNumber) {
+        this.timeout(() => {
+            var el = document.getElementById(`scarlet-page-${pageNumber}`);
+
+            if(!el) return;
+
+            var doc = el.getSVGDocument();
+            var s = doc.getElementById("status");
+
+            if(!s) return;
+
+            const pageStatusCheck = setInterval(() => {
+                if(s.getAttribute('animation-done') === 'true') {
+                    clearInterval(pageStatusCheck);
+                    this.currentPage = pageNumber + 1;
+                    if(!$(`#scarlet-page-${pageNumber}`).hasClass('last-flip')) this.turnToPage(pageNumber + 1);
+                }
+            }, 1500);
+        }, 5000);
+    }
+
 
     onMouseEnter(event) {
         if(!this.$rootScope.isScreenUnlocked && !this.open) {
