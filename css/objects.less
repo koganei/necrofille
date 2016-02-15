@@ -59,9 +59,60 @@
                 6px 0 0   #eee;
 
     .erasure-poem {
-      margin-left: 30px;
-      height: 95%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform-origin: left center;
+      transform: rotateY(0deg);
+      transition: transform 1s;
+      background: #f5f5f5;
+      box-sizing: border-box;
+      padding: 30px;
+      -moz-box-shadow: inset 6px 0 5px rgba(0,0,0,0.5);
+      -webkit-box-shadow: inset 6px 0 5px rgba(0,0,0,0.5);
+      box-shadow: inset 6px 0 5px rgba(0,0,0,0.5);
+      z-index: 8;
+
+      backface-visibility: hidden;
     }
+
+    .back-face {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+
+      background: #f5f5f5;
+      z-index: 7;
+
+      transform-origin: left center;
+      transform: rotateY(0deg);
+      transition: transform 1s;
+
+      -moz-box-shadow: inset 6px 0 5px rgba(0,0,0,0.5);
+      -webkit-box-shadow: inset 6px 0 5px rgba(0,0,0,0.5);
+      box-shadow: inset 6px 0 5px rgba(0,0,0,0.5);
+    }
+
+    .flipped {
+      transform: rotateY(180deg);
+      z-index: 6;
+    }
+
+    .flipped + .back-face {
+      transform: rotateY(180deg);
+    }
+
+    .erasure-poem ~ .erasure-poem {
+      z-index: 6;
+    }
+
+    .back-face ~ .back-face {
+      z-index: 5;
+    }
+
+
   }
 
   .backcover {
@@ -90,6 +141,12 @@
     .erasure-poem {
       display: block !important;
     }
+
+    .inside { z-index: 10; }
+  }
+
+  &.opening {
+    .inside { z-index: 4 !important; }
   }
 
   &.closing {
@@ -105,6 +162,16 @@
 
     }
 
+    .back-face {
+      transform: rotateY(0deg) !important;
+    }
+
+  }
+
+  &.closed {
+    .back-face {
+      opacity: 0;
+    }
   }
 }
 

@@ -4,8 +4,10 @@ import _ from 'lodash';
 
 
 class bookflipAnimation {
-    constructor($element, $rootScope) {
+    constructor($element, $rootScope, $timeout, $interval) {
         this.$rootScope = $rootScope;
+        this.timeout = $timeout;
+        this.interval = $interval;
         this.listeners = {
             click: this.onClick.bind(this),
             DOMNodeRemoved: this.onDestroy.bind(this),
@@ -24,9 +26,33 @@ class bookflipAnimation {
     onClick(event) {
         if(!this.$rootScope.isScreenUnlocked && !this.open) {
             this.open = true;
+            this.currentPage = 1;
             this.executeResizeAnimation();
 
             this.element.addClass('opened');
+            this.element.addClass('opening');
+            this.element.removeClass('closed');
+
+            this.timeout(() => {
+                this.element.removeClass('opening');
+            }, 1000);
+
+        
+            this.timeout(() => {
+
+                var doc = document.getElementById("scarlet-page-1").getSVGDocument();
+                var s = doc.getElementById("status");
+
+
+                const pageStatusCheck = setInterval(() => {
+                    if(s.getAttribute('animation-done') === 'true') {
+                        clearInterval(pageStatusCheck);
+                        console.log(this);
+                        this.currentPage = 2;
+                    }
+                }, 1500);    
+            }, 5000);
+            
         }
     }
 
@@ -45,7 +71,10 @@ class bookflipAnimation {
 
         setTimeout(() => {
             this.open = false;
+
             this.element.removeClass('closing');
+            this.element.addClass('closed');
+
         }, 1100);
     }
 

@@ -58,7 +58,7 @@ import jQuery from 'jquery';
                                     post.source_link = post.node.field_source_link.und[0].value;
                                     post.source = post.node.field_source.und[0].value;
                                     post.genres = post.node.field_genres.und[0].value;
-                                    post.pages = post.node.field_pages.und.map(page => $sce.trustAsResourceUrl(host + page.filename));
+                                    post.pages = post.node.field_pages.und.map(page => $sce.trustAsResourceUrl(host + page.uri.replace('public://', '')));
                                     post.description = post.node.body.und[0].value;
                                 });
                                 return posts;

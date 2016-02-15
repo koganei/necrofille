@@ -116,8 +116,17 @@
         <div class="inside">
             <object type="image/svg+xml" data="images/erasure_scarlet.svg"
                     width="0" height="0" border="0"></object>
-            <object ng-if="bookflipAnimation.open" class="erasure-poem" type="image/svg+xml" data="images/erasure_scarlet.svg"
-                    height="100%" border="0" style="display: none;"></object>
+            <object ng-if="bookflipAnimation.open && bookflipAnimation.currentPage >= 1" class="erasure-poem" type="image/svg+xml" data="images/erasure_scarlet.svg" ng-class="{ flipped: bookflipAnimation.currentPage > 1 }"
+                    height="100%" border="0" style="display: none;" id="scarlet-page-1"></object>
+
+            <div ng-if="bookflipAnimation.open && bookflipAnimation.currentPage >= 1" ng-click="bookflipAnimation.close()" class="back-face"></div>
+
+            <object type="image/svg+xml" data="images/erasure_scarlet2.svg"
+                    width="0" height="0" border="0"></object>
+            <object ng-if="bookflipAnimation.open && bookflipAnimation.currentPage >= 2" class="erasure-poem poem-2" type="image/svg+xml" data="images/erasure_scarlet2.svg" ng-class="{ flipped: bookflipAnimation.currentPage > 2 }"
+                    height="100%" border="0" style="display: none;" id="scarlet-page-2"></object>
+
+            <div ng-if="bookflipAnimation.open && bookflipAnimation.currentPage >= 2" ng-click="bookflipAnimation.close()" class="back-face"></div>
         </div>
         <img src="images/scarlet-letter-flipped.png" class="backcover" />
 
