@@ -8,18 +8,22 @@
         <div class="snapchat-posts">
             <div class="snapchat-post" ng-repeat="post in snapchat.posts" ng-click="snapchat.loadPost(post)">
                 <img class="post-preview"
-                     ng-src="{{'http://dev.nataschasimard.com/sites/default/files/' + post.node.field_posts.und[post.node.field_posts.und.length-1].filename}}">
+                     ng-src="{{'http://dev.nataschasimard.com/sites/default/files/' + post.node.field_snapchat_posts.und[post.node.field_snapchat_posts.und.length-1].filename}}">
                 <h1 class="post-author">{{post.title}}</h1>
                 <span class="post-date">{{post.node.field_latest.und[0].safe_value}}</span>
             </div>
         </div>
     </div>
     <div class="loaded-post" ng-if="snapchat.loadedPost">
-        <div ng-repeat="post in snapchat.loadedPost.node.field_posts.und"
+        <div ng-repeat="post in snapchat.loadedPost.node.field_snapchat_posts.und"
             ng-if="snapchat.loadedPostIndex === $index"
             ng-click="snapchat.nextLoadedPostIndex()">
-            <img class="snapchat-loaded-post-post"
-                ng-src="{{'http://dev.nataschasimard.com/sites/default/files/' + post.filename}}">
+
+            <img ng-if="!post.isVideo" class="snapchat-loaded-post-post"
+                ng-src="{{post.file}}">
+
+            <video ng-if="post.isVideo" autoplay="true" width="100%" class="snapchat-loaded-post-video"  type="video/webm"   
+                ng-src="{{post.file}}"></video>            
 
             <div class="radial-progress" ng-attr-data-progress="{{snapchat.loadedPostTimer}}">
                 <div class="circle">

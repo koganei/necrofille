@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Natascha Portfolio</title>
 
-    <link rel="stylesheet" href="css/app.css"/>
-    <link rel="stylesheet" href="css/devices.min.css"/>
+    <link rel="stylesheet" href="css/app.css?t=123"/>
+    <link rel="stylesheet" href="css/devices.min.css?t=234"/>
     <link rel="stylesheet" href="node_modules/toastr/build/toastr.min.css"/>
 
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400' rel='stylesheet' type='text/css'>
@@ -101,7 +101,7 @@
             <object class="binder-page" id="binder-tolerance" data="binder/tolerance.svg" type="image/svg+xml"></object>
             <div class="back-page"></div>
 
-            <object class="binder-page" id="binder-10steps" data="binder/10_steps.svg" type="image/svg+xml"></object>
+            <object ng-if="binderAnimation.open" class="binder-page" id="binder-10steps" data="binder/10_steps.svg" type="image/svg+xml"></object>
             <div class="back-page"></div>
         </div>
 
@@ -115,11 +115,6 @@
         <img src="images/scarlet-letter-flipped.png" class="cover-flipped" ng-click="bookflipAnimation.close()" />
         <div class="inside">
             <!-- Page 1 -->
-            <object type="image/svg+xml"
-                    data="images/erasure_scarlet.svg"
-                    width="0"
-                    height="0"
-                    border="0"></object>
 
             <object ng-if="bookflipAnimation.open && bookflipAnimation.currentPage >= 1"
                     class="erasure-poem"
@@ -136,7 +131,8 @@
                     class="back-face"></div>
 
             <!-- Page 2 -->
-            <object type="image/svg+xml"
+            <object ng-if="bookflipAnimation.open"
+                    type="image/svg+xml"
                     data="images/erasure_scarlet2.svg"
                     width="0"
                     height="0"
@@ -157,7 +153,8 @@
                     class="back-face"></div>
 
             <!-- Page 3 -->
-            <object type="image/svg+xml"
+            <object ng-if="bookflipAnimation.open"
+                    type="image/svg+xml"
                     data="images/erasure_scarlet3.svg"
                     width="0"
                     height="0"
@@ -211,7 +208,7 @@
     </div>
 </div>
 </div>
-<script src="bundle.js"></script>
+<script src="bundle.js?t=2345"></script>
 <!--<script src="node_modules/lodash/index.js"></script>-->
 <!--<script src="node_modules/angular/angular.js"></script>-->
 <!--<script src="node_modules/angular-resource/angular-resource.js"></script>-->

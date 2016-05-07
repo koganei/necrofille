@@ -56,8 +56,12 @@ class binderAnimation {
 
     prepareResizeAnimation() {
         const windowHeight = window.innerHeight,
-           deviceHeight = this.element.height(),
-           ratio = windowHeight / deviceHeight * 0.5;
+           deviceHeight = this.element.height();
+
+        let ratio = windowHeight / deviceHeight * 0.5;
+
+        // there's a weird bug here that gets the wrong innerHeight, so if that happens, we just force it to 0.45
+        if(ratio > 1) { ratio = 0.45; }
 
         this.transformText = `scale(${ratio})`;
 
@@ -135,6 +139,6 @@ angular.module('binderanimation', [])
             restrict: 'A',
             controller: binderAnimation,
             bindToController: true,
-            controllerAs: 'bookflipAnimation'
+            controllerAs: 'binderAnimation'
         }
     });

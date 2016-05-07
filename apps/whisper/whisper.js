@@ -3,6 +3,7 @@ import '../../components/slide-show/main';
 import _ from 'lodash';
 import moment from 'moment';
 import jQuery from 'jquery';
+import 'timeago';
 
 
     function WhisperResources(Resources) {
@@ -12,26 +13,27 @@ import jQuery from 'jquery';
     function WhisperAppController(posts, $rootScope) {
         this.posts = posts;
         $rootScope.currentAppName = 'whisper';
+        
 
-        jQuery.timeago.settings.strings = {
-            prefixAgo: null,
-            prefixFromNow: null,
-            suffixAgo: "",
-            suffixFromNow: "",
-            seconds: "1m",
-            minute: "1m",
-            minutes: "%dm",
-            hour: "1h",
-            hours: "%dh",
-            day: "1d",
-            days: "%dd",
-            month: "1mo",
-            months: "%dmo",
-            year: "1yr",
-            years: "%dyr",
-            wordSeparator: " ",
-            numbers: []
-        };
+        // jQuery.timeago.settings.strings = {
+        //     prefixAgo: null,
+        //     prefixFromNow: null,
+        //     suffixAgo: "",
+        //     suffixFromNow: "",
+        //     seconds: "1m",
+        //     minute: "1m",
+        //     minutes: "%dm",
+        //     hour: "1h",
+        //     hours: "%dh",
+        //     day: "1d",
+        //     days: "%dd",
+        //     month: "1mo",
+        //     months: "%dmo",
+        //     year: "1yr",
+        //     years: "%dyr",
+        //     wordSeparator: " ",
+        //     numbers: []
+        // };
     }
 
     angular.module('app.whisper', ['ngResource', 'portfolio.resources', 'slideShow'])

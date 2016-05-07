@@ -1,8 +1,7 @@
 import { angular } from './../../js/base';
 import jQuery from 'jquery';
-import 'timeago';
+import timeago from 'timeago';
 import moment from 'moment';
-
 
 class TimeAgoElement {
     constructor() {
@@ -12,8 +11,6 @@ class TimeAgoElement {
 
 class TimeAgoElementLinker {
     constructor(scope, element, attrs, controller) {
-
-
 
         var el = jQuery(element);
 

@@ -29,14 +29,14 @@ import moment from 'moment';
         nextLoadedPostIndex() {
             this.loadedPostIndex++;
             this.loadedPostTimer = 0;
-            if(this.loadedPostIndex === this.loadedPost.node.field_posts.und.length) {
+            if(this.loadedPostIndex === this.loadedPost.node.field_snapchat_posts.und.length) {
                 this.unloadPost();
             }
         }
 
         unloadPost() {
             this.loadedPost = undefined;
-            this.loadedPostIntervalInterrupter();
+            clearInterval(this.loadedPostIntervalInterrupter);
         }
     }
 
@@ -53,10 +53,18 @@ import moment from 'moment';
                     url: "/snapchat",
                     templateUrl: "apps/snapchat/app.html",
                     resolve: {
-                        posts: function (SnapchatResources, $sce) {
+                        posts: function (SnapchatResources, $sce, $http) {
                             return SnapchatResources.query().$promise.then(function (posts) {
                                 posts.forEach(function (post) {
-
+                                    post.node.field_snapchat_posts.und.forEach((file) => {
+                                        file.file = $sce.trustAsResourceUrl('http://dev.nataschasimard.com/sites/default/files/' + file.uri.replace('public://', ''));
+                                        if (file.filename.indexOf('webm') !== -1) {
+                                            file.isVideo = true;
+                                        }
+                                        let image = new Image();
+                                        image.src = 'http://dev.nataschasimard.com/sites/default/files/' + file.uri.replace('public://', '');
+                                        console.log(file.file);
+                                    });
                                 });
                                 return posts;
                             });
