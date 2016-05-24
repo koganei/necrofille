@@ -2,12 +2,13 @@
 <html lang="en" ng-app="portfolio">
 <head>
     <meta charset="UTF-8">
-    <title>Natascha Portfolio</title>
+    <title>@necrofille</title>
 
-    <link rel="stylesheet" href="css/app.css?t=123"/>
-    <link rel="stylesheet" href="css/devices.min.css?t=234"/>
+    <link rel="stylesheet" href="css/app.css?t=123456"/>
+    <link rel="stylesheet" href="css/devices.min.css?t=2345654"/>
     <link rel="stylesheet" href="node_modules/toastr/build/toastr.min.css"/>
-
+    <link rel='shortcut icon' href='/favicon.ico' type='image/x-icon'/ >
+    
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -33,9 +34,9 @@
                 </div>
             </div>
 
-            <div class="crack">
-                <img src="images/crack.png">
-            </div>
+            <!--<div class="crack">-->
+                <!--<img src="images/crack.png">-->
+            <!--</div>-->
 
             <div id="phone-screen">
                 <connection-bar app-color="{{currentAppName}}" ng-hide="hideConnectionBar"></connection-bar>
@@ -74,6 +75,9 @@
                             <li><a notification-target="netflix_post" ui-sref="app.netflix"><img src="images/apps/netflix.png"></a></li>
                             <li><a notification-target="manga_post" ui-sref="app.manga"><img src="images/apps/mangarock.png"></a></li>
                             <li><a ui-sref="app.borderland"><img src="images/apps/borderland.png"></a></li>
+                            <li><a notification-target="bible_post" ui-sref="app.bible"><img src="images/apps/bible.png"></a></li>
+                            <li><div></div></li>
+                            <li><div></div></li>
                             <li><div></div></li>
                         </ul>
                         <ul id="app-bottom-list" class="app-list">
@@ -82,7 +86,7 @@
                             <li><a notification-target="messages_post" ui-sref="app.messages" data-label="Messages"><img
                                     src="images/apps/messages.png"></a></li>
                             <li><a notification-target="gmail_post" ui-sref="app.gmail" data-label="Gmail"><img src="images/apps/gmail.gif"></a></li>
-                            <li><a ui-sref="app.notes"><img src="images/apps/notes.png"></a></li>
+                            <li><a notification-target="notes_post" ui-sref="app.notes"><img src="images/apps/notes.png"></a></li>
                             
                         </ul>
                         <div class="app-menu-background"></div>
@@ -117,7 +121,7 @@
             <!-- Page 1 -->
 
             <object ng-if="bookflipAnimation.open && bookflipAnimation.currentPage >= 1"
-                    class="erasure-poem"
+                    class="erasure-poem last-flip"
                     type="image/svg+xml"
                     data="images/erasure_scarlet.svg"
                     ng-class="{ flipped: bookflipAnimation.currentPage > 1 }"
@@ -139,38 +143,16 @@
                     border="0"></object>
 
             <object ng-if="bookflipAnimation.open && bookflipAnimation.currentPage >= 2"
-                    class="erasure-poem poem-2 last-flip"
+                    class="erasure-poem poem-2"
                     type="image/svg+xml"
-                    data="images/erasure_scarlet2.svg"
+                    data="images/erasure_scarlet132.svg"
                     ng-class="{ flipped: bookflipAnimation.currentPage > 2 }"
                     height="100%"
                     border="0"
-                    style="display: none;"
+                    style="display: none; padding: 20px 30px 20px 10px"
                     id="scarlet-page-2"></object>
 
             <div ng-if="bookflipAnimation.open && bookflipAnimation.currentPage >= 2"
-                    ng-click="bookflipAnimation.close()"
-                    class="back-face"></div>
-
-            <!-- Page 3 -->
-            <object ng-if="bookflipAnimation.open"
-                    type="image/svg+xml"
-                    data="images/erasure_scarlet3.svg"
-                    width="0"
-                    height="0"
-                    border="0"></object>
-
-            <object ng-if="bookflipAnimation.open && bookflipAnimation.currentPage >= 3"
-                    class="erasure-poem poem-3"
-                    type="image/svg+xml"
-                    data="images/erasure_scarlet3.svg"
-                    ng-class="{ flipped: bookflipAnimation.currentPage > 3 }"
-                    height="100%"
-                    border="0"
-                    style="display: none;"
-                    id="scarlet-page-3"></object>
-
-            <div ng-if="bookflipAnimation.open && bookflipAnimation.currentPage >= 3"
                     ng-click="bookflipAnimation.close()"
                     class="back-face"></div>
         </div>
@@ -208,7 +190,7 @@
     </div>
 </div>
 </div>
-<script src="bundle.js?t=2345"></script>
+<script src="bundle.js?t=342345"></script>
 <!--<script src="node_modules/lodash/index.js"></script>-->
 <!--<script src="node_modules/angular/angular.js"></script>-->
 <!--<script src="node_modules/angular-resource/angular-resource.js"></script>-->

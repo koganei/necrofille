@@ -6,9 +6,9 @@ import BaseController from '../base-controller/index.js';
 let controllerName = 'notifications';
 
 class NotificationsAttribute {
-    constructor(Resources) {
+    constructor(Resources, PostResources) {
         this.items = {};
-        Resources.getResources('http://dev.nataschasimard.com/poems/node.json?pagesize=500').query().$promise.then((allItems) => {
+        PostResources.query.then((allItems) => {
             _(allItems).groupBy('type')
                 .each((value, key) => { this.items[key] = value.length; })
                 .value();

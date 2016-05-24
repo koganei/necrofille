@@ -26,18 +26,18 @@
         <div class="emails">
             <div class="email"
                  ng-repeat="email in gmail.loadedPost.body"
-                 ng-class="{ expanded: gmail.expanded === email }"
-                 ng-click="gmail.expanded = email">
+                 ng-class="{ expanded: email.expanded }"
+                 ng-click="email.expanded = !email.expanded">
                 <img class="email_avatar" ng-src="{{email.avatar}}" />
                 <div class="email_author">{{email.author}}</div>
-                <div class="email_text_preview" ng-if="gmail.expanded !== email" ng-bind-html="email.text"></div>
-                <div class="email_details" ng-if="gmail.expanded === email">
+                <div class="email_text_preview" ng-if="!email.expanded" ng-bind-html="email.text"></div>
+                <div class="email_details" ng-if="email.expanded">
                     <div class="email_to">to {{email.to}}</div>
                     <div class="email_date">{{email.date | date}} <span class="details">Details</span></div>
                 </div>
 
 
-                <div class="email_text" ng-if="gmail.expanded === email" ng-bind-html="email.text"></div>
+                <div class="email_text" ng-if="email.expanded" ng-bind-html="email.text"></div>
             </div>
         </div>
     </div>

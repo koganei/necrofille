@@ -22,7 +22,15 @@ import '../../js/resources/resources';
                         posts: function (TwitterResources, $sce) {
                             return TwitterResources.query().$promise.then(function (posts) {
                                 posts.forEach(function (post) {
+                                    post.avatar = post.node.field_twitter_avatar.und[0].uri.replace('public://', '');
                                     post.node.body.und[0].safe_value = $sce.trustAsHtml(post.node.body.und[0].safe_value);
+                                    if(post.node.field_twitter_date.und && post.node.field_twitter_date.und.length) {
+                                        var date = post.node.field_twitter_date.und[0].value;
+                                        if(date) {
+                                            post.date = date.split(' ')[0].replace(/\//g, '-');
+                                        
+                                         }
+                                    }
                                 });
                                 return posts;
                             });

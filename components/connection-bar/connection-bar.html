@@ -1,22 +1,44 @@
 <div ng-class="connectionBar.textColor + '-color'">
-    <ul class="connection-dots horizontal-list">
-        <li class="connection-dot"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot.png" alt=""/></li>
-        <li class="connection-dot"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot.png" alt=""/></li>
-        <li class="connection-dot"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot.png" alt=""/></li>
-        <li class="connection-dot" ng-class="{ empty: connectionBar.isLow }"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot{{connectionBar.isLow ? '-empty' : ''}}.png" alt=""/></li>
-        <li class="connection-dot empty"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot-empty.png" alt=""/></li>
-    </ul>
+    <span class="top-bar" ng-click="connectionBar.toggleNotifications()">
+        <ul class="connection-dots horizontal-list">
+            <li class="connection-dot"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot.png" alt=""/></li>
+            <li class="connection-dot"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot.png" alt=""/></li>
+            <li class="connection-dot"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot.png" alt=""/></li>
+            <li class="connection-dot" ng-class="{ empty: connectionBar.isLow }"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot{{connectionBar.isLow ? '-empty' : ''}}.png" alt=""/></li>
+            <li class="connection-dot empty"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-dot-empty.png" alt=""/></li>
+        </ul>
 
-    <ul class="connection-info horizontal-list">
-        <li class="connection-text">MTS</li>
-        <li class="connection-icon"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-wireless-icon.png" alt=""/></li>
-    </ul>
+        <ul class="connection-info horizontal-list">
+            <li class="connection-text">MTS</li>
+            <li class="connection-icon"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-wireless-icon.png" alt=""/></li>
+        </ul>
 
-    <div class="time">
-        <ds-widget-clock show-digital="true" digital-format="'h:mma'"></ds-widget-clock>
+        <div class="time">
+            <ds-widget-clock show-digital="true" digital-format="'h:mma'"></ds-widget-clock>
+        </div>
+
+        <div class="battery"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-battery.png" alt=""/></div>
+    </span>
+    
+    <div class="notifications-overview" ng-class="{'open': connectionBar.isNotificationsOpen}">
+        <ul class="top-buttons"><li>Today</li><li>Notifications</li></ul>
+        
+        <ul class="notifications-list">
+            <li class="notification clearfix" ng-repeat="post in connectionBar.posts">
+                <img class="icon" ng-src="{{post.info.image}}">
+                <div class="details">
+                    <span class="app-name" title="{{post.title}} {{post.datetime}}">{{post.info.name}}</span>
+                    <span class="notification-time">{{post.time}}</span>
+                    <br />
+                    <span class="author" ng-if="post.author">{{post.author}}</span>
+                    <div class="preview" ng-bind-html="post.preview"></div>
+                    <hr ng-if="!$last" />
+                </div>
+            </li>
+        </ul>
+        <div class="roll-up" ng-click="connectionBar.toggleNotifications()">
+            <img src="images/notifications-bottom.png" alt="">
+        </div>
     </div>
-
-    <div class="battery"><img ng-src="images/connection-bar/{{connectionBar.textColor}}-battery.png" alt=""/></div>
-
 
 </div>

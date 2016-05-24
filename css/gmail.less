@@ -7,7 +7,7 @@
 }
 
 #gmail-app {
-  font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+  font-family: Arial, sans-serif;
   padding-top: 25px;
 
   .header {
@@ -51,6 +51,7 @@
       position: relative;
       margin-left: 45px;
       padding-right: 40px;
+  
 
       .sender, .subject, .preview {
         white-space: nowrap;
@@ -89,6 +90,7 @@
   .loaded-post {
 
       background: #f1f1f1;
+      font-size: 1.5em;
 
       .header {
         cursor: pointer;
@@ -120,7 +122,7 @@
 
         .email_author {
           padding-top: 10px;
-          font-size: 13px;
+          font-size: 16px;
           font-weight: bold;
         }
 
@@ -142,14 +144,15 @@
         }
 
         .email_text_preview {
-          height: 2em;
+          height: 1.4em;
           overflow: hidden;
           color: #bbb;
           padding-top: 4px;
+          line-height: 1.5em;
 
           p {
             margin: 0;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 100;
             line-height: 1.4em;
           }
@@ -157,9 +160,10 @@
 
         .email_text {
           clear: both;
-          font-size: 13px;
+          font-size: 16px;
           font-weight: 100;
           padding-left: 10px;
+          line-height: 1.5em;
         }
 
         clear: both;

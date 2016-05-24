@@ -10,10 +10,11 @@ import jQuery from 'jquery';
 
 
     class MessagesAppController {
-        constructor(posts, $rootScope, $timeout) {
+        constructor(posts, $rootScope, $timeout, $sce) {
             this.posts = posts;
             $rootScope.currentAppName = 'messages';
             this.$timeout = $timeout;
+            this.$sce = $sce;
         }
 
         loadPost(post) {
@@ -26,11 +27,16 @@ import jQuery from 'jquery';
         }
 
         asMessage(post) {
-            post.messages = _(post.node.body.und[0].value)
-                .split('\r\n')
+            let messages = post.node.body.und[0].safe_value
+                                .replace(/<p>/g, '')
+                                .replace(/<\/p>/g, '');
+            
+            post.messages = _(messages)
+                .split('\n')
                 .map(this.getMessageFromLine)
                 .map(this.attachLines)
                 .compact()
+                .map(message => { message.message = this.$sce.trustAsHtml(message.message); return message; })
                 .value();
 
             return post;
@@ -49,6 +55,7 @@ import jQuery from 'jquery';
 
         getMessageFromLine(line) {
             if(_.trim(line) === '') { return false; }
+            console.log(line.indexOf('~~~'));
             if(line.indexOf('~~~') === 0) {
                 return {
                     type: 'date',
@@ -65,6 +72,7 @@ import jQuery from 'jquery';
                     message: line.slice(1)
                 }
             } else {
+                console.log('Attach', line);
                 return {
                     type: 'attach',
                     message: line

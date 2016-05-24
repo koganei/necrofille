@@ -62,11 +62,11 @@
 
 	__webpack_require__(17);
 
-	__webpack_require__(18);
-
-	__webpack_require__(19);
-
 	__webpack_require__(20);
+
+	__webpack_require__(21);
+
+	__webpack_require__(22);
 
 	__webpack_require__(127);
 
@@ -102,7 +102,9 @@
 
 	__webpack_require__(144);
 
-	_base.angular.module('portfolio', ['ngAnimate', 'ds.clock', 'portfolio.routing', 'app.facebook', 'app.tumblr', 'app.twitter', 'app.whisper', 'app.newhive', 'app.instagram', 'app.notes', 'app.messages', 'app.camera', 'app.youtube', 'app.gmail', 'app.snapchat', 'app.netflix', 'app.manga', 'app.borderland', 'notifications', 'timeago', 'connectionBar', 'unlockanimation', 'bookflipanimation', 'binderanimation']);
+	__webpack_require__(145);
+
+	_base.angular.module('portfolio', ['ngAnimate', 'ds.clock', 'portfolio.routing', 'app.facebook', 'app.tumblr', 'app.twitter', 'app.whisper', 'app.newhive', 'app.instagram', 'app.notes', 'app.messages', 'app.camera', 'app.youtube', 'app.gmail', 'app.snapchat', 'app.netflix', 'app.manga', 'app.borderland', 'app.bible', 'notifications', 'timeago', 'connectionBar', 'unlockanimation', 'bookflipanimation', 'binderanimation']);
 
 /***/ },
 /* 1 */
@@ -48365,6 +48367,10 @@
 
 	'use strict';
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 	__webpack_require__(13);
 
 	function Resources($resource) {
@@ -48375,7 +48381,26 @@
 	    };
 	}
 
-	angular.module('portfolio.resources', ['ngResource']).service('Resources', Resources);
+	var PostResources = (function () {
+	    function PostResources(Resources) {
+	        _classCallCheck(this, PostResources);
+
+	        this.resources = Resources;
+	        this.query = Resources.getResources('http://dev.nataschasimard.com/poems/node.json?pagesize=500').query().$promise;
+	    }
+
+	    _createClass(PostResources, [{
+	        key: 'getFullData',
+	        value: function getFullData() {
+	            if (!this.fullData) this.fullData = this.resources.getResources('http://dev.nataschasimard.com/poems/node.json?pagesize=500&parameters[]=node').query().$promise;
+	            return this.fullData;
+	        }
+	    }]);
+
+	    return PostResources;
+	})();
+
+	angular.module('portfolio.resources', ['ngResource']).service('PostResources', PostResources).service('Resources', Resources);
 
 /***/ },
 /* 13 */
@@ -49308,6 +49333,10 @@
 
 	__webpack_require__(12);
 
+	var _lodash = __webpack_require__(18);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
 	function FacebookResources(Resources) {
 	    return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=facebook_post&parameters[]=node');
 	}
@@ -49348,6 +49377,12 @@
 	                return FacebookResources.query().$promise.then(function (posts) {
 	                    posts.forEach(function (post) {
 	                        post.node.body.und[0].safe_value = $sce.trustAsHtml(post.node.body.und[0].safe_value);
+	                        post.comments = _lodash2['default'].map(post.node.field_comment_dates.und, function (comment_date, $index) {
+	                            return {
+	                                date: comment_date.safe_value,
+	                                body: $sce.trustAsHtml(post.node.field_comment_bodies.und[$index].safe_value)
+	                            };
+	                        });
 	                    });
 	                    return posts;
 	                });
@@ -49359,279 +49394,6 @@
 
 /***/ },
 /* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	__webpack_require__(12);
-
-	function TumblrResources(Resources) {
-	    return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=tumblr_post&parameters[]=node');
-	}
-
-	function TumblrAppController(posts, $rootScope) {
-	    console.log(posts);
-	    this.posts = posts;
-	    $rootScope.currentAppName = 'tumblr';
-	    this.convertTag = function (value) {
-	        return value.replace('#', '').replace(/ /g, '+');
-	    };
-	}
-
-	angular.module('app.tumblr', ['ngResource', 'portfolio.resources']).service('TumblrResources', TumblrResources).controller('TumblrAppController', TumblrAppController).config(function ($stateProvider, $urlRouterProvider) {
-
-	    $stateProvider.state('app.tumblr', {
-	        url: "/tumblr",
-	        templateUrl: "apps/tumblr/app.html",
-	        resolve: {
-	            posts: function posts(TumblrResources, $sce) {
-	                return TumblrResources.query().$promise.then(function (posts) {
-	                    posts.forEach(function (post) {
-	                        post.title = $sce.trustAsHtml(post.node.title);
-	                        post.body = $sce.trustAsHtml(post.node.body.und[0].safe_value);
-	                    });
-	                    return posts;
-	                });
-	            }
-	        },
-	        controller: 'TumblrAppController as tumblr'
-	    });
-	});
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	__webpack_require__(12);
-
-	function TwitterResources(Resources) {
-	    return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=twitter_post&parameters[]=node');
-	}
-
-	function TwitterAppController(posts, $scope, $rootScope) {
-	    this.posts = posts;
-	    $rootScope.currentAppName = 'twitter';
-	}
-
-	angular.module('app.twitter', ['ngResource', 'portfolio.resources']).service('TwitterResources', TwitterResources).controller('TwitterAppController', TwitterAppController).config(function ($stateProvider, $urlRouterProvider) {
-
-	    $stateProvider.state('app.twitter', {
-	        url: "/twitter",
-	        templateUrl: "apps/twitter/app.html",
-	        resolve: {
-	            posts: function posts(TwitterResources, $sce) {
-	                return TwitterResources.query().$promise.then(function (posts) {
-	                    posts.forEach(function (post) {
-	                        post.node.body.und[0].safe_value = $sce.trustAsHtml(post.node.body.und[0].safe_value);
-	                    });
-	                    return posts;
-	                });
-	            }
-	        },
-	        controller: 'TwitterAppController as twitter'
-	    });
-	});
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	__webpack_require__(12);
-
-	__webpack_require__(21);
-
-	var _lodash = __webpack_require__(22);
-
-	var _lodash2 = _interopRequireDefault(_lodash);
-
-	var _moment = __webpack_require__(24);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	var _jquery = __webpack_require__(5);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	__webpack_require__(126);
-
-	function WhisperResources(Resources) {
-	    return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=whisper_post&parameters[]=node');
-	}
-
-	function WhisperAppController(posts, $rootScope) {
-	    this.posts = posts;
-	    $rootScope.currentAppName = 'whisper';
-
-	    // jQuery.timeago.settings.strings = {
-	    //     prefixAgo: null,
-	    //     prefixFromNow: null,
-	    //     suffixAgo: "",
-	    //     suffixFromNow: "",
-	    //     seconds: "1m",
-	    //     minute: "1m",
-	    //     minutes: "%dm",
-	    //     hour: "1h",
-	    //     hours: "%dh",
-	    //     day: "1d",
-	    //     days: "%dd",
-	    //     month: "1mo",
-	    //     months: "%dmo",
-	    //     year: "1yr",
-	    //     years: "%dyr",
-	    //     wordSeparator: " ",
-	    //     numbers: []
-	    // };
-	}
-
-	angular.module('app.whisper', ['ngResource', 'portfolio.resources', 'slideShow']).service('WhisperResources', WhisperResources).controller('WhisperAppController', WhisperAppController).config(function ($stateProvider, $urlRouterProvider) {
-
-	    $stateProvider.state('app.whisper', {
-	        url: "/whisper",
-	        templateUrl: "apps/whisper/app.html",
-	        resolve: {
-	            posts: function posts(WhisperResources, $sce) {
-	                return WhisperResources.query().$promise.then(function (posts) {
-	                    //posts.forEach(function (post) {
-	                    //    console.log('POST POST', post);
-	                    //    //console.log('WHAT', ta, post.node, post.node.field_whisper_date_posted.und);
-	                    //    if(!_.isEmpty(post.node.field_whisper_date_posted.und)) {
-	                    //        var posted = moment(post.node.field_whisper_date_posted.und[0].safe_value, "DD/MM/YYYY");
-	                    //        post.postedTimeAgo = ta().ago(posted.format());
-	                    //        debugger;
-	                    //        console.log('TIME AGO', posted.format(), post.node.field_whisper_date_posted.und[0].safe_value, post.postedTimeAgo);
-	                    //    }
-	                    //
-	                    //});
-	                    return posts;
-	                });
-	            }
-	        },
-	        controller: 'WhisperAppController as whisper'
-	    });
-	});
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _bind = Function.prototype.bind;
-	var _slice = Array.prototype.slice;
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-	var _jsBase = __webpack_require__(1);
-
-	var SlideShowElement = (function () {
-	    function SlideShowElement() {
-	        _classCallCheck(this, SlideShowElement);
-
-	        console.log('CONTTRUCIUOTN');
-	        this.slides = [];
-	        this.cursor = 0;
-	    }
-
-	    _createClass(SlideShowElement, [{
-	        key: 'register',
-	        value: function register(newSlide) {
-	            this.slides.push(newSlide);
-	        }
-	    }, {
-	        key: 'start',
-	        value: function start(cursorPos) {
-	            console.log('RUNNING RUNNING');
-	            this.isRunning = true;
-	            if (cursorPos) this.cursor = cursorPos;
-	        }
-	    }, {
-	        key: 'stop',
-	        value: function stop() {
-	            this.isRunning = false;
-	        }
-	    }, {
-	        key: 'next',
-	        value: function next() {
-	            this.slides[this.cursor].hide();
-	            this.cursor++;
-	            this.slides[this.cursor].show();
-	        }
-	    }, {
-	        key: 'previous',
-	        value: function previous() {
-	            this.cursor--;
-	        }
-	    }]);
-
-	    return SlideShowElement;
-	})();
-
-	var SlideShowElementLinker = function SlideShowElementLinker(scope, element, attrs, controller) {
-	    _classCallCheck(this, SlideShowElementLinker);
-
-	    console.log('CONTROLLER LINKER', controller);
-	};
-
-	var SlideShowTargetElement = (function () {
-	    function SlideShowTargetElement() {
-	        _classCallCheck(this, SlideShowTargetElement);
-	    }
-
-	    _createClass(SlideShowTargetElement, [{
-	        key: 'show',
-	        value: function show() {
-	            this.element.addClass('slide-show-target');
-	        }
-	    }]);
-
-	    return SlideShowTargetElement;
-	})();
-
-	var SlideShowTargetElementLinker = function SlideShowTargetElementLinker(scope, element, attrs, slideShow, controller) {
-	    _classCallCheck(this, SlideShowTargetElementLinker);
-
-	    this.element = element;
-	    slideShow.register(this);
-	};
-
-	_jsBase.angular.module('slideShow', []).controller('SlideShowElement', SlideShowElement).directive('slideShow', function () {
-	    console.log('SLIDESHOW ');
-	    return {
-	        restrict: 'A',
-	        controller: 'SlideShowElement',
-	        link: function link() {
-	            return new (_bind.apply(SlideShowElementLinker, [null].concat(_slice.call(arguments))))();
-	        },
-
-	        bindToController: true,
-	        scope: {},
-	        controllerAs: 'slideShow'
-	    };
-	}).controller('SlideShowTargetElement', SlideShowTargetElement).directive('slideShowTarget', function () {
-	    return {
-	        restrict: 'A',
-	        controller: 'SlideShowTargetElement',
-	        link: function link() {
-	            return new (_bind.apply(SlideShowTargetElementLinker, [null].concat(_slice.call(arguments))))();
-	        },
-
-	        bindToController: true,
-	        scope: {},
-	        controllerAs: 'target',
-	        require: '^slideShow'
-	    };
-	});
-
-/***/ },
-/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -61986,10 +61748,10 @@
 	  }
 	}.call(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19)(module), (function() { return this; }())))
 
 /***/ },
-/* 23 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -62003,6 +61765,297 @@
 		return module;
 	}
 
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(12);
+
+	function TumblrResources(Resources) {
+	    return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=tumblr_post&parameters[]=node');
+	}
+
+	function TumblrAppController(posts, $rootScope) {
+	    console.log(posts);
+	    this.posts = posts;
+	    $rootScope.currentAppName = 'tumblr';
+	    this.convertTag = function (value) {
+	        return value.replace('#', '').replace(/ /g, '+');
+	    };
+	}
+
+	angular.module('app.tumblr', ['ngResource', 'portfolio.resources']).service('TumblrResources', TumblrResources).controller('TumblrAppController', TumblrAppController).config(function ($stateProvider, $urlRouterProvider) {
+
+	    $stateProvider.state('app.tumblr', {
+	        url: "/tumblr",
+	        templateUrl: "apps/tumblr/app.html",
+	        resolve: {
+	            posts: function posts(TumblrResources, $sce) {
+	                return TumblrResources.query().$promise.then(function (posts) {
+	                    posts.forEach(function (post) {
+	                        post.title = $sce.trustAsHtml(post.node.title);
+	                        post.body = post.node.body.und ? $sce.trustAsHtml(post.node.body.und[0].safe_value) : $sce.trustAsHtml('');
+	                        post.header = post.node.field_tumblr_header.und ? $sce.trustAsHtml(post.node.field_tumblr_header.und[0].safe_value) : undefined;
+	                        post.isAsk = post.node.field_tumblr_is_ask_post.und ? post.node.field_tumblr_is_ask_post.und[0].value === '1' : false;
+	                        post.question = post.isAsk ? $sce.trustAsHtml(post.node.field_tumblr_ask_question.und[0].safe_value) : undefined;
+	                    });
+	                    return posts;
+	                });
+	            }
+	        },
+	        controller: 'TumblrAppController as tumblr'
+	    });
+	});
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(12);
+
+	function TwitterResources(Resources) {
+	    return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=twitter_post&parameters[]=node');
+	}
+
+	function TwitterAppController(posts, $scope, $rootScope) {
+	    this.posts = posts;
+	    $rootScope.currentAppName = 'twitter';
+	}
+
+	angular.module('app.twitter', ['ngResource', 'portfolio.resources']).service('TwitterResources', TwitterResources).controller('TwitterAppController', TwitterAppController).config(function ($stateProvider, $urlRouterProvider) {
+
+	    $stateProvider.state('app.twitter', {
+	        url: "/twitter",
+	        templateUrl: "apps/twitter/app.html",
+	        resolve: {
+	            posts: function posts(TwitterResources, $sce) {
+	                return TwitterResources.query().$promise.then(function (posts) {
+	                    posts.forEach(function (post) {
+	                        post.avatar = post.node.field_twitter_avatar.und[0].uri.replace('public://', '');
+	                        post.node.body.und[0].safe_value = $sce.trustAsHtml(post.node.body.und[0].safe_value);
+	                        if (post.node.field_twitter_date.und && post.node.field_twitter_date.und.length) {
+	                            var date = post.node.field_twitter_date.und[0].value;
+	                            if (date) {
+	                                post.date = date.split(' ')[0].replace(/\//g, '-');
+	                            }
+	                        }
+	                    });
+	                    return posts;
+	                });
+	            }
+	        },
+	        controller: 'TwitterAppController as twitter'
+	    });
+	});
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	__webpack_require__(12);
+
+	__webpack_require__(23);
+
+	var _lodash = __webpack_require__(18);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _moment = __webpack_require__(24);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _jquery = __webpack_require__(5);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	__webpack_require__(126);
+
+	function WhisperResources(Resources) {
+	    return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=whisper_post&parameters[]=node');
+	}
+
+	function WhisperAppController(posts, $rootScope) {
+	    this.posts = posts;
+	    $rootScope.currentAppName = 'whisper';
+
+	    this.setSelected = function (post) {
+	        this.selectedPost = post;
+	    };
+
+	    this.removeSelected = function () {
+	        this.selectedPost = undefined;
+	    };
+
+	    // jQuery.timeago.settings.strings = {
+	    //     prefixAgo: null,
+	    //     prefixFromNow: null,
+	    //     suffixAgo: "",
+	    //     suffixFromNow: "",
+	    //     seconds: "1m",
+	    //     minute: "1m",
+	    //     minutes: "%dm",
+	    //     hour: "1h",
+	    //     hours: "%dh",
+	    //     day: "1d",
+	    //     days: "%dd",
+	    //     month: "1mo",
+	    //     months: "%dmo",
+	    //     year: "1yr",
+	    //     years: "%dyr",
+	    //     wordSeparator: " ",
+	    //     numbers: []
+	    // };
+	}
+
+	angular.module('app.whisper', ['ngResource', 'portfolio.resources', 'slideShow']).service('WhisperResources', WhisperResources).controller('WhisperAppController', WhisperAppController).config(function ($stateProvider, $urlRouterProvider) {
+
+	    $stateProvider.state('app.whisper', {
+	        url: "/whisper",
+	        templateUrl: "apps/whisper/app.html",
+	        resolve: {
+	            posts: function posts(WhisperResources, $sce) {
+	                return WhisperResources.query().$promise.then(function (posts) {
+	                    //posts.forEach(function (post) {
+	                    //    console.log('POST POST', post);
+	                    //    //console.log('WHAT', ta, post.node, post.node.field_whisper_date_posted.und);
+	                    //    if(!_.isEmpty(post.node.field_whisper_date_posted.und)) {
+	                    //        var posted = moment(post.node.field_whisper_date_posted.und[0].safe_value, "DD/MM/YYYY");
+	                    //        post.postedTimeAgo = ta().ago(posted.format());
+	                    //        debugger;
+	                    //        console.log('TIME AGO', posted.format(), post.node.field_whisper_date_posted.und[0].safe_value, post.postedTimeAgo);
+	                    //    }
+	                    //
+	                    //});
+	                    return posts;
+	                });
+	            }
+	        },
+	        controller: 'WhisperAppController as whisper'
+	    });
+	});
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _bind = Function.prototype.bind;
+	var _slice = Array.prototype.slice;
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var _jsBase = __webpack_require__(1);
+
+	var SlideShowElement = (function () {
+	    function SlideShowElement() {
+	        _classCallCheck(this, SlideShowElement);
+
+	        console.log('CONTTRUCIUOTN');
+	        this.slides = [];
+	        this.cursor = 0;
+	    }
+
+	    _createClass(SlideShowElement, [{
+	        key: 'register',
+	        value: function register(newSlide) {
+	            this.slides.push(newSlide);
+	        }
+	    }, {
+	        key: 'start',
+	        value: function start(cursorPos) {
+	            console.log('RUNNING RUNNING');
+	            this.isRunning = true;
+	            if (cursorPos) this.cursor = cursorPos;
+	        }
+	    }, {
+	        key: 'stop',
+	        value: function stop() {
+	            this.isRunning = false;
+	        }
+	    }, {
+	        key: 'next',
+	        value: function next() {
+	            this.slides[this.cursor].hide();
+	            this.cursor++;
+	            this.slides[this.cursor].show();
+	        }
+	    }, {
+	        key: 'previous',
+	        value: function previous() {
+	            this.cursor--;
+	        }
+	    }]);
+
+	    return SlideShowElement;
+	})();
+
+	var SlideShowElementLinker = function SlideShowElementLinker(scope, element, attrs, controller) {
+	    _classCallCheck(this, SlideShowElementLinker);
+
+	    console.log('CONTROLLER LINKER', controller);
+	};
+
+	var SlideShowTargetElement = (function () {
+	    function SlideShowTargetElement() {
+	        _classCallCheck(this, SlideShowTargetElement);
+	    }
+
+	    _createClass(SlideShowTargetElement, [{
+	        key: 'show',
+	        value: function show() {
+	            this.element.addClass('slide-show-target');
+	        }
+	    }]);
+
+	    return SlideShowTargetElement;
+	})();
+
+	var SlideShowTargetElementLinker = function SlideShowTargetElementLinker(scope, element, attrs, slideShow, controller) {
+	    _classCallCheck(this, SlideShowTargetElementLinker);
+
+	    this.element = element;
+	    slideShow.register(this);
+	};
+
+	_jsBase.angular.module('slideShow', []).controller('SlideShowElement', SlideShowElement).directive('slideShow', function () {
+	    console.log('SLIDESHOW ');
+	    return {
+	        restrict: 'A',
+	        controller: 'SlideShowElement',
+	        link: function link() {
+	            return new (_bind.apply(SlideShowElementLinker, [null].concat(_slice.call(arguments))))();
+	        },
+
+	        bindToController: true,
+	        scope: {},
+	        controllerAs: 'slideShow'
+	    };
+	}).controller('SlideShowTargetElement', SlideShowTargetElement).directive('slideShowTarget', function () {
+	    return {
+	        restrict: 'A',
+	        controller: 'SlideShowTargetElement',
+	        link: function link() {
+	            return new (_bind.apply(SlideShowTargetElementLinker, [null].concat(_slice.call(arguments))))();
+	        },
+
+	        bindToController: true,
+	        scope: {},
+	        controllerAs: 'target',
+	        require: '^slideShow'
+	    };
+	});
 
 /***/ },
 /* 24 */
@@ -66048,7 +66101,7 @@
 	    return _moment;
 
 	}));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19)(module)))
 
 /***/ },
 /* 25 */
@@ -76026,11 +76079,11 @@
 
 	__webpack_require__(12);
 
-	__webpack_require__(21);
+	__webpack_require__(23);
 
 	__webpack_require__(15);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -76101,7 +76154,7 @@
 
 	__webpack_require__(12);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -76158,7 +76211,7 @@
 
 	__webpack_require__(12);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -76223,7 +76276,7 @@
 
 	__webpack_require__(12);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -76240,12 +76293,13 @@
 	}
 
 	var MessagesAppController = (function () {
-	    function MessagesAppController(posts, $rootScope, $timeout) {
+	    function MessagesAppController(posts, $rootScope, $timeout, $sce) {
 	        _classCallCheck(this, MessagesAppController);
 
 	        this.posts = posts;
 	        $rootScope.currentAppName = 'messages';
 	        this.$timeout = $timeout;
+	        this.$sce = $sce;
 	    }
 
 	    _createClass(MessagesAppController, [{
@@ -76260,7 +76314,13 @@
 	    }, {
 	        key: 'asMessage',
 	        value: function asMessage(post) {
-	            post.messages = (0, _lodash2['default'])(post.node.body.und[0].value).split('\r\n').map(this.getMessageFromLine).map(this.attachLines).compact().value();
+	            var _this = this;
+
+	            var messages = post.node.body.und[0].safe_value.replace(/<p>/g, '').replace(/<\/p>/g, '');
+
+	            post.messages = (0, _lodash2['default'])(messages).split('\n').map(this.getMessageFromLine).map(this.attachLines).compact().map(function (message) {
+	                message.message = _this.$sce.trustAsHtml(message.message);return message;
+	            }).value();
 
 	            return post;
 	        }
@@ -76282,6 +76342,7 @@
 	            if (_lodash2['default'].trim(line) === '') {
 	                return false;
 	            }
+	            console.log(line.indexOf('~~~'));
 	            if (line.indexOf('~~~') === 0) {
 	                return {
 	                    type: 'date',
@@ -76298,6 +76359,7 @@
 	                    message: line.slice(1)
 	                };
 	            } else {
+	                console.log('Attach', line);
 	                return {
 	                    type: 'attach',
 	                    message: line
@@ -76339,7 +76401,7 @@
 
 	__webpack_require__(12);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -76414,7 +76476,7 @@
 
 	__webpack_require__(15);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -76492,7 +76554,7 @@
 
 	__webpack_require__(12);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -76513,7 +76575,9 @@
 	        key: 'loadPost',
 	        value: function loadPost(post) {
 	            this.loadedPost = post;
-	            this.expanded = _lodash2['default'].last(post.body);
+	            var email = _lodash2['default'].last(post.body);
+	            email.expanded = true;
+	            //            this.expanded = _.last(post.body);
 	            console.log(this.expanded);
 	        }
 	    }, {
@@ -76551,12 +76615,12 @@
 	                            var isFromSender = !(i % 2 && post.node.field_first_email_is_necrofille.und[0].value === "0");
 	                            var host = 'http://dev.nataschasimard.com/sites/default/files/';
 	                            return {
-	                                author: isFromSender ? post.sender : 'necrofille',
+	                                author: isFromSender ? post.sender : 'Ash Tsukino',
 	                                date: new Date(post.node.field_gmail_email_dates.und[i].value),
 	                                to: isFromSender ? 'me' : post.node.field_gmail_short_sender_name.und[0].value,
 	                                text: $sce.trustAsHtml(body.safe_value),
 	                                unsafe_text: body.safe_value,
-	                                avatar: isFromSender ? host + post.node.field_gmail_sender_avatar.und[0].filename : '/images/avatar.jpg'
+	                                avatar: isFromSender ? host + post.node.field_gmail_sender_avatar.und[0].filename : '/images/gmail/avatar.jpg'
 	                            };
 	                        });
 	                    });
@@ -76583,7 +76647,7 @@
 
 	__webpack_require__(12);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -76685,7 +76749,7 @@
 
 	__webpack_require__(15);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -76772,7 +76836,7 @@
 
 	__webpack_require__(15);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -76872,7 +76936,7 @@
 
 	__webpack_require__(15);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -78677,6 +78741,52 @@
 
 	'use strict';
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _jquery = __webpack_require__(5);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	__webpack_require__(12);
+
+	var _lodash = __webpack_require__(18);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function BibleResources(Resources) {
+	    return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=bible_post&parameters[]=node');
+	}
+
+	function BibleAppController(posts, $rootScope) {
+	    this.posts = posts;
+	    $rootScope.currentAppName = 'bible';
+	}
+
+	angular.module('app.bible', ['ngResource', 'portfolio.resources']).service('BibleResources', BibleResources).controller('BibleAppController', BibleAppController).config(function ($stateProvider, $urlRouterProvider) {
+
+	    $stateProvider.state('app.bible', {
+	        url: "/bible",
+	        templateUrl: "apps/bible/app.html",
+	        resolve: {
+	            posts: function posts(BibleResources, $sce) {
+	                return BibleResources.query().$promise.then(function (posts) {
+	                    posts.forEach(function (post) {
+	                        post.node.body.und[0].safe_value = $sce.trustAsHtml(post.node.body.und[0].safe_value);
+	                    });
+	                    return posts;
+	                });
+	            }
+	        },
+	        controller: 'BibleAppController as bible'
+	    });
+	});
+
+/***/ },
+/* 140 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	var _bind = Function.prototype.bind;
 	var _slice = Array.prototype.slice;
 
@@ -78692,7 +78802,7 @@
 
 	var _jsBase = __webpack_require__(1);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -78704,13 +78814,13 @@
 
 	var controllerName = 'notifications';
 
-	var NotificationsAttribute = function NotificationsAttribute(Resources) {
+	var NotificationsAttribute = function NotificationsAttribute(Resources, PostResources) {
 	    var _this = this;
 
 	    _classCallCheck(this, NotificationsAttribute);
 
 	    this.items = {};
-	    Resources.getResources('http://dev.nataschasimard.com/poems/node.json?pagesize=500').query().$promise.then(function (allItems) {
+	    PostResources.query.then(function (allItems) {
 	        (0, _lodash2['default'])(allItems).groupBy('type').each(function (value, key) {
 	            _this.items[key] = value.length;
 	        }).value();
@@ -78781,7 +78891,7 @@
 	});
 
 /***/ },
-/* 140 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78839,7 +78949,7 @@
 	});
 
 /***/ },
-/* 141 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78855,26 +78965,274 @@
 
 	var _jsBase = __webpack_require__(1);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
+	var infoByType = {
+	    tumblr_post: {
+	        name: 'Tumblr',
+	        image: 'images/apps/tumblr.jpg',
+	        getPreview: function getPreview(post) {
+	            if (_lodash2['default'].get(post, 'node.field_tumblr_is_ask_post.und[0].value') === '1') {
+	                return '<b>anonymous</b> asked you a question';
+	            } else {
+	                return _lodash2['default'].get(post, 'node.body.und[0].value');
+	            }
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_tumblr_post_date.und[0].value');
+	        }
+	    },
+	    facebook_post: {
+	        name: 'Facebook',
+	        image: 'images/apps/facebook.png',
+	        getAuthor: function getAuthor(post) {
+	            return _lodash2['default'].get(post, 'node.field_name.und[0].safe_value');
+	        },
+	        getPreview: function getPreview(post) {
+	            return _lodash2['default'].get(post, 'node.body.und[0].safe_value');
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_facebook_post_date.und[0].value');
+	        }
+	    },
+	    twitter_post: {
+	        name: 'Twitter',
+	        image: 'images/apps/tumblr.jpg',
+	        getAuthor: function getAuthor(post) {
+	            return _lodash2['default'].get(post, 'node.field_twitter_handle.und[0].safe_value');
+	        },
+	        getPreview: function getPreview(post) {
+	            return _lodash2['default'].get(post, 'node.body.und[0].safe_value');
+	        },
+	        getAggregateLabel: function getAggregateLabel(post) {
+	            return _lodash2['default'].get(post, 'node.field_twitter_aggregate_label.und[0].value');
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_twitter_date.und[0].value');
+	        }
+
+	    },
+	    whisper_post: {
+	        name: 'Whisper',
+	        image: 'images/apps/whisper.png',
+	        getAuthor: function getAuthor(post) {
+	            return _lodash2['default'].get(post, 'node.name');
+	        },
+	        getAggregateLabel: function getAggregateLabel(post) {
+	            return _lodash2['default'].get(post, 'node.field_whisper_aggregate_label.und[0].value');
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_whisper_post_date.und[0].value');
+	        }
+	    },
+	    newhive_post: {
+	        name: 'Newhive',
+	        image: 'images/apps/newhive.jpg',
+	        getAuthor: function getAuthor(post) {
+	            return _lodash2['default'].get(post, 'node.field_newhive_author.und[0].safe_value');
+	        },
+	        getPreview: function getPreview(post) {
+	            return _lodash2['default'].get(post, 'node.title');
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_newhive_post_date.und[0].value');
+	        }
+	    },
+	    instagram_post: {
+	        name: 'Instagram',
+	        image: 'images/apps/instagram.png',
+	        getAuthor: function getAuthor(post) {
+	            return _lodash2['default'].get(post, 'node.field_instagram_author.und[0].safe_value');
+	        },
+	        getPreview: function getPreview(post) {
+	            return _lodash2['default'].get(post, 'node.body.und[0].safe_value');
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_instagram_post_date.und[0].value');
+	        }
+	    },
+	    camera_post: {
+	        name: 'Camera',
+	        image: 'images/apps/camera.jpg',
+	        getPreview: function getPreview(post) {
+	            return '<b>' + _lodash2['default'].get(post, 'node.title') + '</b> has been uploaded to your iCloud account.';
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_camera_post_date.und[0].value');
+	        }
+	    },
+	    youtube_post: {
+	        name: 'Youtube',
+	        image: 'images/apps/youtube.png',
+	        getPreview: function getPreview(post) {
+	            return '<b>necrofille</b> posted a new video.<br />' + _lodash2['default'].get(post, 'node.title');
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_youtube_post_date.und[0].value');
+	        }
+	    },
+	    snapchat_post: {
+	        name: 'Snapchat',
+	        image: 'images/apps/snapchat.png',
+	        getPreview: function getPreview(post) {
+	            return '<b>' + _lodash2['default'].get(post, 'node.field_author.und[0].value') + '</b> sent a snap to their story.';
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_snapchat_post_date.und[0].value');
+	        }
+	    },
+	    netflix_post: {
+	        name: 'Netflix',
+	        image: 'images/apps/netflix.png',
+	        getPreview: function getPreview(post) {
+	            return '<b>' + _lodash2['default'].get(post, 'node.title') + '</b> is now available.';
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_netflix_post_date.und[0].value');
+	        }
+	    },
+	    manga_post: {
+	        name: 'Manga Rock',
+	        image: 'images/apps/mangarock.png',
+	        getAuthor: function getAuthor(post) {
+	            return _lodash2['default'].get(post, 'node.title');
+	        },
+	        getPreview: function getPreview() {
+	            return 'A new chapter has been released';
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_manga_post_date.und[0].value');
+	        }
+	    },
+	    bible_post: {
+	        name: 'Holy Bible',
+	        image: 'images/apps/bible.png',
+	        getPreview: function getPreview(post) {
+	            return _lodash2['default'].get(post, 'node.body.und[0].safe_value');
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_bible_date.und[0].value');
+	        }
+	    },
+	    messages_post: {
+	        name: 'Messages',
+	        image: 'images/apps/messages.png',
+	        getAuthor: function getAuthor(post) {
+	            return _lodash2['default'].get(post, 'node.field_messages_recipient.und[0].safe_value');
+	        },
+	        getPreview: function getPreview(post) {
+	            // let body = _.get(post, 'node.body.und[0].value');
+	            // body = body.replace(/~~~/g, '++++++');
+	            // let exploded = body.split('~~');
+	            return 'Message Preview!';
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_messages_post_date.und[0].value');
+	        }
+	    },
+	    gmail_post: {
+	        name: 'Gmail',
+	        image: 'images/apps/gmail.gif',
+	        getAuthor: function getAuthor(post) {
+	            return _lodash2['default'].get(post, 'node.field_gmail_sender.und[0].value');
+	        },
+	        getPreview: function getPreview(post) {
+	            return _lodash2['default'].get(post, 'node.field_gmail_preview.und[0].safe_value');
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_gmail_post_date.und[0].value');
+	        }
+	    },
+	    notes_post: {
+	        name: 'Notes',
+	        image: 'images/apps/notes.png',
+	        getPreview: function getPreview(post) {
+	            return '<b>' + _lodash2['default'].get(post, 'node.title') + '</b> has been uploaded to your iCloud account.';
+	        },
+	        getDate: function getDate(post) {
+	            return _lodash2['default'].get(post, 'node.field_notes_post_date.und[0].value');
+	        }
+	    }
+	};
+
 	var ConnectionBarElement = (function () {
-	    function ConnectionBarElement() {
+	    function ConnectionBarElement(PostResources, $sce) {
+	        var _this = this;
+
 	        _classCallCheck(this, ConnectionBarElement);
 
 	        this.changeConnection();
 	        this.state = { color: 'black' };
+	        PostResources.getFullData().then(function (posts) {
+
+	            var labels = {};
+
+	            _this.posts = (0, _lodash2['default'])(posts).filter(function (post) {
+	                post.info = _this.getInfoFromType(post.type);
+	                if (_lodash2['default'].isFunction(post.info.getAuthor)) {
+	                    post.author = post.info.getAuthor(post);
+	                }
+
+	                if (_lodash2['default'].isFunction(post.info.getPreview)) {
+	                    var preview = post.info.getPreview(post);
+	                    preview = preview.replace(/a href/g, 'span no-href');
+	                    preview = preview.replace(/<\/a>/g, '<\/span>');
+	                    post.preview = $sce.trustAsHtml(preview);
+	                }
+
+	                if (_lodash2['default'].isFunction(post.info.getDate)) {
+	                    var date = post.info.getDate(post);
+	                    if (date) {
+	                        post.datetime = date;
+	                        date = date.split(' ');
+	                        post.date = date[0];
+
+	                        var time = date[1].split(':');
+	                        post.time = time[0] + ':' + time[1];
+	                    }
+	                }
+
+	                if (_lodash2['default'].isFunction(post.info.getAggregateLabel)) {
+	                    labels[post.type] = labels[post.type] || [];
+	                    post.aggregateLabel = post.info.getAggregateLabel(post);
+	                    if (!post.aggregateLabel) return true;
+
+	                    post.author = post.aggregateLabel;
+	                    if (labels[post.type].indexOf(post.aggregateLabel) !== -1) {
+	                        return false;
+	                    } else {
+	                        labels[post.type].push(post.aggregateLabel);
+	                    }
+	                }
+	                return true;
+	            }).sortBy(function (post) {
+	                if (!post.datetime) return 9999999900000;
+	                var date = new Date(post.datetime);
+	                return date.getTime();
+	            }).value();
+	        });
 	    }
 
 	    _createClass(ConnectionBarElement, [{
 	        key: 'changeConnection',
 	        value: function changeConnection() {
-	            var _this = this;
+	            var _this2 = this;
 
 	            setTimeout(function () {
-	                _this.isLow = !_this.isLow;_this.changeConnection();
+	                _this2.isLow = !_this2.isLow;_this2.changeConnection();
 	            }, _lodash2['default'].random(10000, 45000));
+	        }
+	    }, {
+	        key: 'toggleNotifications',
+	        value: function toggleNotifications() {
+	            this.isNotificationsOpen = !this.isNotificationsOpen;
+	        }
+	    }, {
+	        key: 'getInfoFromType',
+	        value: function getInfoFromType(type) {
+	            return infoByType[type];
 	        }
 	    }, {
 	        key: 'textColor',
@@ -78909,7 +79267,7 @@
 	});
 
 /***/ },
-/* 142 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78926,7 +79284,7 @@
 
 	var _jsBase = __webpack_require__(1);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -78991,7 +79349,7 @@
 	});
 
 /***/ },
-/* 143 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79008,7 +79366,7 @@
 
 	var _jsBase = __webpack_require__(1);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -79104,6 +79462,15 @@
 	            }, 1100);
 	        }
 	    }, {
+	        key: 'getScrollPositions',
+	        value: function getScrollPositions() {
+	            var offset = this.element.offset();
+	            return {
+	                left: offset.left - 100,
+	                top: offset.top + 150
+	            };
+	        }
+	    }, {
 	        key: 'prepareResizeAnimation',
 	        value: function prepareResizeAnimation() {
 	            //let windowHeight = window.innerHeight,
@@ -79117,7 +79484,18 @@
 	    }, {
 	        key: 'executeResizeAnimation',
 	        value: function executeResizeAnimation() {
+	            var _this4 = this;
+
 	            this.container.css({ transform: this.text });
+
+	            this.timeout(function () {
+	                var positions = _this4.getScrollPositions();
+
+	                (0, _jquery2['default'])('body').animate({
+	                    scrollTop: positions.top,
+	                    scrollLeft: positions.left
+	                }, { duration: 250, queue: true });
+	            }, 1000);
 	        }
 	    }, {
 	        key: 'onDestroy',
@@ -79139,7 +79517,7 @@
 	});
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79156,7 +79534,7 @@
 
 	var _jsBase = __webpack_require__(1);
 
-	var _lodash = __webpack_require__(22);
+	var _lodash = __webpack_require__(18);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 

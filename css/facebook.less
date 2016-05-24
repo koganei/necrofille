@@ -1,29 +1,54 @@
 @import "fonts/facebook-fonts";
 
-#facebook-app {
-  background: #d3d6db;
+@import 'connection-bar';
+[app-color="facebook"] {
+  .connection-bar-color("white");
+}
 
-  font-family: facebook-regular;
+#facebook-app {
+  background: #d5d6db;
+  font-size: 0.85em;
+
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
 
   p, h1, h2, h3, h4, h5, a {
-    font-family: facebook-regular;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
   }
 
   .header-pic img {
     width: 100%;
   }
-}
-@import 'connection-bar';
-[app-color="facebook"] {
-  .connection-bar-color("black");
+  
+  .body {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      
+      overflow: scroll;
+      &::-webkit-scrollbar {
+        width: 0;
+        }
+      
+  }
+  
+  .footer-pic {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      img {
+        width: 100%;
+        }
+  }
 }
 
 .facebook-post {
   background: white;
-  border: 1px solid #bbc3d0;
-  border-radius: 2px;
-  margin: 10px;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+  border-bottom: 12px solid #d5d6db;
   padding: 0;
 
   .post-header, .post-body {
@@ -32,14 +57,16 @@
 
   .post-header {
     position: relative;
+    padding-bottom: 0;
 
     .avatar {
-      display: inline;
+      display: inline-block;
+      width: 43px;
     }
 
     .details {
       position: absolute;
-      left: 100px;
+      left: 60px;
       top: -5px;
       time, time-ago {
         font-size: 0.7em;
@@ -47,19 +74,36 @@
       }
 
       .name {
-        font-famiy: facebook-bold;
-        margin-bottom: -5px;
-        color: #60739c;
+          font-size: 1em;
+        font-family: facebook-bold;
+        margin-bottom: 0;
+        color: black;
       }
     }
   }
 
+  .post-body {
+      padding-top: 0;
+      font-family: 'Roboto', Helvetica, Arial, sans-serif;
+      font-weight: 200;
+      
+      & > p { margin: 5px 0; }
+  }
 
   .post-footer {
-    background: #eceff6;
-    border-top: #e0e3ea;
+    background: white;
     padding: 0;
-
+    
+    
+    .like-control { color: #9a9faa; display: block; margin-left: 1em; height: 12px; float: left;  & > * { vertical-align: middle; }}
+    .comment-control { color: #9a9faa; display: block; margin-right: 1em; padding-top: 3px; height: 12px; float: right; & > * { vertical-align: middle; }}
+    
+    .post-top-controls {
+        height: 35px;
+    }
+    .post-controls {
+        width: 100%;
+    }
 
     ul {
       margin: 0;
@@ -110,5 +154,56 @@
     > ul {
       margin-bottom: 5px;
     }
+    
   }
+  
+  .post-comments-ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .post-comment {
+        padding-bottom: 8px;
+        font-family: 'Roboto', Helvetica, Arial, sans-serif;
+        font-weight: 200;
+        
+        .post-separator {
+            color: #dcdee3;
+            height: 1px;
+            width: 90%;
+            margin: 8px auto;
+            opacity: 0.5;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            float: left;
+            padding: 12px;
+            padding-top: 0;
+        }
+        
+        .post-comment-details {
+            float: right;
+            width: 80%;
+            
+            .name { margin: 0; font-size: 1em; }
+
+            .comment-body p {
+                
+                font-family: 'Roboto', Helvetica, Arial, sans-serif;
+                font-weight: 200;
+                font-size: 1em;
+                
+                 margin: 0; padding: 6px; padding-left: 0;
+                 }
+            
+            .comment-date,
+            .comment-date a {
+                color: #959ba6;
+                font-size: 0.9em;
+            }
+        }
+        
+    }
 }

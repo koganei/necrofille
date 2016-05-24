@@ -25,7 +25,10 @@ import '../../js/resources/resources';
                             return TumblrResources.query().$promise.then(function (posts) {
                                 posts.forEach(function (post) {
                                     post.title = $sce.trustAsHtml(post.node.title);
-                                    post.body = $sce.trustAsHtml(post.node.body.und[0].safe_value);
+                                    post.body = post.node.body.und ? $sce.trustAsHtml(post.node.body.und[0].safe_value) : $sce.trustAsHtml('');
+                                    post.header = post.node.field_tumblr_header.und ? $sce.trustAsHtml(post.node.field_tumblr_header.und[0].safe_value) : undefined;  
+                                    post.isAsk = post.node.field_tumblr_is_ask_post.und ? post.node.field_tumblr_is_ask_post.und[0].value === '1' : false;
+                                    post.question = post.isAsk ? $sce.trustAsHtml(post.node.field_tumblr_ask_question.und[0].safe_value) : undefined;
                                 });
                                 return posts;
                             });

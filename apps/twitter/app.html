@@ -4,12 +4,12 @@
 
         <div class="twitter-post" ng-repeat="post in twitter.posts">
 
-            <img class="avatar" ng-src="{{'http://dev.nataschasimard.com/sites/default/files/' +  post.node.field_twitter_avatar.und[0].filename}}">
+            <img class="avatar" ng-src="{{'http://dev.nataschasimard.com/sites/default/files/' +  post.avatar}}">
 
             <div class="details">
                 <span class="name" ng-bind="post.node.field_twitter_name.und[0].safe_value"></span>
                 <span class="handle" ng-bind="post.node.field_twitter_handle.und[0].safe_value"></span>
-                <time>2015-08-20</time>
+                <time>{{post.date}}</time>
             </div>
 
             <div class="post-body" ng-bind-html="post.node.body.und[0].safe_value"></div>
@@ -19,6 +19,7 @@
                 </ul>
             </div>
         </div>
+        <br />
     </div>
 </div>
 

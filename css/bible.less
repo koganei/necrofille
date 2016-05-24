@@ -1,0 +1,40 @@
+@import 'connection-bar';
+[app-color="bible"] {
+  .connection-bar-color("black");
+}
+
+#bible-app {
+    font-family: 'Roboto', Arial;
+    font-size: 0.8em;
+   
+    .header-pic img { width: 100%; }
+    .footer-pic img { width: 100%; }
+
+    .footer-pic {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .body {
+        position: absolute;
+        top: 65px;
+        bottom: 25px;
+        left: 0;
+        right: 0;
+        overflow: scroll;
+        z-index: -1;
+        padding: 0 20px;
+        line-height: 2em;
+        
+        sup {
+            color: #868686;
+            font-size: 0.8em;
+        }
+        
+        &::-webkit-scrollbar {
+        width: 0;
+        }
+    }
+}

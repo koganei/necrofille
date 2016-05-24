@@ -21,6 +21,8 @@ connection-bar {
   &.ng-hide {
     opacity: 0;
   }
+  
+  .top-bar { cursor: pointer; }
 
   .horizontal-list {
     display: inline-block;
@@ -90,3 +92,107 @@ connection-bar {
   }
 }
 
+
+
+
+.notifications-overview {
+    z-index: -1;
+    position: absolute;
+    top: -30px;
+    left: 0;
+    right: 0;
+    bottom: 55px;
+    background: url('../images/notifications-bg.jpg');
+    text-align: center;
+    overflow: hidden;
+    transition: bottom 250ms ease-in-out, top 250ms ease-in-out;
+    padding-top: 25px;
+    
+    &.open {
+        top: 0;
+        bottom: -560px;
+    }
+    
+    font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+    font-weight: normal;
+    
+    .top-buttons {
+        margin: 0;
+        padding: 5px 0;
+        border-bottom: 1px solid #4db181;
+        
+        
+        li {
+            display: inline-block;
+            width: 47%;
+            text-align: center;
+            border: 2px solid #4db181;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        li:nth-child(1) {
+            padding-right: 0;
+        }
+        li:nth-child(2) {
+            color: black;
+            padding-left: 0;
+            border-radius: 0 5px 5px 0;
+            background: #4db181;
+        }
+    }
+    
+    .notifications-list {
+        position: absolute;
+        top: 45px;
+        bottom: 2px;
+        left: 0;
+        right: 0;
+        overflow: scroll;
+        &::-webkit-scrollbar {
+        width: 0;
+        }
+        
+        padding-top: 1em;
+        padding-bottom: 1em;
+        padding-left: 0;
+        
+        .notification { list-style: none; }
+        .icon {
+            width: 25px;
+            border-radius: 5px;
+            float: left;
+            margin: 0 20px;
+        }
+        
+        .details {
+            float: right;
+            width: ~'calc(100% - 66px)';
+            text-align: left;
+            
+            .app-name {
+                display: inline-block;
+                font-weight: bold;
+                width: 75px;
+            }
+            
+            .notification-time { padding-left: 20px; }
+            
+            .preview {
+                max-height: 3.7em;
+                overflow: hidden;
+                p { margin: 0; }
+            }
+        }
+    }
+        
+    .roll-up {
+        cursor: pointer;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        
+        img { width: 100%; }
+    }
+}

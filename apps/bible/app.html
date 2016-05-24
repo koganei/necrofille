@@ -1,0 +1,9 @@
+<div id="bible-app">
+    <div class="header-pic"><img src="images/bible/header.jpg"></div>
+    <div class="body">
+        <div class="posts">
+            <div class="post" ng-repeat="post in bible.posts" ng-bind-html="post.node.body.und[0].safe_value"></div>
+        </div>
+    </div>
+    <div class="footer-pic"><img src="images/bible/footer.jpg"></div>
+</div>

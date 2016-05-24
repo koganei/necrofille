@@ -39,5 +39,6 @@ import '../../components/phone-orientation/main';
 
     var Router = new Routing();
 
-    angular.module('portfolio.routing', ['ui.router', 'portfolio.resources']).service('Router', Router.getService)
+    angular.module('portfolio.routing', ['ui.router', 'portfolio.resources'])
+        .service('Router', Router.getService)
         .config(Router.config);

@@ -21,6 +21,7 @@ import '../apps/snapchat/snapchat';
 import '../apps/netflix/netflix';
 import '../apps/manga/manga';
 import '../apps/borderland/borderland';
+import '../apps/bible/bible';
 
 import '../components/notifications/notifications';
 import '../components/timeago/main';
@@ -50,6 +51,7 @@ angular.module('portfolio', [
     'app.netflix',
     'app.manga',
     'app.borderland',
+    'app.bible',
 
     'notifications',
     'timeago',

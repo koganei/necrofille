@@ -12,7 +12,8 @@
 
     <div class="messages-loadedpost" ng-if="messages.loadedPost">
         <div class="messages-message-body" role="log">
-            <p ng-repeat="message in messages.loadedPost.messages" ng-class="'message message-type-'+message.type">{{message.message}}</p>
+            <p ng-repeat="message in messages.loadedPost.messages track by $index" ng-class="'message message-type-'+message.type" ng-bind-html="message.message"></p>
+            <br /><br /><br />
         </div>
         <div class="messages-message-footer">
             <img src="images/messages/footer.png">

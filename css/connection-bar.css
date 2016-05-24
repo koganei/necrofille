@@ -15,6 +15,9 @@ connection-bar {
 connection-bar.ng-hide {
   opacity: 0;
 }
+connection-bar .top-bar {
+  cursor: pointer;
+}
 connection-bar .horizontal-list {
   display: inline-block;
   list-style-type: none;
@@ -66,4 +69,98 @@ connection-bar .connection-icon img {
 }
 connection-bar .battery img {
   content: url("../images/connection-bar/white-battery.png");
+}
+.notifications-overview {
+  z-index: -1;
+  position: absolute;
+  top: -30px;
+  left: 0;
+  right: 0;
+  bottom: 55px;
+  background: url('../images/notifications-bg.jpg');
+  text-align: center;
+  overflow: hidden;
+  transition: bottom 250ms ease-in-out, top 250ms ease-in-out;
+  padding-top: 25px;
+  font-family: "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+  font-weight: normal;
+}
+.notifications-overview.open {
+  top: 0;
+  bottom: -560px;
+}
+.notifications-overview .top-buttons {
+  margin: 0;
+  padding: 5px 0;
+  border-bottom: 1px solid #4db181;
+}
+.notifications-overview .top-buttons li {
+  display: inline-block;
+  width: 47%;
+  text-align: center;
+  border: 2px solid #4db181;
+  border-radius: 5px 0 0 5px;
+}
+.notifications-overview .top-buttons li:nth-child(1) {
+  padding-right: 0;
+}
+.notifications-overview .top-buttons li:nth-child(2) {
+  color: black;
+  padding-left: 0;
+  border-radius: 0 5px 5px 0;
+  background: #4db181;
+}
+.notifications-overview .notifications-list {
+  position: absolute;
+  top: 45px;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  overflow: scroll;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 0;
+}
+.notifications-overview .notifications-list::-webkit-scrollbar {
+  width: 0;
+}
+.notifications-overview .notifications-list .notification {
+  list-style: none;
+}
+.notifications-overview .notifications-list .icon {
+  width: 25px;
+  border-radius: 5px;
+  float: left;
+  margin: 0 20px;
+}
+.notifications-overview .notifications-list .details {
+  float: right;
+  width: calc(100% - 66px);
+  text-align: left;
+}
+.notifications-overview .notifications-list .details .app-name {
+  display: inline-block;
+  font-weight: bold;
+  width: 75px;
+}
+.notifications-overview .notifications-list .details .notification-time {
+  padding-left: 20px;
+}
+.notifications-overview .notifications-list .details .preview {
+  max-height: 3.7em;
+  overflow: hidden;
+}
+.notifications-overview .notifications-list .details .preview p {
+  margin: 0;
+}
+.notifications-overview .roll-up {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.notifications-overview .roll-up img {
+  width: 100%;
 }

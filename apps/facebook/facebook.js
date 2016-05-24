@@ -1,5 +1,6 @@
 import jQuery from 'jquery';
 import '../../js/resources/resources';
+import _ from 'lodash';
 
     function FacebookResources(Resources) {
         return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=facebook_post&parameters[]=node');
@@ -46,6 +47,12 @@ import '../../js/resources/resources';
                             return FacebookResources.query().$promise.then(function (posts) {
                                 posts.forEach(function (post) {
                                     post.node.body.und[0].safe_value = $sce.trustAsHtml(post.node.body.und[0].safe_value);
+                                    post.comments = _.map(post.node.field_comment_dates.und, function(comment_date, $index) {
+                                        return {
+                                            date: comment_date.safe_value,
+                                            body: $sce.trustAsHtml(post.node.field_comment_bodies.und[$index].safe_value)
+                                        };
+                                    }) 
                                 });
                                 return posts;
                             });

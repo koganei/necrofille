@@ -118,7 +118,10 @@ connection-bar .battery img {
   padding: 0.5em;
 }
 .twitter-post .post-body {
-  padding-left: 50px;
+  padding-left: 65px;
+}
+.twitter-post .post-body > p {
+  margin-top: 6px;
 }
 .twitter-post .avatar {
   float: left;
@@ -128,6 +131,7 @@ connection-bar .battery img {
 }
 .twitter-post .details {
   padding-top: 10px;
+  padding-left: 65px;
 }
 .twitter-post .details time {
   display: inline-block;
@@ -135,6 +139,7 @@ connection-bar .battery img {
   color: #c2c2c2;
   float: right;
   margin-right: 1em;
+  margin-top: 5px;
 }
 .twitter-post .details .name {
   font-famiy: twitter-bold;
@@ -144,7 +149,8 @@ connection-bar .battery img {
   content: '@';
 }
 .twitter-post .post-footer {
-  margin-left: 100px;
+  margin-left: 65px;
+  margin-bottom: 8px;
 }
 .twitter-post .post-footer ul {
   margin: 0;

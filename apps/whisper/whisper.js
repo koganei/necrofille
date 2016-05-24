@@ -14,6 +14,14 @@ import 'timeago';
         this.posts = posts;
         $rootScope.currentAppName = 'whisper';
         
+        this.setSelected = function(post) {
+            this.selectedPost = post;
+        };
+        
+        this.removeSelected = function() {
+            this.selectedPost = undefined;
+        }
+        
 
         // jQuery.timeago.settings.strings = {
         //     prefixAgo: null,

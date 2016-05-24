@@ -1,10 +1,10 @@
 <div id="facebook-app">
-    <div class="header-pic"><img src="images/facebook-timeline-header.jpg"></div>
     <div class="body">
+        <div class="header-pic"><img src="images/facebook/header.jpg"></div>
 
         <div class="facebook-post" ng-repeat="post in facebook.posts">
             <div class="post-header">
-                <img class="avatar" src="images/avatar.jpg">
+                <img class="avatar" src="images/facebook/avatar.jpg">
 
                 <div class="details">
                     <h3 class="name" ng-bind="post.node.field_name.und[0].safe_value"></h3>
@@ -13,18 +13,41 @@
 
                 </div>
             </div>
-            <div class="post-body" ng-bind-html="post.node.body.und[0].safe_value"></div>
+            <div class="post-body clearfix" ng-bind-html="post.node.body.und[0].safe_value"></div>
             <div class="post-footer clearfix">
-                <ul class="left-menu pull-left">
-                    <li><a href="#">Like</a></li>
-                    <li><a href="#">Comment</a></li>
-                </ul>
+                <div class="post-top-controls">
+                    <span class="like-control">
+                        <img src="images/facebook/like-button.png">
+                        <span ng-bind="post.node.field_likes.und[0].value === '0' ? '' : post.node.field_likes.und[0].value"></span>
+                    </span>
+                    
+                    <span class="comment-control">{{post.comments.length}} comments</span>
+                </div>
+                
+                <img class="post-controls cleafix" src="images/facebook/post-controls.jpg">
 
-                <ul class="right-menu pull-right">
+                <!--<ul class="right-menu pull-right">
                     <li class="likes"><a href="#"><img src="images/facebook/icon-thumbs-up.png" alt=""/> <span ng-bind="post.node.field_likes.und[0].value"></span></a></li>
                     <li class="comments"><a href="#"><img src="images/facebook/icon-comments.png" alt=""/> <span ng-bind="post.node.field_comments.und[0].value"></span></a></li>
+                </ul>-->
+            </div>
+            <div class="post-comments clearfix">
+                <ul class="post-comments-ul">
+                    <li class="clearfix post-comment" ng-repeat="comment in post.comments">
+                        <hr ng-if="!$first" class="post-separator" />
+                        <img class="avatar" src="images/facebook/avatar.jpg">                    
+                        <div class="post-comment-details">
+                            <h3 class="name" ng-bind="post.node.field_name.und[0].safe_value"></h3>
+                            <div class="comment-body" ng-bind-html="comment.body"></div>
+                            <div class="comment-date">
+                                <span ng-bind="comment.date"></span> • <span><a href="">Like</a> • <a href="">Reply</a></span>
+                            </div>
+                            
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
+    <div class="footer-pic"><img src="images/facebook/footer.jpg"></div>
 </div>

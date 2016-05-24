@@ -11,7 +11,9 @@ import moment from 'moment';
 
         loadPost(post) {
             this.loadedPost = post;
-            this.expanded = _.last(post.body);
+            let email = _.last(post.body);
+            email.expanded = true;
+//            this.expanded = _.last(post.body);
             console.log(this.expanded);
         }
 
@@ -50,12 +52,12 @@ import moment from 'moment';
                                         const isFromSender = !(i%2 && post.node.field_first_email_is_necrofille.und[0].value === "0");
                                         const host = 'http://dev.nataschasimard.com/sites/default/files/';
                                         return {
-                                            author: isFromSender ? post.sender : 'necrofille',
+                                            author: isFromSender ? post.sender : 'Ash Tsukino',
                                             date: new Date(post.node.field_gmail_email_dates.und[i].value),
                                             to: isFromSender ? 'me' : post.node.field_gmail_short_sender_name.und[0].value,
                                             text: $sce.trustAsHtml(body.safe_value),
                                             unsafe_text: body.safe_value,
-                                            avatar: isFromSender ? host + post.node.field_gmail_sender_avatar.und[0].filename : '/images/avatar.jpg'
+                                            avatar: isFromSender ? host + post.node.field_gmail_sender_avatar.und[0].filename : '/images/gmail/avatar.jpg'
                                         };
                                     });
                                 });

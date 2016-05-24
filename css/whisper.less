@@ -2,8 +2,9 @@
 // @import "fonts/whisper-fonts";
 
 @import 'connection-bar';
+
 [app-color="whisper"] {
-  @import 'connection-bar';
+  .connection-bar-color("black");
 }
 
 #whisper-app {
@@ -64,7 +65,25 @@
     width: 100%;
   }
 
+  .avatar { cursor: pointer; }
+}
 
+.whisper-selected {
+    position: absolute;
+    top: 0;
+    bottom :0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    
+    cursor: pointer;
+    background: #fff;
+    
+    
+    img {
+        width: 98%;
+        border-radius: 3px;
+    }
 }
 
 .whisper-post-footer {

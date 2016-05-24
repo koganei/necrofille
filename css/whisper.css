@@ -67,6 +67,21 @@ connection-bar .connection-icon img {
 connection-bar .battery img {
   content: url("../images/connection-bar/white-battery.png");
 }
+[app-color="whisper"] {
+  color: black;
+}
+[app-color="whisper"] .connection-dot img {
+  content: url("../images/connection-bar/black-dot.png");
+}
+[app-color="whisper"] .connection-dot.empty img {
+  content: url("../images/connection-bar/black-dot-empty.png");
+}
+[app-color="whisper"] .connection-icon img {
+  content: url("../images/connection-bar/black-wireless-icon.png");
+}
+[app-color="whisper"] .battery img {
+  content: url("../images/connection-bar/black-battery.png");
+}
 #whisper-app {
   font-family: whisper-regular;
 }
@@ -119,6 +134,23 @@ connection-bar .battery img {
 }
 .whisper-post img {
   width: 100%;
+}
+.whisper-post .avatar {
+  cursor: pointer;
+}
+.whisper-selected {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+}
+.whisper-selected img {
+  width: 98%;
+  border-radius: 3px;
 }
 .whisper-post-footer {
   list-style-type: none;

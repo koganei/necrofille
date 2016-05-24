@@ -84,6 +84,14 @@ class bookflipAnimation {
 
         }, 1100);
     }
+    
+    getScrollPositions() {
+    	const offset = this.element.offset();
+    	return {
+    		left: offset.left - 100,
+    		top: offset.top + 150
+    	};
+    }
 
     prepareResizeAnimation() {
         //let windowHeight = window.innerHeight,
@@ -97,6 +105,15 @@ class bookflipAnimation {
 
     executeResizeAnimation() {
         this.container.css({transform: this.text});
+        
+        this.timeout(() => {
+            const positions = this.getScrollPositions();
+
+            $('body').animate({
+                scrollTop: positions.top,
+                scrollLeft: positions.left
+            }, {duration: 250, queue: true})
+        }, 1000);
     }
 
     onDestroy() {

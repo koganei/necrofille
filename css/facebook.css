@@ -12,22 +12,6 @@
   font-weight: bold;
   font-style: normal;
 }
-#facebook-app {
-  background: #d3d6db;
-  font-family: facebook-regular;
-}
-#facebook-app p,
-#facebook-app h1,
-#facebook-app h2,
-#facebook-app h3,
-#facebook-app h4,
-#facebook-app h5,
-#facebook-app a {
-  font-family: facebook-regular;
-}
-#facebook-app .header-pic img {
-  width: 100%;
-}
 connection-bar {
   display: block;
   position: absolute;
@@ -98,26 +82,62 @@ connection-bar .battery img {
   content: url("../images/connection-bar/white-battery.png");
 }
 [app-color="facebook"] {
-  color: black;
+  color: white;
 }
 [app-color="facebook"] .connection-dot img {
-  content: url("../images/connection-bar/black-dot.png");
+  content: url("../images/connection-bar/white-dot.png");
 }
 [app-color="facebook"] .connection-dot.empty img {
-  content: url("../images/connection-bar/black-dot-empty.png");
+  content: url("../images/connection-bar/white-dot-empty.png");
 }
 [app-color="facebook"] .connection-icon img {
-  content: url("../images/connection-bar/black-wireless-icon.png");
+  content: url("../images/connection-bar/white-wireless-icon.png");
 }
 [app-color="facebook"] .battery img {
-  content: url("../images/connection-bar/black-battery.png");
+  content: url("../images/connection-bar/white-battery.png");
+}
+#facebook-app {
+  background: #d5d6db;
+  font-size: 0.85em;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+}
+#facebook-app p,
+#facebook-app h1,
+#facebook-app h2,
+#facebook-app h3,
+#facebook-app h4,
+#facebook-app h5,
+#facebook-app a {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+}
+#facebook-app .header-pic img {
+  width: 100%;
+}
+#facebook-app .body {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow: scroll;
+}
+#facebook-app .body::-webkit-scrollbar {
+  width: 0;
+}
+#facebook-app .footer-pic {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#facebook-app .footer-pic img {
+  width: 100%;
 }
 .facebook-post {
   background: white;
-  border: 1px solid #bbc3d0;
-  border-radius: 2px;
-  margin: 10px;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+  border-bottom: 12px solid #d5d6db;
   padding: 0;
 }
 .facebook-post .post-header,
@@ -126,13 +146,15 @@ connection-bar .battery img {
 }
 .facebook-post .post-header {
   position: relative;
+  padding-bottom: 0;
 }
 .facebook-post .post-header .avatar {
-  display: inline;
+  display: inline-block;
+  width: 43px;
 }
 .facebook-post .post-header .details {
   position: absolute;
-  left: 100px;
+  left: 60px;
   top: -5px;
 }
 .facebook-post .post-header .details time,
@@ -141,14 +163,49 @@ connection-bar .battery img {
   color: #c2c2c2;
 }
 .facebook-post .post-header .details .name {
-  font-famiy: facebook-bold;
-  margin-bottom: -5px;
-  color: #60739c;
+  font-size: 1em;
+  font-family: facebook-bold;
+  margin-bottom: 0;
+  color: black;
+}
+.facebook-post .post-body {
+  padding-top: 0;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: 200;
+}
+.facebook-post .post-body > p {
+  margin: 5px 0;
 }
 .facebook-post .post-footer {
-  background: #eceff6;
-  border-top: #e0e3ea;
+  background: white;
   padding: 0;
+}
+.facebook-post .post-footer .like-control {
+  color: #9a9faa;
+  display: block;
+  margin-left: 1em;
+  height: 12px;
+  float: left;
+}
+.facebook-post .post-footer .like-control > * {
+  vertical-align: middle;
+}
+.facebook-post .post-footer .comment-control {
+  color: #9a9faa;
+  display: block;
+  margin-right: 1em;
+  padding-top: 3px;
+  height: 12px;
+  float: right;
+}
+.facebook-post .post-footer .comment-control > * {
+  vertical-align: middle;
+}
+.facebook-post .post-footer .post-top-controls {
+  height: 35px;
+}
+.facebook-post .post-footer .post-controls {
+  width: 100%;
 }
 .facebook-post .post-footer ul {
   margin: 0;
@@ -188,4 +245,48 @@ connection-bar .battery img {
 }
 .facebook-post .post-footer > ul {
   margin-bottom: 5px;
+}
+.facebook-post .post-comments-ul {
+  list-style: none;
+  padding: 0;
+}
+.facebook-post .post-comment {
+  padding-bottom: 8px;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: 200;
+}
+.facebook-post .post-comment .post-separator {
+  color: #dcdee3;
+  height: 1px;
+  width: 90%;
+  margin: 8px auto;
+  opacity: 0.5;
+}
+.facebook-post .post-comment .avatar {
+  width: 40px;
+  height: 40px;
+  float: left;
+  padding: 12px;
+  padding-top: 0;
+}
+.facebook-post .post-comment .post-comment-details {
+  float: right;
+  width: 80%;
+}
+.facebook-post .post-comment .post-comment-details .name {
+  margin: 0;
+  font-size: 1em;
+}
+.facebook-post .post-comment .post-comment-details .comment-body p {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: 200;
+  font-size: 1em;
+  margin: 0;
+  padding: 6px;
+  padding-left: 0;
+}
+.facebook-post .post-comment .post-comment-details .comment-date,
+.facebook-post .post-comment .post-comment-details .comment-date a {
+  color: #959ba6;
+  font-size: 0.9em;
 }
