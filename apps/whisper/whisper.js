@@ -10,7 +10,7 @@ import 'timeago';
         return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=whisper_post&parameters[]=node');
     }
 
-    function WhisperAppController(posts, $rootScope) {
+    function WhisperAppController(posts, $rootScope, $stateParams) {
         this.posts = posts;
         $rootScope.currentAppName = 'whisper';
         
@@ -20,6 +20,10 @@ import 'timeago';
         
         this.removeSelected = function() {
             this.selectedPost = undefined;
+        }
+        
+        if($stateParams.post) {
+            $rootScope.isScreenUnlocked = true;
         }
         
 
@@ -51,7 +55,7 @@ import 'timeago';
 
             $stateProvider
                 .state('app.whisper', {
-                    url: "/whisper",
+                    url: "/whisper?post",
                     templateUrl: "apps/whisper/app.html",
                     resolve: {
                         posts: function (WhisperResources, $sce) {

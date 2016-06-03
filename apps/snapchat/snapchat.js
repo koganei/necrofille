@@ -3,10 +3,16 @@ import _ from 'lodash';
 import moment from 'moment';
 
     class SnapchatAppController {
-        constructor(posts, $rootScope, $interval) {
+        constructor(posts, $rootScope, $interval, $stateParams) {
             this.posts = posts;
             $rootScope.currentAppName = 'snapchat';
             this.$interval = $interval;
+            
+            if($stateParams.post) {
+                $rootScope.isScreenUnlocked = true;
+                let postToLoad = _.find(posts, {nid: $stateParams.post});
+                this.loadPost(postToLoad);
+            }
         }
 
         loadPost(post) {
@@ -50,7 +56,7 @@ import moment from 'moment';
         .config(function ($stateProvider) {
             $stateProvider
                 .state('app.snapchat', {
-                    url: "/snapchat",
+                    url: "/snapchat?post",
                     templateUrl: "apps/snapchat/app.html",
                     resolve: {
                         posts: function (SnapchatResources, $sce, $http) {

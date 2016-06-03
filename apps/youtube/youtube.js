@@ -4,10 +4,15 @@ import _ from 'lodash';
 import moment from 'moment';
 
     class YoutubeAppController {
-        constructor(posts, $rootScope, phoneOrientation) {
+        constructor(posts, $rootScope, phoneOrientation, $stateParams) {
             this.posts = posts;
             $rootScope.currentAppName = 'youtube';
             this.orientation = phoneOrientation;
+            if($stateParams.post) {
+                $rootScope.isScreenUnlocked = true;
+                let postToLoad = _.find(posts, {nid: $stateParams.post});
+                this.loadPost(postToLoad);
+            }
         }
 
         loadPost(post) {
@@ -34,14 +39,26 @@ import moment from 'moment';
         .config(function ($stateProvider) {
             $stateProvider
                 .state('app.youtube', {
-                    url: "/youtube",
+                    url: "/youtube?post",
                     templateUrl: "apps/youtube/app.html",
                     resolve: {
                         posts: function (YoutubeResources, $sce) {
                             return YoutubeResources.query().$promise.then(function (posts) {
                                 posts.forEach(function (post) {
+                                    let views = post.node.field_views.und[0].value;
+                                    if(views >= 1000000) {
+                                        post.views = Math.floor(views/1000000) + 'M';
+                                    } else if(views >= 1000) {
+                                        post.views = Math.floor(views/1000) + 'K';
+                                    } else {
+                                        post.views =views;
+                                    }
+                                    
                                     post.thumbnail = post.node.field_video_thumbnail.und[0].filename;
                                     post.video = $sce.trustAsResourceUrl(post.node.field_youtube_video_link.und[0].safe_value);
+                                    
+                                    post.timeago = post.node.field_youtube_timeago.und[0].value;
+                                    console.log(post);
                                 });
                                 return posts;
                             });

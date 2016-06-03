@@ -2,7 +2,7 @@
     <div class="body">
         <div class="header-pic"><img src="images/facebook/header.jpg"></div>
 
-        <div class="facebook-post" ng-repeat="post in facebook.posts">
+        <div class="facebook-post" ng-repeat="post in facebook.posts" data-post-nid="{{post.nid}}">
             <div class="post-header">
                 <img class="avatar" src="images/facebook/avatar.jpg">
 

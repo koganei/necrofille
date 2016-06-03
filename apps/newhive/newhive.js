@@ -5,9 +5,15 @@ import _ from 'lodash';
 import moment from 'moment';
 
     class NewhiveAppController {
-        constructor(posts, $rootScope) {
+        constructor(posts, $rootScope, $stateParams) {
             this.posts = posts;
             $rootScope.currentAppName = 'newhive';
+            
+            if($stateParams.post) {
+                $rootScope.isScreenUnlocked = true;
+                let postToLoad = _.find(posts, {nid: $stateParams.post});
+                this.loadPost(postToLoad);
+            }
         }
 
         loadPost(post) {
@@ -25,7 +31,7 @@ import moment from 'moment';
         .config(function ($stateProvider) {
             $stateProvider
                 .state('app.newhive', {
-                    url: "/newhive",
+                    url: "/newhive?post",
                     templateUrl: "apps/newhive/app.html",
                     resolve: {
                         posts: function (NewhiveResources, $sce) {

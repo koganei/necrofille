@@ -10,11 +10,17 @@ import jQuery from 'jquery';
 
 
     class CameraAppController {
-        constructor(posts, $rootScope, $timeout) {
+        constructor(posts, $rootScope, $timeout, $stateParams) {
             this.posts = posts;
             $rootScope.currentAppName = 'camera';
             this.$timeout = $timeout;
             this.$rootScope = $rootScope;
+            
+            if($stateParams.post) {
+                $rootScope.isScreenUnlocked = true;
+                let postToLoad = _.find(posts, {nid: $stateParams.post});
+                this.loadPost(postToLoad);
+            }
         }
 
         loadPost(post) {
@@ -31,7 +37,7 @@ import jQuery from 'jquery';
 
             $stateProvider
                 .state('app.camera', {
-                    url: "/camera",
+                    url: "/camera?post",
                     templateUrl: "apps/camera/app.html",
                     resolve: {
                         posts: function (CameraResources, $sce) {

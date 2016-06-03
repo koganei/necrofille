@@ -3,10 +3,16 @@ import _ from 'lodash';
 import moment from 'moment';
 
     class GmailAppController {
-        constructor(posts, $rootScope) {
+        constructor(posts, $rootScope, $stateParams) {
             this.posts = posts;
             this.expanded = undefined;
             $rootScope.currentAppName = 'gmail';
+            
+            if($stateParams.post) {
+                $rootScope.isScreenUnlocked = true;
+                let postToLoad = _.find(posts, {nid: $stateParams.post});
+                this.loadPost(postToLoad);
+            }
         }
 
         loadPost(post) {
@@ -32,7 +38,7 @@ import moment from 'moment';
         .config(function ($stateProvider) {
             $stateProvider
                 .state('app.gmail', {
-                    url: "/gmail",
+                    url: "/gmail?post",
                     templateUrl: "apps/gmail/app.html",
                     resolve: {
                         posts: function (GmailResources, $sce) {

@@ -10,10 +10,16 @@ import jQuery from 'jquery';
 
 
     class NotesAppController {
-        constructor(posts, $rootScope, $timeout) {
+        constructor(posts, $rootScope, $timeout, $stateParams) {
             this.posts = posts;
             $rootScope.currentAppName = 'notes';
             this.$timeout = $timeout;
+            
+            if($stateParams.post) {
+                $rootScope.isScreenUnlocked = true;
+                let postToLoad = _.find(posts, {nid: $stateParams.post});
+                this.loadPost(postToLoad);
+            }
         }
 
         loadPost(post) {
@@ -28,7 +34,7 @@ import jQuery from 'jquery';
 
             $stateProvider
                 .state('app.notes', {
-                    url: "/notes",
+                    url: "/notes?post",
                     templateUrl: "apps/notes/app.html",
                     resolve: {
                         posts: function (NotesResources, $sce) {

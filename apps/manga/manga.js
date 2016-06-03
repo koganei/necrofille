@@ -11,11 +11,17 @@ import jQuery from 'jquery';
 
 
     class MangaAppController {
-        constructor(posts, $rootScope, phoneOrientation, $timeout) {
+        constructor(posts, $rootScope, phoneOrientation, $timeout, $stateParams) {
             this.posts = posts;
             $rootScope.currentAppName = 'manga';
             this.orientation = phoneOrientation;
             this.timeout = $timeout;
+            
+            if($stateParams.post) {
+                $rootScope.isScreenUnlocked = true;
+                let postToLoad = _.find(posts, {nid: $stateParams.post});
+                this.loadPost(postToLoad);
+            }
         }
 
         loadPost(post) {
@@ -42,7 +48,7 @@ import jQuery from 'jquery';
 
             $stateProvider
                 .state('app.manga', {
-                    url: "/manga",
+                    url: "/manga?post",
                     templateUrl: "apps/manga/app.html",
                     resolve: {
                         posts: function (MangaResources, $sce) {

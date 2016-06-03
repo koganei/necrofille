@@ -4,10 +4,16 @@ import _ from 'lodash';
 import moment from 'moment';
 
     class NetflixAppController {
-        constructor(posts, $rootScope, phoneOrientation) {
+        constructor(posts, $rootScope, phoneOrientation, $stateParams) {
             this.posts = posts;
             $rootScope.currentAppName = 'netflix';
             this.orientation = phoneOrientation;
+            
+            if($stateParams.post) {
+                $rootScope.isScreenUnlocked = true;
+                let postToLoad = _.find(posts, {nid: $stateParams.post});
+                this.loadPost(postToLoad);
+            }
         }
 
         loadPost(post) {
@@ -34,7 +40,7 @@ import moment from 'moment';
         .config(function ($stateProvider) {
             $stateProvider
                 .state('app.netflix', {
-                    url: "/netflix",
+                    url: "/netflix?post",
                     templateUrl: "apps/netflix/app.html",
                     resolve: {
                         posts: function (NetflixResources, $sce) {

@@ -4,6 +4,7 @@ import _ from 'lodash';
 let infoByType = {
     tumblr_post: {
         name: 'Tumblr',
+        route: 'app.tumblr',
         image: 'images/apps/tumblr.jpg',
         getPreview: post => {
             if(_.get(post, 'node.field_tumblr_is_ask_post.und[0].value') === '1') {
@@ -17,6 +18,7 @@ let infoByType = {
     },
     facebook_post: {
         name: 'Facebook',
+        route: 'app.facebook',
         image: 'images/apps/facebook.png',
         getAuthor: post => _.get(post, 'node.field_name.und[0].safe_value'),
         getPreview: post => _.get(post, 'node.body.und[0].safe_value'),
@@ -24,7 +26,8 @@ let infoByType = {
     },
     twitter_post: {
         name: 'Twitter',
-        image: 'images/apps/tumblr.jpg',
+        route: 'app.twitter',
+        image: 'images/apps/twitter.png',
         getAuthor: post => _.get(post, 'node.field_twitter_handle.und[0].safe_value'),
         getPreview: post => _.get(post, 'node.body.und[0].safe_value'),
         getAggregateLabel: post => _.get(post, 'node.field_twitter_aggregate_label.und[0].value'),
@@ -33,6 +36,7 @@ let infoByType = {
     },
     whisper_post: {
         name: 'Whisper',
+        route: 'app.whisper',
         image: 'images/apps/whisper.png' ,
         getAuthor: post => _.get(post, 'node.name'),
         getAggregateLabel: post => _.get(post, 'node.field_whisper_aggregate_label.und[0].value'),
@@ -40,6 +44,7 @@ let infoByType = {
     },
     newhive_post: {
         name: 'Newhive',
+        route: 'app.newhive',
         image: 'images/apps/newhive.jpg',
         getAuthor: post => _.get(post, 'node.field_newhive_author.und[0].safe_value'),
         getPreview: post => _.get(post, 'node.title'),
@@ -47,6 +52,7 @@ let infoByType = {
     },
     instagram_post: {
         name: 'Instagram',
+        route: 'app.instagram',
         image: 'images/apps/instagram.png',
         getAuthor: post => _.get(post, 'node.field_instagram_author.und[0].safe_value'),
         getPreview: post => _.get(post, 'node.body.und[0].safe_value'),
@@ -54,30 +60,35 @@ let infoByType = {
     },
     camera_post: {
         name: 'Camera',
+        route: 'app.camera',
         image: 'images/apps/camera.jpg',
         getPreview: post => `<b>${_.get(post, 'node.title')}</b> has been uploaded to your iCloud account.`,
         getDate: post => _.get(post, 'node.field_camera_post_date.und[0].value')
     },
     youtube_post: {
         name: 'Youtube',
+        route: 'app.youtube',
         image: 'images/apps/youtube.png',
         getPreview: post => `<b>necrofille</b> posted a new video.<br />${_.get(post, 'node.title')}`,
         getDate: post => _.get(post, 'node.field_youtube_post_date.und[0].value')
     },
     snapchat_post: {
         name: 'Snapchat',
+        route: 'app.snapchat',
         image: 'images/apps/snapchat.png',
         getPreview: post => `<b>${_.get(post, 'node.field_author.und[0].value')}</b> sent a snap to their story.`,
         getDate: post => _.get(post, 'node.field_snapchat_post_date.und[0].value') 
     },
     netflix_post: {
         name: 'Netflix',
+        route: 'app.netflix',
         image: 'images/apps/netflix.png',
         getPreview: post => `<b>${_.get(post, 'node.title')}</b> is now available.`,
         getDate: post => _.get(post, 'node.field_netflix_post_daate.und[0].value')
     },
     manga_post: {
         name: 'Manga Rock',
+        route: 'app.manga',
         image: 'images/apps/mangarock.png',
         getAuthor: post => _.get(post, 'node.title'),
         getPreview: () => 'A new chapter has been released',
@@ -85,12 +96,14 @@ let infoByType = {
     },
     bible_post: {
         name: 'Holy Bible',
+        route: 'app.bible',
         image: 'images/apps/bible.png',
         getPreview: post => _.get(post, 'node.body.und[0].safe_value'),
         getDate: post => _.get(post, 'node.field_bible_date.und[0].value')
     },
     messages_post: {
         name: 'Messages',
+        route: 'app.messages',
         image: 'images/apps/messages.png',
         getAuthor: post => _.get(post, 'node.field_messages_recipient.und[0].safe_value'),
         getPreview: post => {
@@ -107,6 +120,7 @@ let infoByType = {
     },
     gmail_post: {
         name: 'Gmail',
+        route: 'app.gmail',
         image: 'images/apps/gmail.gif',
         getAuthor: post => _.get(post, 'node.field_gmail_sender.und[0].value'),
         getPreview: post => _.get(post, 'node.field_gmail_preview.und[0].safe_value'),
@@ -114,6 +128,7 @@ let infoByType = {
     },
     notes_post: {
         name: 'Notes',
+        route: 'app.notes',
         image: 'images/apps/notes.png',
         getPreview: post => `<b>${_.get(post, 'node.title')}</b> has been uploaded to your iCloud account.`,
         getDate: post => _.get(post, 'node.field_notes_post_date.und[0].value')
@@ -121,8 +136,10 @@ let infoByType = {
 };
 
 class ConnectionBarElement {
-    constructor(PostResources, $sce) {
+    constructor(PostResources, $sce, $state, $rootScope) {
+        this.$state = $state;
         this.changeConnection();
+        this.lockScreenState = $rootScope;
         this.state = {color: 'black'};
         PostResources.getFullData().then(posts => {
             
@@ -193,6 +210,13 @@ class ConnectionBarElement {
     
     getInfoFromType(type) {
         return infoByType[type];
+    }
+    
+    goToPost(post) {
+        console.log('going to post', post);
+        this.lockScreenState.isScreenUnlocked = true;
+        this.toggleNotifications();
+        this.$state.go(post.info.route, { post: post.nid });
     }
 }
 

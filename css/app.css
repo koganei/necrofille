@@ -4096,6 +4096,7 @@ connection-bar .battery img {
 }
 .notifications-overview .notifications-list .notification {
   list-style: none;
+  cursor: pointer;
 }
 .notifications-overview .notifications-list .icon {
   width: 25px;

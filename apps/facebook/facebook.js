@@ -6,9 +6,23 @@ import _ from 'lodash';
         return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=facebook_post&parameters[]=node');
     }
 
-    function FacebookAppController(posts, $rootScope) {
+    function FacebookAppController(posts, $rootScope, $stateParams, $timeout) {
+        let $element = jQuery('#facebook-app > .body');
         this.posts = posts;
         $rootScope.currentAppName = 'facebook';
+        
+        this.scrollTo = function(post) {
+            let $elementToScroll = $element.find('.facebook-post[data-post-nid="'+post.nid+'"]');
+            if(!$elementToScroll) return;
+            
+            console.log('scrolling', $elementToScroll.offset().top, $element.offset().top);
+            
+            $element.animate({
+                scrollTop: $elementToScroll.offset().top - $element.offset().top
+            }, 2500, function() {
+                console.log('DONE', $element.scrollTop(), $elementToScroll.position().top, $elementToScroll.offset().top);
+            });
+        };
 
         // English (Template)
         jQuery.timeago.settings.strings = {
@@ -31,6 +45,14 @@ import _ from 'lodash';
             numbers: []
         };
 
+        if($stateParams.post) {
+            $timeout(()=>{
+                $rootScope.isScreenUnlocked = true;
+                let postToLoad = _.find(posts, {nid: $stateParams.post});
+                this.scrollTo(postToLoad);    
+            }, 1000);
+        }
+        
     }
 
     angular.module('app.facebook', ['ngResource', 'portfolio.resources'])
@@ -40,7 +62,7 @@ import _ from 'lodash';
 
             $stateProvider
                 .state('app.facebook', {
-                    url: "/facebook",
+                    url: "/facebook?post",
                     templateUrl: "apps/facebook/app.html",
                     resolve: {
                         posts: function (FacebookResources, $sce) {

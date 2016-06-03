@@ -10,11 +10,16 @@ import jQuery from 'jquery';
 
 
     class MessagesAppController {
-        constructor(posts, $rootScope, $timeout, $sce) {
+        constructor(posts, $rootScope, $timeout, $sce, $stateParams) {
             this.posts = posts;
             $rootScope.currentAppName = 'messages';
             this.$timeout = $timeout;
             this.$sce = $sce;
+            if($stateParams.post) {
+                $rootScope.isScreenUnlocked = true;
+                let postToLoad = _.find(posts, {nid: $stateParams.post});
+                this.loadPost(postToLoad);
+            }
         }
 
         loadPost(post) {
@@ -89,7 +94,7 @@ import jQuery from 'jquery';
 
             $stateProvider
                 .state('app.messages', {
-                    url: "/messages",
+                    url: "/messages?post",
                     templateUrl: "apps/messages/app.html",
                     resolve: {
                         posts: function (MessagesResources, $sce) {

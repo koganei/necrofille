@@ -15,8 +15,8 @@
                     <h2 ng-bind="post.node.title" ng-click="youtube.loadPost(post)"></h2>
                     <div>
                         <ul class="stats">
-                            <li>3M views</li>
-                            <li>7 days ago</li>
+                            <li>{{post.views}} views</li>
+                            <li>{{post.timeago}} days ago</li>
                             <li><img src="images/youtube/globe.png"></li>
                         </ul>
                     </div>

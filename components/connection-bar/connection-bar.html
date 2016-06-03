@@ -24,10 +24,10 @@
         <ul class="top-buttons"><li>Today</li><li>Notifications</li></ul>
         
         <ul class="notifications-list">
-            <li class="notification clearfix" ng-repeat="post in connectionBar.posts">
+            <li class="notification clearfix" ng-repeat="post in connectionBar.posts" ng-click="connectionBar.goToPost(post)">
                 <img class="icon" ng-src="{{post.info.image}}">
                 <div class="details">
-                    <span class="app-name" title="{{post.title}} {{post.datetime}}">{{post.info.name}}</span>
+                    <span class="app-name" data-more-details="{{post.title + ' ' + post.datetime}}">{{post.info.name}}</span>
                     <span class="notification-time">{{post.time}}</span>
                     <br />
                     <span class="author" ng-if="post.author">{{post.author}}</span>

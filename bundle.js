@@ -49341,9 +49341,25 @@
 	    return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=facebook_post&parameters[]=node');
 	}
 
-	function FacebookAppController(posts, $rootScope) {
+	function FacebookAppController(posts, $rootScope, $stateParams, $timeout) {
+	    var _this = this;
+
+	    var $element = (0, _jquery2['default'])('#facebook-app > .body');
 	    this.posts = posts;
 	    $rootScope.currentAppName = 'facebook';
+
+	    this.scrollTo = function (post) {
+	        var $elementToScroll = $element.find('.facebook-post[data-post-nid="' + post.nid + '"]');
+	        if (!$elementToScroll) return;
+
+	        console.log('scrolling', $elementToScroll.offset().top, $element.offset().top);
+
+	        $element.animate({
+	            scrollTop: $elementToScroll.offset().top - $element.offset().top
+	        }, 2500, function () {
+	            console.log('DONE', $element.scrollTop(), $elementToScroll.position().top, $elementToScroll.offset().top);
+	        });
+	    };
 
 	    // English (Template)
 	    _jquery2['default'].timeago.settings.strings = {
@@ -49365,12 +49381,20 @@
 	        wordSeparator: " ",
 	        numbers: []
 	    };
+
+	    if ($stateParams.post) {
+	        $timeout(function () {
+	            $rootScope.isScreenUnlocked = true;
+	            var postToLoad = _lodash2['default'].find(posts, { nid: $stateParams.post });
+	            _this.scrollTo(postToLoad);
+	        }, 1000);
+	    }
 	}
 
 	angular.module('app.facebook', ['ngResource', 'portfolio.resources']).service('FacebookResources', FacebookResources).controller('FacebookAppController', FacebookAppController).config(function ($stateProvider, $urlRouterProvider) {
 
 	    $stateProvider.state('app.facebook', {
-	        url: "/facebook",
+	        url: "/facebook?post",
 	        templateUrl: "apps/facebook/app.html",
 	        resolve: {
 	            posts: function posts(FacebookResources, $sce) {
@@ -61883,7 +61907,7 @@
 	    return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=whisper_post&parameters[]=node');
 	}
 
-	function WhisperAppController(posts, $rootScope) {
+	function WhisperAppController(posts, $rootScope, $stateParams) {
 	    this.posts = posts;
 	    $rootScope.currentAppName = 'whisper';
 
@@ -61894,6 +61918,10 @@
 	    this.removeSelected = function () {
 	        this.selectedPost = undefined;
 	    };
+
+	    if ($stateParams.post) {
+	        $rootScope.isScreenUnlocked = true;
+	    }
 
 	    // jQuery.timeago.settings.strings = {
 	    //     prefixAgo: null,
@@ -61919,7 +61947,7 @@
 	angular.module('app.whisper', ['ngResource', 'portfolio.resources', 'slideShow']).service('WhisperResources', WhisperResources).controller('WhisperAppController', WhisperAppController).config(function ($stateProvider, $urlRouterProvider) {
 
 	    $stateProvider.state('app.whisper', {
-	        url: "/whisper",
+	        url: "/whisper?post",
 	        templateUrl: "apps/whisper/app.html",
 	        resolve: {
 	            posts: function posts(WhisperResources, $sce) {
@@ -76092,11 +76120,17 @@
 	var _moment2 = _interopRequireDefault(_moment);
 
 	var NewhiveAppController = (function () {
-	    function NewhiveAppController(posts, $rootScope) {
+	    function NewhiveAppController(posts, $rootScope, $stateParams) {
 	        _classCallCheck(this, NewhiveAppController);
 
 	        this.posts = posts;
 	        $rootScope.currentAppName = 'newhive';
+
+	        if ($stateParams.post) {
+	            $rootScope.isScreenUnlocked = true;
+	            var postToLoad = _lodash2['default'].find(posts, { nid: $stateParams.post });
+	            this.loadPost(postToLoad);
+	        }
 	    }
 
 	    _createClass(NewhiveAppController, [{
@@ -76115,7 +76149,7 @@
 
 	angular.module('app.newhive', ['ngResource', 'portfolio.resources', 'phone-orientation']).service('NewhiveResources', NewhiveResources).controller('NewhiveAppController', NewhiveAppController).config(function ($stateProvider) {
 	    $stateProvider.state('app.newhive', {
-	        url: "/newhive",
+	        url: "/newhive?post",
 	        templateUrl: "apps/newhive/app.html",
 	        resolve: {
 	            posts: function posts(NewhiveResources, $sce) {
@@ -76228,12 +76262,18 @@
 	}
 
 	var NotesAppController = (function () {
-	    function NotesAppController(posts, $rootScope, $timeout) {
+	    function NotesAppController(posts, $rootScope, $timeout, $stateParams) {
 	        _classCallCheck(this, NotesAppController);
 
 	        this.posts = posts;
 	        $rootScope.currentAppName = 'notes';
 	        this.$timeout = $timeout;
+
+	        if ($stateParams.post) {
+	            $rootScope.isScreenUnlocked = true;
+	            var postToLoad = _lodash2['default'].find(posts, { nid: $stateParams.post });
+	            this.loadPost(postToLoad);
+	        }
 	    }
 
 	    _createClass(NotesAppController, [{
@@ -76249,7 +76289,7 @@
 	angular.module('app.notes', ['ngResource', 'portfolio.resources', 'slideShow']).service('NotesResources', NotesResources).controller('NotesAppController', NotesAppController).config(function ($stateProvider) {
 
 	    $stateProvider.state('app.notes', {
-	        url: "/notes",
+	        url: "/notes?post",
 	        templateUrl: "apps/notes/app.html",
 	        resolve: {
 	            posts: function posts(NotesResources, $sce) {
@@ -76293,13 +76333,18 @@
 	}
 
 	var MessagesAppController = (function () {
-	    function MessagesAppController(posts, $rootScope, $timeout, $sce) {
+	    function MessagesAppController(posts, $rootScope, $timeout, $sce, $stateParams) {
 	        _classCallCheck(this, MessagesAppController);
 
 	        this.posts = posts;
 	        $rootScope.currentAppName = 'messages';
 	        this.$timeout = $timeout;
 	        this.$sce = $sce;
+	        if ($stateParams.post) {
+	            $rootScope.isScreenUnlocked = true;
+	            var postToLoad = _lodash2['default'].find(posts, { nid: $stateParams.post });
+	            this.loadPost(postToLoad);
+	        }
 	    }
 
 	    _createClass(MessagesAppController, [{
@@ -76374,7 +76419,7 @@
 	angular.module('app.messages', ['ngResource', 'portfolio.resources', 'slideShow']).service('MessagesResources', MessagesResources).controller('MessagesAppController', MessagesAppController).config(function ($stateProvider, $urlRouterProvider) {
 
 	    $stateProvider.state('app.messages', {
-	        url: "/messages",
+	        url: "/messages?post",
 	        templateUrl: "apps/messages/app.html",
 	        resolve: {
 	            posts: function posts(MessagesResources, $sce) {
@@ -76418,13 +76463,19 @@
 	}
 
 	var CameraAppController = (function () {
-	    function CameraAppController(posts, $rootScope, $timeout) {
+	    function CameraAppController(posts, $rootScope, $timeout, $stateParams) {
 	        _classCallCheck(this, CameraAppController);
 
 	        this.posts = posts;
 	        $rootScope.currentAppName = 'camera';
 	        this.$timeout = $timeout;
 	        this.$rootScope = $rootScope;
+
+	        if ($stateParams.post) {
+	            $rootScope.isScreenUnlocked = true;
+	            var postToLoad = _lodash2['default'].find(posts, { nid: $stateParams.post });
+	            this.loadPost(postToLoad);
+	        }
 	    }
 
 	    _createClass(CameraAppController, [{
@@ -76442,7 +76493,7 @@
 	angular.module('app.camera', ['ngResource', 'portfolio.resources', 'slideShow']).service('CameraResources', CameraResources).controller('CameraAppController', CameraAppController).config(function ($stateProvider) {
 
 	    $stateProvider.state('app.camera', {
-	        url: "/camera",
+	        url: "/camera?post",
 	        templateUrl: "apps/camera/app.html",
 	        resolve: {
 	            posts: function posts(CameraResources, $sce) {
@@ -76485,12 +76536,17 @@
 	var _moment2 = _interopRequireDefault(_moment);
 
 	var YoutubeAppController = (function () {
-	    function YoutubeAppController(posts, $rootScope, phoneOrientation) {
+	    function YoutubeAppController(posts, $rootScope, phoneOrientation, $stateParams) {
 	        _classCallCheck(this, YoutubeAppController);
 
 	        this.posts = posts;
 	        $rootScope.currentAppName = 'youtube';
 	        this.orientation = phoneOrientation;
+	        if ($stateParams.post) {
+	            $rootScope.isScreenUnlocked = true;
+	            var postToLoad = _lodash2['default'].find(posts, { nid: $stateParams.post });
+	            this.loadPost(postToLoad);
+	        }
 	    }
 
 	    _createClass(YoutubeAppController, [{
@@ -76523,14 +76579,26 @@
 
 	angular.module('app.youtube', ['ngResource', 'portfolio.resources', 'phone-orientation']).service('YoutubeResources', YoutubeResources).controller('YoutubeAppController', YoutubeAppController).config(function ($stateProvider) {
 	    $stateProvider.state('app.youtube', {
-	        url: "/youtube",
+	        url: "/youtube?post",
 	        templateUrl: "apps/youtube/app.html",
 	        resolve: {
 	            posts: function posts(YoutubeResources, $sce) {
 	                return YoutubeResources.query().$promise.then(function (posts) {
 	                    posts.forEach(function (post) {
+	                        var views = post.node.field_views.und[0].value;
+	                        if (views >= 1000000) {
+	                            post.views = Math.floor(views / 1000000) + 'M';
+	                        } else if (views >= 1000) {
+	                            post.views = Math.floor(views / 1000) + 'K';
+	                        } else {
+	                            post.views = views;
+	                        }
+
 	                        post.thumbnail = post.node.field_video_thumbnail.und[0].filename;
 	                        post.video = $sce.trustAsResourceUrl(post.node.field_youtube_video_link.und[0].safe_value);
+
+	                        post.timeago = post.node.field_youtube_timeago.und[0].value;
+	                        console.log(post);
 	                    });
 	                    return posts;
 	                });
@@ -76563,12 +76631,18 @@
 	var _moment2 = _interopRequireDefault(_moment);
 
 	var GmailAppController = (function () {
-	    function GmailAppController(posts, $rootScope) {
+	    function GmailAppController(posts, $rootScope, $stateParams) {
 	        _classCallCheck(this, GmailAppController);
 
 	        this.posts = posts;
 	        this.expanded = undefined;
 	        $rootScope.currentAppName = 'gmail';
+
+	        if ($stateParams.post) {
+	            $rootScope.isScreenUnlocked = true;
+	            var postToLoad = _lodash2['default'].find(posts, { nid: $stateParams.post });
+	            this.loadPost(postToLoad);
+	        }
 	    }
 
 	    _createClass(GmailAppController, [{
@@ -76596,7 +76670,7 @@
 
 	angular.module('app.gmail', ['ngResource', 'portfolio.resources']).service('GmailResources', GmailResources).controller('GmailAppController', GmailAppController).config(function ($stateProvider) {
 	    $stateProvider.state('app.gmail', {
-	        url: "/gmail",
+	        url: "/gmail?post",
 	        templateUrl: "apps/gmail/app.html",
 	        resolve: {
 	            posts: function posts(GmailResources, $sce) {
@@ -76656,12 +76730,18 @@
 	var _moment2 = _interopRequireDefault(_moment);
 
 	var SnapchatAppController = (function () {
-	    function SnapchatAppController(posts, $rootScope, $interval) {
+	    function SnapchatAppController(posts, $rootScope, $interval, $stateParams) {
 	        _classCallCheck(this, SnapchatAppController);
 
 	        this.posts = posts;
 	        $rootScope.currentAppName = 'snapchat';
 	        this.$interval = $interval;
+
+	        if ($stateParams.post) {
+	            $rootScope.isScreenUnlocked = true;
+	            var postToLoad = _lodash2['default'].find(posts, { nid: $stateParams.post });
+	            this.loadPost(postToLoad);
+	        }
 	    }
 
 	    _createClass(SnapchatAppController, [{
@@ -76709,7 +76789,7 @@
 
 	angular.module('app.snapchat', ['ngResource', 'portfolio.resources']).service('SnapchatResources', SnapchatResources).controller('SnapchatAppController', SnapchatAppController).config(function ($stateProvider) {
 	    $stateProvider.state('app.snapchat', {
-	        url: "/snapchat",
+	        url: "/snapchat?post",
 	        templateUrl: "apps/snapchat/app.html",
 	        resolve: {
 	            posts: function posts(SnapchatResources, $sce, $http) {
@@ -76758,12 +76838,18 @@
 	var _moment2 = _interopRequireDefault(_moment);
 
 	var NetflixAppController = (function () {
-	    function NetflixAppController(posts, $rootScope, phoneOrientation) {
+	    function NetflixAppController(posts, $rootScope, phoneOrientation, $stateParams) {
 	        _classCallCheck(this, NetflixAppController);
 
 	        this.posts = posts;
 	        $rootScope.currentAppName = 'netflix';
 	        this.orientation = phoneOrientation;
+
+	        if ($stateParams.post) {
+	            $rootScope.isScreenUnlocked = true;
+	            var postToLoad = _lodash2['default'].find(posts, { nid: $stateParams.post });
+	            this.loadPost(postToLoad);
+	        }
 	    }
 
 	    _createClass(NetflixAppController, [{
@@ -76796,7 +76882,7 @@
 
 	angular.module('app.netflix', ['ngResource', 'portfolio.resources', 'phone-orientation']).service('NetflixResources', NetflixResources).controller('NetflixAppController', NetflixAppController).config(function ($stateProvider) {
 	    $stateProvider.state('app.netflix', {
-	        url: "/netflix",
+	        url: "/netflix?post",
 	        templateUrl: "apps/netflix/app.html",
 	        resolve: {
 	            posts: function posts(NetflixResources, $sce) {
@@ -76853,13 +76939,19 @@
 	}
 
 	var MangaAppController = (function () {
-	    function MangaAppController(posts, $rootScope, phoneOrientation, $timeout) {
+	    function MangaAppController(posts, $rootScope, phoneOrientation, $timeout, $stateParams) {
 	        _classCallCheck(this, MangaAppController);
 
 	        this.posts = posts;
 	        $rootScope.currentAppName = 'manga';
 	        this.orientation = phoneOrientation;
 	        this.timeout = $timeout;
+
+	        if ($stateParams.post) {
+	            $rootScope.isScreenUnlocked = true;
+	            var postToLoad = _lodash2['default'].find(posts, { nid: $stateParams.post });
+	            this.loadPost(postToLoad);
+	        }
 	    }
 
 	    _createClass(MangaAppController, [{
@@ -76893,7 +76985,7 @@
 	angular.module('app.manga', ['ngResource', 'portfolio.resources', 'phone-orientation']).service('MangaResources', MangaResources).controller('MangaAppController', MangaAppController).config(function ($stateProvider, $urlRouterProvider) {
 
 	    $stateProvider.state('app.manga', {
-	        url: "/manga",
+	        url: "/manga?post",
 	        templateUrl: "apps/manga/app.html",
 	        resolve: {
 	            posts: function posts(MangaResources, $sce) {
@@ -78972,6 +79064,7 @@
 	var infoByType = {
 	    tumblr_post: {
 	        name: 'Tumblr',
+	        route: 'app.tumblr',
 	        image: 'images/apps/tumblr.jpg',
 	        getPreview: function getPreview(post) {
 	            if (_lodash2['default'].get(post, 'node.field_tumblr_is_ask_post.und[0].value') === '1') {
@@ -78982,10 +79075,14 @@
 	        },
 	        getDate: function getDate(post) {
 	            return _lodash2['default'].get(post, 'node.field_tumblr_post_date.und[0].value');
+	        },
+	        getAggregateLabel: function getAggregateLabel(post) {
+	            return _lodash2['default'].get(post, 'node.field_tumblr_aggregate_label.und[0].value');
 	        }
 	    },
 	    facebook_post: {
 	        name: 'Facebook',
+	        route: 'app.facebook',
 	        image: 'images/apps/facebook.png',
 	        getAuthor: function getAuthor(post) {
 	            return _lodash2['default'].get(post, 'node.field_name.und[0].safe_value');
@@ -78999,7 +79096,8 @@
 	    },
 	    twitter_post: {
 	        name: 'Twitter',
-	        image: 'images/apps/tumblr.jpg',
+	        route: 'app.twitter',
+	        image: 'images/apps/twitter.png',
 	        getAuthor: function getAuthor(post) {
 	            return _lodash2['default'].get(post, 'node.field_twitter_handle.und[0].safe_value');
 	        },
@@ -79016,6 +79114,7 @@
 	    },
 	    whisper_post: {
 	        name: 'Whisper',
+	        route: 'app.whisper',
 	        image: 'images/apps/whisper.png',
 	        getAuthor: function getAuthor(post) {
 	            return _lodash2['default'].get(post, 'node.name');
@@ -79029,6 +79128,7 @@
 	    },
 	    newhive_post: {
 	        name: 'Newhive',
+	        route: 'app.newhive',
 	        image: 'images/apps/newhive.jpg',
 	        getAuthor: function getAuthor(post) {
 	            return _lodash2['default'].get(post, 'node.field_newhive_author.und[0].safe_value');
@@ -79042,6 +79142,7 @@
 	    },
 	    instagram_post: {
 	        name: 'Instagram',
+	        route: 'app.instagram',
 	        image: 'images/apps/instagram.png',
 	        getAuthor: function getAuthor(post) {
 	            return _lodash2['default'].get(post, 'node.field_instagram_author.und[0].safe_value');
@@ -79055,6 +79156,7 @@
 	    },
 	    camera_post: {
 	        name: 'Camera',
+	        route: 'app.camera',
 	        image: 'images/apps/camera.jpg',
 	        getPreview: function getPreview(post) {
 	            return '<b>' + _lodash2['default'].get(post, 'node.title') + '</b> has been uploaded to your iCloud account.';
@@ -79065,6 +79167,7 @@
 	    },
 	    youtube_post: {
 	        name: 'Youtube',
+	        route: 'app.youtube',
 	        image: 'images/apps/youtube.png',
 	        getPreview: function getPreview(post) {
 	            return '<b>necrofille</b> posted a new video.<br />' + _lodash2['default'].get(post, 'node.title');
@@ -79075,6 +79178,7 @@
 	    },
 	    snapchat_post: {
 	        name: 'Snapchat',
+	        route: 'app.snapchat',
 	        image: 'images/apps/snapchat.png',
 	        getPreview: function getPreview(post) {
 	            return '<b>' + _lodash2['default'].get(post, 'node.field_author.und[0].value') + '</b> sent a snap to their story.';
@@ -79085,16 +79189,18 @@
 	    },
 	    netflix_post: {
 	        name: 'Netflix',
+	        route: 'app.netflix',
 	        image: 'images/apps/netflix.png',
 	        getPreview: function getPreview(post) {
 	            return '<b>' + _lodash2['default'].get(post, 'node.title') + '</b> is now available.';
 	        },
 	        getDate: function getDate(post) {
-	            return _lodash2['default'].get(post, 'node.field_netflix_post_date.und[0].value');
+	            return _lodash2['default'].get(post, 'node.field_netflix_post_daate.und[0].value');
 	        }
 	    },
 	    manga_post: {
 	        name: 'Manga Rock',
+	        route: 'app.manga',
 	        image: 'images/apps/mangarock.png',
 	        getAuthor: function getAuthor(post) {
 	            return _lodash2['default'].get(post, 'node.title');
@@ -79108,6 +79214,7 @@
 	    },
 	    bible_post: {
 	        name: 'Holy Bible',
+	        route: 'app.bible',
 	        image: 'images/apps/bible.png',
 	        getPreview: function getPreview(post) {
 	            return _lodash2['default'].get(post, 'node.body.und[0].safe_value');
@@ -79118,15 +79225,20 @@
 	    },
 	    messages_post: {
 	        name: 'Messages',
+	        route: 'app.messages',
 	        image: 'images/apps/messages.png',
 	        getAuthor: function getAuthor(post) {
 	            return _lodash2['default'].get(post, 'node.field_messages_recipient.und[0].safe_value');
 	        },
 	        getPreview: function getPreview(post) {
+	            var body = _lodash2['default'].get(post, 'node.body.und[0].safe_value').split('~');
+	            var message = body[body.length - 1].replace(/<\/p>/g, '');
+	            console.log(message);
+	            return message;
 	            // let body = _.get(post, 'node.body.und[0].value');
 	            // body = body.replace(/~~~/g, '++++++');
 	            // let exploded = body.split('~~');
-	            return 'Message Preview!';
+	            // return '';
 	        },
 	        getDate: function getDate(post) {
 	            return _lodash2['default'].get(post, 'node.field_messages_post_date.und[0].value');
@@ -79134,6 +79246,7 @@
 	    },
 	    gmail_post: {
 	        name: 'Gmail',
+	        route: 'app.gmail',
 	        image: 'images/apps/gmail.gif',
 	        getAuthor: function getAuthor(post) {
 	            return _lodash2['default'].get(post, 'node.field_gmail_sender.und[0].value');
@@ -79147,6 +79260,7 @@
 	    },
 	    notes_post: {
 	        name: 'Notes',
+	        route: 'app.notes',
 	        image: 'images/apps/notes.png',
 	        getPreview: function getPreview(post) {
 	            return '<b>' + _lodash2['default'].get(post, 'node.title') + '</b> has been uploaded to your iCloud account.';
@@ -79158,12 +79272,14 @@
 	};
 
 	var ConnectionBarElement = (function () {
-	    function ConnectionBarElement(PostResources, $sce) {
+	    function ConnectionBarElement(PostResources, $sce, $state, $rootScope) {
 	        var _this = this;
 
 	        _classCallCheck(this, ConnectionBarElement);
 
+	        this.$state = $state;
 	        this.changeConnection();
+	        this.lockScreenState = $rootScope;
 	        this.state = { color: 'black' };
 	        PostResources.getFullData().then(function (posts) {
 
@@ -79233,6 +79349,14 @@
 	        key: 'getInfoFromType',
 	        value: function getInfoFromType(type) {
 	            return infoByType[type];
+	        }
+	    }, {
+	        key: 'goToPost',
+	        value: function goToPost(post) {
+	            console.log('going to post', post);
+	            this.lockScreenState.isScreenUnlocked = true;
+	            this.toggleNotifications();
+	            this.$state.go(post.info.route, { post: post.nid });
 	        }
 	    }, {
 	        key: 'textColor',
