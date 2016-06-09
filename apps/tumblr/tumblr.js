@@ -1,14 +1,37 @@
+import jQuery from 'jquery';
 import '../../js/resources/resources';
+import _ from 'lodash';
+import scrollIntoView from '../../components/scroll-into-view/scrollIntoView';
 
     function TumblrResources(Resources) {
         return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=tumblr_post&parameters[]=node');
     }
 
-    function TumblrAppController(posts, $rootScope) {
-        console.log(posts);
+    function TumblrAppController(posts, $rootScope, $stateParams, $timeout) {
+        let $element = jQuery('#tumblr-app');
         this.posts = posts;
         $rootScope.currentAppName = 'tumblr';
         this.convertTag = function(value) { return value.replace('#', '').replace(/ /g, '+'); }
+        
+        this.scrollTo = function(post) {
+            let $elementToScroll = $element.find('.post[data-post-nid="'+post.nid+'"]')[0];
+            if(!$elementToScroll) return;
+            
+            scrollIntoView($elementToScroll, {
+                time: 500, // half a second
+                skipBody: true,
+                align: { top: 0.1 },
+            });
+            
+        };
+        
+        if($stateParams.post) {
+            $timeout(()=>{
+                $rootScope.isScreenUnlocked = true;
+                let postToLoad = _.find(posts, {nid: $stateParams.post});
+                this.scrollTo(postToLoad);    
+            }, 1000);
+        }
     }
 
     angular.module('app.tumblr', ['ngResource', 'portfolio.resources'])
@@ -18,7 +41,7 @@ import '../../js/resources/resources';
 
             $stateProvider
                 .state('app.tumblr', {
-                    url: "/tumblr",
+                    url: "/tumblr?post",
                     templateUrl: "apps/tumblr/app.html",
                     resolve: {
                         posts: function (TumblrResources, $sce) {

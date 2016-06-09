@@ -2,6 +2,7 @@ import '../../js/resources/resources';
 import _ from 'lodash';
 import moment from 'moment';
 import jQuery from 'jquery';
+import scrollIntoView from '../../components/scroll-into-view/scrollIntoView';
 
 
     function InstagramResources(Resources) {
@@ -10,10 +11,32 @@ import jQuery from 'jquery';
 
 
     class InstagramAppController {
-        constructor(posts, $rootScope, $timeout) {
+        constructor(posts, $rootScope, $timeout, $stateParams) {
+            let $element = jQuery('#instagram-app > .body');
+    
             this.posts = posts;
             $rootScope.currentAppName = 'instagram';
             this.$timeout = $timeout;
+            
+            this.scrollTo = function(post) {
+                let $elementToScroll = $element.find('.instagram-post[data-post-nid="'+post.nid+'"]')[0];
+                if(!$elementToScroll) return;
+                
+                scrollIntoView($elementToScroll, {
+                    time: 500, // half a second
+                    skipBody: true,
+                    align: { top: 0.1 },
+                });
+                
+            };
+    
+            if($stateParams.post) {
+                $timeout(()=>{
+                    $rootScope.isScreenUnlocked = true;
+                    let postToLoad = _.find(posts, {nid: $stateParams.post});
+                    this.scrollTo(postToLoad);    
+                }, 1000);
+            }
         }
     }
 
@@ -24,7 +47,7 @@ import jQuery from 'jquery';
 
             $stateProvider
                 .state('app.instagram', {
-                    url: "/instagram",
+                    url: "/instagram?post",
                     templateUrl: "apps/instagram/app.html",
                     resolve: {
                         posts: function (InstagramResources, $sce) {

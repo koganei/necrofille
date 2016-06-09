@@ -31,7 +31,7 @@ feminist | genderfluid | felinekin |</p>
          </span>
     </div>
     <div class="posts">
-        <div class="post" ng-repeat="post in tumblr.posts">
+        <div class="post" ng-repeat="post in tumblr.posts" data-post-nid="{{post.nid}}">
 
             <h1 class="post-header" ng-if="post.node.field_tumblr_header.und[0].value && post.node.field_tumblr_header.und[0].value !== ''" ng-bind-html="post.header"></h1>
             <div class="post-body">

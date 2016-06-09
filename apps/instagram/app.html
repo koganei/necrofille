@@ -3,7 +3,7 @@
 
     <div class="body">
         <div class="instagram-posts">
-            <div class="instagram-post" ng-repeat="post in instagram.posts" ng-click="instagram.loadPost(post)">
+            <div class="instagram-post" ng-repeat="post in instagram.posts" ng-click="instagram.loadPost(post)" data-post-nid="{{post.nid}}">
                 <div class="post-info">
                     <img src="images/instagram/avatar.jpg" alt=""/>
                     <b class="author" ng-bind="post.node.field_instagram_author.und[0].value"></b>

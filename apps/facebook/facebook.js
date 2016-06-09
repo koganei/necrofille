@@ -1,6 +1,7 @@
 import jQuery from 'jquery';
 import '../../js/resources/resources';
 import _ from 'lodash';
+import scrollIntoView from '../../components/scroll-into-view/scrollIntoView';
 
     function FacebookResources(Resources) {
         return Resources.getResources('http://dev.nataschasimard.com/poems/node.json?parameters[type]=facebook_post&parameters[]=node');
@@ -12,16 +13,15 @@ import _ from 'lodash';
         $rootScope.currentAppName = 'facebook';
         
         this.scrollTo = function(post) {
-            let $elementToScroll = $element.find('.facebook-post[data-post-nid="'+post.nid+'"]');
+            let $elementToScroll = $element.find('.facebook-post[data-post-nid="'+post.nid+'"]')[0];
             if(!$elementToScroll) return;
             
-            console.log('scrolling', $elementToScroll.offset().top, $element.offset().top);
-            
-            $element.animate({
-                scrollTop: $elementToScroll.offset().top - $element.offset().top
-            }, 2500, function() {
-                console.log('DONE', $element.scrollTop(), $elementToScroll.position().top, $elementToScroll.offset().top);
+            scrollIntoView($elementToScroll, {
+                time: 500, // half a second
+                skipBody: true,
+                align: { top: 0.1 },
             });
+            
         };
 
         // English (Template)

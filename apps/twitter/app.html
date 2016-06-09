@@ -2,7 +2,7 @@
     <div class="header-pic"><img src="images/twitter/timeline-header.jpg"></div>
     <div class="body">
 
-        <div class="twitter-post" ng-repeat="post in twitter.posts">
+        <div class="twitter-post" ng-repeat="post in twitter.posts" data-post-nid="{{post.nid}}">
 
             <img class="avatar" ng-src="{{'http://dev.nataschasimard.com/sites/default/files/' +  post.avatar}}">
 
